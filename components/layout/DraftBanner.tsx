@@ -1,7 +1,7 @@
 import { isDraftMode } from "@/lib/draft";
 
 /**
- * Thin "website dalam pengembangan" banner shown while
+ * Thin "site under development" banner shown while
  * NEXT_PUBLIC_DRAFT_MODE is on — see REVISION_V0.2.md section 5.
  * Height is driven by the --banner-height CSS var (globals.css), which
  * Navbar/RootLayout read so fixed positioning stays in sync.
@@ -17,7 +17,7 @@ export function DraftBanner() {
       style={{ height: "var(--banner-height)" }}
     >
       <span aria-hidden="true">⚠</span>
-      Website dalam pengembangan — sebagian konten masih berupa data sementara.
+      This site is under development — some content is still placeholder data.
     </div>
   );
 }

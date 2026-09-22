@@ -7,17 +7,33 @@ import { DraftBanner } from "@/components/layout/DraftBanner";
 import { isDraftMode } from "@/lib/draft";
 import { site } from "@/content/site";
 
-// Self-hosted Inter — see REVISION_V0.2.md item #7 (v0.1 misconception
+// Self-hosted fonts — see REVISION_V0.2.md item #7 (v0.1 misconception
 // table): next/font/google made the build depend on network access to
 // Google Fonts. next/font/local removes that dependency.
-const inter = localFont({
+//
+// Cormorant Garamond (display) + DM Sans (body) — derived from
+// sparktalks/bestiego-app, see DESIGN.md section 0.
+const cormorant = localFont({
   src: [
-    { path: "./fonts/inter/inter-400.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/inter/inter-500.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/inter/inter-600.woff2", weight: "600", style: "normal" },
-    { path: "./fonts/inter/inter-700.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/cormorant/cormorant-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/cormorant/cormorant-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/cormorant/cormorant-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/cormorant/cormorant-700.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/cormorant/cormorant-400-italic.woff2", weight: "400", style: "italic" },
+    { path: "./fonts/cormorant/cormorant-500-italic.woff2", weight: "500", style: "italic" },
   ],
-  variable: "--font-inter",
+  variable: "--font-cormorant",
+  display: "swap",
+});
+
+const dmSans = localFont({
+  src: [
+    { path: "./fonts/dmsans/dmsans-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/dmsans/dmsans-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/dmsans/dmsans-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/dmsans/dmsans-700.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-dmsans",
   display: "swap",
 });
 
@@ -43,7 +59,7 @@ export const metadata: Metadata = {
   creator: site.legalName,
   openGraph: {
     type: "website",
-    locale: "id_ID",
+    locale: "en_US",
     ...(siteUrl ? { url: siteUrl } : {}),
     siteName: site.legalName,
     title: `PT KTS — ${site.tagline}`,
@@ -63,7 +79,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#F5F5F3",
+  themeColor: "#F7F4EC",
   width: "device-width",
   initialScale: 1,
 };
@@ -74,7 +90,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" data-draft={draft ? "true" : "false"} className={inter.variable}>
+    <html
+      lang="en"
+      data-draft={draft ? "true" : "false"}
+      className={`${cormorant.variable} ${dmSans.variable}`}
+    >
       <body>
         <DraftBanner />
         <Navbar />

@@ -34,10 +34,12 @@ export function KTSLogo({ variant = "mark", className, priority }: KTSLogoProps)
 interface UnitLogoProps {
   unit: BusinessUnit;
   className?: string;
+  /** Force a white monochrome treatment for dark backgrounds — bypasses `logoBlend` (multiply on a dark bg would erase the logo). */
+  monochrome?: boolean;
 }
 
 /** Business-unit logo. Applies mix-blend-multiply for white-background source files. */
-export function UnitLogo({ unit, className }: UnitLogoProps) {
+export function UnitLogo({ unit, className, monochrome }: UnitLogoProps) {
   return (
     <Image
       src={unit.logo}
@@ -46,7 +48,7 @@ export function UnitLogo({ unit, className }: UnitLogoProps) {
       height={160}
       className={cn(
         "h-10 w-auto object-contain",
-        unit.logoBlend === "multiply" && "mix-blend-multiply",
+        monochrome ? "brightness-0 invert opacity-80" : unit.logoBlend === "multiply" && "mix-blend-multiply",
         className
       )}
     />

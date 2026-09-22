@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { buttonClasses } from "@/components/ui/Button";
 
 interface MobileNavProps {
   id: string;
@@ -38,10 +39,30 @@ export function MobileNav({
     };
   }, [isOpen]);
 
-  // Close on Escape key
+  // Close on Escape; trap Tab/Shift+Tab within the drawer's focusable elements
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) onClose();
+      if (!isOpen) return;
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab" || !drawerRef.current) return;
+
+      const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener("keydown", handleKey);
     return () => document.removeEventListener("keydown", handleKey);
@@ -54,7 +75,7 @@ export function MobileNav({
         aria-hidden="true"
         onClick={onClose}
         className={cn(
-          "fixed inset-0 z-40 bg-black/30 backdrop-blur-[2px] transition-opacity duration-300 lg:hidden",
+          "fixed inset-0 z-40 bg-[var(--color-text)]/40 backdrop-blur-[2px] transition-opacity duration-300 lg:hidden",
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         )}
       />
@@ -65,7 +86,7 @@ export function MobileNav({
         ref={drawerRef}
         role="dialog"
         aria-modal="true"
-        aria-label="Menu navigasi"
+        aria-label="Navigation menu"
         className={cn(
           "fixed inset-y-0 right-0 z-50 w-[min(340px,90vw)] bg-[var(--color-surface)] shadow-2xl flex flex-col transition-transform duration-300 ease-[var(--ease-out)] lg:hidden",
           isOpen ? "translate-x-0" : "translate-x-full"
@@ -76,7 +97,7 @@ export function MobileNav({
           <Link
             href="/"
             onClick={onClose}
-            className="text-sm font-semibold tracking-[-0.01em] text-[var(--color-text)]"
+            className="font-display text-lg font-medium text-[var(--color-text)]"
           >
             KTS
           </Link>
@@ -84,8 +105,8 @@ export function MobileNav({
             ref={closeButtonRef}
             onClick={onClose}
             id="mobile-nav-close"
-            aria-label="Tutup menu navigasi"
-            className="w-9 h-9 rounded-md flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-border)] transition-colors duration-150"
+            aria-label="Close navigation menu"
+            className="w-9 h-9 rounded-full flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-border)] transition-colors duration-150"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M2 2L14 14M14 2L2 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -94,18 +115,18 @@ export function MobileNav({
         </div>
 
         {/* Nav links */}
-        <nav aria-label="Navigasi seluler" className="flex-1 overflow-y-auto py-6 px-4">
+        <nav aria-label="Mobile" className="flex-1 overflow-y-auto py-6 px-4">
           <ul className="space-y-1" role="list">
             {links.map((link) => {
               const active =
-                pathname === link.href || pathname.startsWith(link.href + "/");
+                pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href + "/"));
               return (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     onClick={onClose}
                     className={cn(
-                      "flex items-center px-4 py-3.5 rounded-lg text-[15px] font-medium transition-colors duration-150",
+                      "flex items-center px-4 py-3.5 rounded-xl text-[15px] font-medium transition-colors duration-150",
                       active
                         ? "text-[var(--color-accent)] bg-[var(--color-accent-light)]"
                         : "text-[var(--color-text)] hover:bg-[var(--color-border)]"
@@ -128,17 +149,17 @@ export function MobileNav({
               rel="noopener noreferrer"
               onClick={onClose}
               id="mobile-nav-cta"
-              className="flex items-center justify-center w-full px-4 py-3.5 rounded-lg text-sm font-semibold bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors duration-150"
+              className={cn(buttonClasses("primary", "md"), "w-full")}
             >
-              Toko Online
+              Online Shop
             </a>
           )}
           <Link
-            href="/kontak"
+            href="/contact"
             onClick={onClose}
-            className="mt-2 flex items-center justify-center w-full px-4 py-3 rounded-lg text-sm font-medium text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-border)] transition-colors duration-150"
+            className="mt-2 flex items-center justify-center w-full px-4 py-3 rounded-full text-sm font-medium text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-border)] transition-colors duration-150"
           >
-            Kontak PT KTS
+            Contact PT KTS
           </Link>
         </div>
       </div>

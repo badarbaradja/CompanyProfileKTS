@@ -1,8 +1,9 @@
 import { cn } from "@/lib/utils";
 
 interface SectionHeadingProps {
-  eyebrow: string;
-  title: string;
+  /** Optional — per DESIGN.md, not every section needs one. No decorative line. */
+  eyebrow?: string;
+  title: React.ReactNode;
   description?: string;
   as?: "h1" | "h2";
   align?: "left" | "center";
@@ -10,8 +11,10 @@ interface SectionHeadingProps {
 }
 
 /**
- * Shared eyebrow + heading + optional description pattern used at the
- * top of every page/section (previously duplicated inline per page).
+ * Heading pattern for section/page intros. Deliberately plain — no
+ * eyebrow underline, no forced use on every section (see DESIGN.md
+ * section 15). `title` accepts JSX so callers can add an inline
+ * italic accent word where it earns its place.
  */
 export function SectionHeading({
   eyebrow,
@@ -24,20 +27,14 @@ export function SectionHeading({
   const centered = align === "center";
   return (
     <div className={cn(centered && "text-center", className)}>
-      <div
-        className={cn(
-          "inline-flex items-center gap-2 mb-5",
-          centered && "justify-center"
-        )}
-      >
-        <span className="w-6 h-px bg-[var(--color-accent)]" aria-hidden="true" />
-        <span className="text-xs font-semibold uppercase tracking-widest text-[var(--color-accent)]">
+      {eyebrow && (
+        <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--color-accent)] mb-3">
           {eyebrow}
-        </span>
-      </div>
+        </p>
+      )}
 
       <Heading
-        className="font-bold leading-tight tracking-tight mb-5"
+        className="leading-[1.1] tracking-tight mb-4"
         style={{ fontSize: Heading === "h1" ? "var(--text-h1)" : "var(--text-h2)" }}
       >
         {title}
@@ -55,5 +52,35 @@ export function SectionHeading({
         </p>
       )}
     </div>
+  );
+}
+
+/**
+ * The two-line serif heading pattern borrowed from bestiego-app: a
+ * dark line followed by an italic accent-color line. Used selectively
+ * (see DESIGN.md section 4) — not on every heading.
+ */
+export function AccentHeading({
+  line1,
+  line2,
+  as: Heading = "h2",
+  align = "left",
+  className,
+}: {
+  line1: string;
+  line2: string;
+  as?: "h1" | "h2";
+  align?: "left" | "center";
+  className?: string;
+}) {
+  return (
+    <Heading
+      className={cn("leading-[1.12] tracking-tight", align === "center" && "text-center", className)}
+      style={{ fontSize: Heading === "h1" ? "var(--text-h1)" : "var(--text-h2)" }}
+    >
+      {line1}
+      <br />
+      <em className="italic text-[var(--color-accent)]">{line2}</em>
+    </Heading>
   );
 }

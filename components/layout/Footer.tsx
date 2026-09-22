@@ -4,15 +4,15 @@ import { Pending } from "@/components/ui/Pending";
 import { site } from "@/content/site";
 
 const footerLinks = {
-  Perusahaan: [
-    { label: "Tentang", href: "/tentang" },
-    { label: "Layanan", href: "/layanan" },
-    { label: "Produk", href: "/produk" },
-    { label: "Pelatihan", href: "/pelatihan" },
+  Company: [
+    { label: "About", href: "/about" },
+    { label: "Services", href: "/services" },
+    { label: "Products", href: "/products" },
+    { label: "Training", href: "/training" },
   ],
-  Terhubung: [
-    { label: "Kegiatan", href: "/kegiatan" },
-    { label: "Kontak", href: "/kontak" },
+  Connect: [
+    { label: "Events", href: "/events" },
+    { label: "Contact", href: "/contact" },
     {
       label: "Instagram",
       href: site.contact.instagram,
@@ -28,45 +28,49 @@ export function Footer() {
   return (
     <footer
       role="contentinfo"
-      className="border-t border-[var(--color-border)] bg-[var(--color-surface)]"
+      className="bg-[var(--color-dark)] text-[var(--color-canvas)] pt-16 pb-8"
     >
-      <div className="container-kts py-16">
+      <div className="container-kts">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8">
           {/* Brand column */}
           <div className="md:col-span-2">
             <Link
               href="/"
-              className="inline-flex items-center gap-2.5 group mb-4"
-              aria-label="PT Kappa Technology Solution — Beranda"
+              className="inline-flex items-center gap-2.5 mb-4"
+              aria-label="PT Kappa Technology Solution — Home"
             >
-              <KTSLogo variant="mark" className="h-6" />
-              <span className="text-[15px] font-semibold tracking-[-0.01em] text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-200">
+              <KTSLogo variant="mark" className="h-7" />
+              <span className="font-display text-xl font-medium text-[var(--color-canvas)]">
                 KTS
               </span>
             </Link>
-            <p className="text-sm text-[var(--color-text-muted)] max-w-xs leading-relaxed mt-2">
+            <p className="text-sm text-[var(--color-dark-muted)] max-w-xs leading-relaxed mt-2">
               {site.description}
             </p>
             <a
               href={site.contact.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="PT KTS di Instagram (buka di tab baru)"
-              className="inline-flex items-center gap-2 mt-5 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors duration-150"
+              aria-label="PT KTS on Instagram (opens in new tab)"
+              className="inline-flex items-center gap-2 mt-5 text-sm text-[var(--color-dark-muted)] hover:text-[var(--color-canvas)] transition-colors duration-150"
             >
               <InstagramIcon />
               {site.contact.instagramHandle}
             </a>
 
             {!hasContact && (
-              <Pending label="Kontak resmi (WhatsApp, email, alamat)" className="mt-5 max-w-xs" />
+              <Pending
+                label="Official contact details (WhatsApp, email, address)"
+                variant="dark"
+                className="mt-5 max-w-xs"
+              />
             )}
           </div>
 
           {/* Link columns */}
           {Object.entries(footerLinks).map(([groupName, links]) => (
             <div key={groupName}>
-              <h3 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-4">
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-dark-muted)] mb-4">
                 {groupName}
               </h3>
               <ul className="space-y-2.5" role="list">
@@ -77,14 +81,14 @@ export function Footer() {
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors duration-150"
+                        className="text-sm text-[var(--color-dark-muted)] hover:text-[var(--color-canvas)] transition-colors duration-150"
                       >
                         {link.label}
                       </a>
                     ) : (
                       <Link
                         href={link.href}
-                        className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors duration-150"
+                        className="text-sm text-[var(--color-dark-muted)] hover:text-[var(--color-canvas)] transition-colors duration-150"
                       >
                         {link.label}
                       </Link>
@@ -97,9 +101,9 @@ export function Footer() {
                       href={site.contact.shopUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors duration-150"
+                      className="text-sm text-[var(--color-dark-muted)] hover:text-[var(--color-canvas)] transition-colors duration-150"
                     >
-                      Toko Online
+                      Online Shop
                     </a>
                   </li>
                 )}
@@ -109,9 +113,9 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-6 border-t border-[var(--color-border)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <p className="text-xs text-[var(--color-text-faint)]">
-            &copy; {currentYear} PT Kappa Technology Solution. Hak cipta dilindungi.
+        <div className="mt-12 pt-6 border-t border-[var(--color-dark-border)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <p className="text-xs text-[var(--color-dark-muted)]">
+            &copy; {currentYear} PT Kappa Technology Solution. All rights reserved.
           </p>
         </div>
       </div>
