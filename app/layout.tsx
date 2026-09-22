@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Navbar } from "@/components/navigation/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { DraftBanner } from "@/components/layout/DraftBanner";
 import { isDraftMode } from "@/lib/draft";
 import { site } from "@/content/site";
 
@@ -38,6 +37,8 @@ const dmSans = localFont({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+// Kept only to drive robots/noindex below — see REVISION v0.4 part A.2.
+// The visible draft banner was removed in v0.4.
 const draft = isDraftMode();
 
 export const metadata: Metadata = {
@@ -90,13 +91,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      data-draft={draft ? "true" : "false"}
-      className={`${cormorant.variable} ${dmSans.variable}`}
-    >
+    <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
       <body>
-        <DraftBanner />
         <Navbar />
         <main id="main-content">{children}</main>
         <Footer />

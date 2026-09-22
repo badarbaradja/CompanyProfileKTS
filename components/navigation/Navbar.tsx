@@ -48,7 +48,7 @@ export function Navbar() {
       <header
         role="banner"
         className={cn(
-          "fixed inset-x-0 top-[var(--banner-height)] z-50 transition-all duration-300",
+          "fixed inset-x-0 top-0 z-50 transition-all duration-300",
           solid
             ? "bg-[var(--color-canvas)]/95 backdrop-blur-md border-b border-[var(--color-border)] shadow-[0_1px_20px_rgba(15,36,56,0.06)]"
             : "bg-transparent"
@@ -124,11 +124,8 @@ export function Navbar() {
         </div>
       </header>
 
-      {/* Spacer so content doesn't hide under fixed nav (+ draft banner, if shown) */}
-      <div
-        style={{ height: "calc(var(--nav-height) + var(--banner-height))" }}
-        aria-hidden="true"
-      />
+      {/* Spacer so content doesn't hide under fixed nav */}
+      <div style={{ height: "var(--nav-height)" }} aria-hidden="true" />
 
       <MobileNav
         id="mobile-nav"

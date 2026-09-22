@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw/unoptimized source photos — never commit originals (EXIF/GPS, large
+# files). Only scripts/optimize-photos.mjs output (public/photos/) is
+# tracked. See REVIEW_NOTES.md.
+/photos-raw/
+/public/photos-raw/
+

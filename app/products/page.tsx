@@ -39,7 +39,7 @@ export default function ProductsPage() {
           {site.businessUnits.map((unit) => {
             const unitProducts = getProductsByUnit(unit.slug);
             return (
-              <div key={unit.slug} id={unit.slug} className="scroll-mt-[calc(var(--nav-height)+var(--banner-height)+1rem)]">
+              <div key={unit.slug} id={unit.slug} className="scroll-mt-[calc(var(--nav-height)+1rem)]">
                 <div className="flex items-center gap-4 mb-8">
                   <UnitLogo unit={unit} className="h-9" />
                   <h2 className="font-display font-medium text-[var(--color-text)]" style={{ fontSize: "var(--text-h3)" }}>
