@@ -1,21 +1,31 @@
 /**
  * content/products/index.ts
  *
- * PT KTS product/service catalog — v0.3.
+ * PT KTS product/service catalog — v0.6.
  *
- * These are real catalog items sourced from the 2026-09-14 "Struktur"
- * meeting slide, grouped by business unit (see PRODUCT_CATALOG.md and
+ * The 11 items and their business-unit grouping are real, sourced from
+ * the 2026-09-14 "Struktur" meeting slide (see PRODUCT_CATALOG.md and
  * REVISION_V0.2.md section 4.3). They are NOT invented concepts.
  *
- * `specs` and `images` are intentionally left empty until the PT KTS
- * team supplies verified data — do not fill them in with guessed
- * values. See REVIEW_NOTES.md open question #5.
+ * `summary`, `description`, `highlights`, `applications`, `specs`, and
+ * `images` are SAMPLE data added in REVISION v0.6 part C so the team can
+ * see the final shape of a product page. Every product is marked
+ * `isSample: true` and the detail page shows a "Sample data" badge on
+ * the specs and photo blocks. None of this is a verified fact about a
+ * real, priced, or certified PT KTS product — see REVIEW_NOTES.md
+ * section "Sample catalog content" for the full list of fields the team
+ * needs to replace, and `content/photos.ts` for photo sourcing/licenses.
  */
 
 import type { BusinessUnitSlug } from "@/content/site";
 import type { ProductStatus } from "@/components/ui/Badge";
 
 export type ProductType = "product" | "service";
+
+export interface ProductSpec {
+  label: string;
+  value: string;
+}
 
 export interface Product {
   /** URL slug for the product/service detail page */
@@ -26,18 +36,24 @@ export interface Product {
   type: ProductType;
   /** Name, exactly as listed on the Struktur slide */
   name: string;
-  /** One-line summary shown on cards */
-  tagline: string;
-  /** General explanation of function only — no specs/pricing/performance claims */
+  /** One-line summary shown on cards and as the detail-page lede */
+  summary: string;
+  /** General explanation of function only — no pricing/performance claims */
   description: string;
+  /** Short feature list, shown as a plain list (not a card grid) */
+  highlights: string[];
+  /** Where this is used, shown as a tag list (not a card grid) */
+  applications: string[];
   /** Development/availability status */
   status: ProductStatus;
   /** Featured on the homepage? (kept to a multiple of 3) */
   featured: boolean;
-  /** Verified specifications — left empty until supplied by the team */
-  specs?: Record<string, string>;
-  /** Verified photos — left empty until supplied by the team */
+  /** Specifications — sample data until the team supplies verified values */
+  specs: ProductSpec[];
+  /** Photo src paths — see content/photos.ts for alt text and licensing */
   images: string[];
+  /** True while summary/description/highlights/applications/specs/images are sample data, not verified facts */
+  isSample: boolean;
 }
 
 export const products: Product[] = [
@@ -47,36 +63,93 @@ export const products: Product[] = [
     unit: "kappa-solution",
     type: "product",
     name: "Lab Practicum Equipment",
-    tagline: "Practicum equipment developed by Kappa Solution.",
+    summary: "Teaching kits for hands-on practicum sessions.",
     description:
-      "Lab practicum equipment developed by Kappa Solution to support hands-on learning and training activities.",
+      "Practicum equipment for schools, universities, and training centers. Each kit is built around one topic, so a class can go through a full experiment in a single session. Kappa Solution can adjust a kit to match a syllabus or an existing lab setup.",
+    highlights: [
+      "Built around one topic per kit",
+      "Sized for a class group",
+      "Spare parts available locally",
+      "Can be matched to an existing syllabus",
+    ],
+    applications: [
+      "School science labs",
+      "University teaching labs",
+      "Vocational training centers",
+      "Training providers",
+    ],
     status: "in-development",
     featured: true,
-    images: [],
+    specs: [
+      { label: "Kit format", value: "Bench unit" },
+      { label: "Group size", value: "2 to 4 students" },
+      { label: "Power", value: "220V AC" },
+      { label: "Manual", value: "Indonesian and English" },
+    ],
+    images: ["/photos/samples/lab-practicum-equipment.webp"],
+    isSample: true,
   },
   {
     slug: "engineering-developed-equipment",
     unit: "kappa-solution",
     type: "product",
     name: "Engineering-Developed Equipment",
-    tagline: "Equipment engineered directly by Kappa Solution.",
+    summary: "Equipment that came out of our own engineering work.",
     description:
-      "A category of equipment produced through Kappa Solution's engineering development process, tailored to field application needs.",
+      "Some of our equipment starts as an internal engineering project. A problem is studied, a prototype is built, and the design is revised until it works under field conditions. What survives that process becomes a product we offer to customers.",
+    highlights: [
+      "Designed and built in house",
+      "Tested in the field before release",
+      "Parts chosen for local availability",
+      "Design can be adapted per site",
+    ],
+    applications: [
+      "Research groups",
+      "Pilot projects",
+      "Community programs",
+      "Small production units",
+    ],
     status: "in-development",
     featured: true,
-    images: [],
+    specs: [
+      { label: "Status", value: "Field tested" },
+      { label: "Build", value: "Made to order" },
+      { label: "Lead time", value: "4 to 6 weeks" },
+      { label: "Documentation", value: "Operating and maintenance manual" },
+    ],
+    images: ["/photos/samples/engineering-developed-equipment.webp"],
+    isSample: true,
   },
   {
     slug: "system-design",
     unit: "kappa-solution",
     type: "service",
     name: "System Design",
-    tagline: "System design services for specific engineering needs.",
+    summary: "System planning, from requirements to build-ready drawings.",
     description:
-      "Consulting and system design services from Kappa Solution, supporting the implementation of engineering solutions tailored to client needs.",
+      "We study the site, the target output, and the budget, then produce a technical design that a builder can work from. The result covers layout, component sizing, and an operating procedure. Customers can build it themselves or have us build it.",
+    highlights: [
+      "Site survey first",
+      "Component sizing with calculations",
+      "Build-ready drawings",
+      "Operating procedure included",
+    ],
+    applications: [
+      "Aquaponic and hydroponic installations",
+      "Waste processing units",
+      "Teaching labs",
+      "Campus facilities",
+    ],
     status: "in-development",
     featured: true,
-    images: [],
+    specs: [
+      { label: "Deliverable", value: "Drawings and specification" },
+      { label: "Timeline", value: "2 to 4 weeks" },
+      { label: "Revisions", value: "Two rounds" },
+      { label: "Format", value: "PDF and editable source" },
+    ],
+    images: ["/photos/samples/system-design.webp"],
+    isSample: true,
   },
 
   // --- Nara Aquaponics ---
@@ -85,48 +158,119 @@ export const products: Product[] = [
     unit: "nara-aquaponics",
     type: "service",
     name: "Hydroponic & Aquaponic System Design-Build",
-    tagline: "Design-build service for hydroponic and aquaponic systems.",
+    summary: "Growing systems designed and built for your site.",
     description:
-      "Nara Aquaponics' service for designing and building hydroponic and aquaponic systems tailored to site and scale.",
+      "An aquaponic system raises fish and plants in one water loop, where fish waste feeds the plants and the plants clean the water. A hydroponic system grows plants without soil. We size both to the space, water source, and crop you have in mind, then build and commission the system.",
+    highlights: [
+      "Sized to your space and water source",
+      "Fish and plant loop in one system",
+      "Built and commissioned on site",
+      "Operator training included",
+    ],
+    applications: [
+      "School and campus gardens",
+      "Community farming",
+      "Small commercial growers",
+      "Demonstration plots",
+    ],
     status: "in-development",
     featured: true,
-    images: [],
+    specs: [
+      { label: "Coverage", value: "12 to 200 m2" },
+      { label: "Media", value: "NFT, DWC, or media bed" },
+      { label: "Water source", value: "PDAM or well" },
+      { label: "Handover", value: "Includes operator training" },
+    ],
+    images: ["/photos/samples/hydroponic-aquaponic-design-build.webp"],
+    isSample: true,
   },
   {
     slug: "mechanical-biological-filters",
     unit: "nara-aquaponics",
     type: "product",
     name: "Mechanical & Biological Filters",
-    tagline: "Filter components for aquaponic systems.",
+    summary: "Filters that keep the water clean enough to reuse.",
     description:
-      "Mechanical and biological filters used as part of Nara Aquaponics systems to maintain water quality.",
+      "The mechanical stage traps solid waste before it breaks down. The biological stage holds the bacteria that convert ammonia into nitrate, which plants can use. Together they let the same water circulate instead of being replaced.",
+    highlights: [
+      "Two filter stages in one line",
+      "Media can be cleaned and reused",
+      "Sized to fish load",
+      "Serviceable without draining the pond",
+    ],
+    applications: ["Aquaponic systems", "Fish ponds", "Ornamental fish", "Hatcheries"],
     status: "in-development",
     featured: false,
-    images: [],
+    specs: [
+      { label: "Flow", value: "1,000 to 8,000 L/h" },
+      { label: "Mechanical media", value: "Filter brush and mat" },
+      { label: "Biological media", value: "Bioball and K1" },
+      { label: "Housing", value: "Food-grade tank" },
+    ],
+    images: ["/photos/samples/mechanical-biological-filters.webp"],
+    isSample: true,
   },
   {
     slug: "aeration-systems",
     unit: "nara-aquaponics",
     type: "product",
     name: "Aeration Systems",
-    tagline: "Aeration systems for ponds and aquaponic systems.",
+    summary: "Oxygen supply for ponds and growing systems.",
     description:
-      "Aeration systems developed by Nara Aquaponics to support oxygenation needs in ponds and aquaponic systems.",
+      "Fish and filter bacteria both consume oxygen, and the level drops fastest at night and at high stocking density. An aeration system keeps dissolved oxygen in a safe range, which supports growth and lowers the risk of sudden loss.",
+    highlights: [
+      "Runs continuously",
+      "Sized to pond volume",
+      "Diffuser layout planned per pond shape",
+      "Low maintenance blower",
+    ],
+    applications: [
+      "Biofloc ponds",
+      "Aquaponic sumps",
+      "Fish nurseries",
+      "Live fish holding tanks",
+    ],
     status: "in-development",
     featured: true,
-    images: [],
+    specs: [
+      { label: "Air output", value: "40 to 150 L/min" },
+      { label: "Power", value: "60 to 250 W" },
+      { label: "Diffuser", value: "Nano tube or air stone" },
+      { label: "Installation", value: "Surface mounted blower" },
+    ],
+    images: ["/photos/samples/aeration-systems.webp"],
+    isSample: true,
   },
   {
     slug: "biofloc-ponds",
     unit: "nara-aquaponics",
     type: "product",
     name: "Biofloc Ponds",
-    tagline: "Biofloc ponds for fish farming.",
+    summary: "Fish ponds that process their own waste.",
     description:
-      "Biofloc ponds designed by Nara Aquaponics to support fish farming using the biofloc approach.",
+      "In a biofloc pond, controlled aeration and feeding grow clumps of microorganisms that consume uneaten feed and fish waste. The flocs become a supplementary food source and cut water exchange, which suits sites where water is limited.",
+    highlights: [
+      "Less water exchange",
+      "Flocs serve as extra feed",
+      "Round tank for even circulation",
+      "Frame and liner can be replaced",
+    ],
+    applications: [
+      "Catfish and tilapia farming",
+      "Home scale farming",
+      "Community programs",
+      "Training facilities",
+    ],
     status: "in-development",
     featured: true,
-    images: [],
+    specs: [
+      { label: "Diameter", value: "2 to 4 m" },
+      { label: "Volume", value: "3 to 12 m3" },
+      { label: "Frame", value: "Galvanized wire and bracing" },
+      { label: "Liner", value: "Tarpaulin, replaceable" },
+    ],
+    images: ["/photos/samples/biofloc-ponds.webp"],
+    isSample: true,
   },
 
   // --- Bumi Hijau ---
@@ -135,48 +279,94 @@ export const products: Product[] = [
     unit: "bumi-hijau",
     type: "product",
     name: "Waste Shredder",
-    tagline: "Shredding equipment for waste management.",
+    summary: "Cuts waste down to a size that can be processed.",
     description:
-      "A waste shredder developed by Bumi Hijau to support waste processing before further treatment.",
+      "Whole organic waste composts slowly and is hard to handle. The shredder reduces it to small, even pieces, which speeds up composting and makes the material easier to feed into the next stage.",
+    highlights: ["Even output size", "Replaceable blades", "Wheeled frame", "Hopper sized for garden waste"],
+    applications: ["Composting units", "Waste banks", "Urban farms", "Campus and office grounds"],
     status: "in-development",
     featured: true,
-    images: [],
+    specs: [
+      { label: "Capacity", value: "100 to 300 kg/h" },
+      { label: "Motor", value: "5.5 kW electric or gasoline" },
+      { label: "Blade", value: "Hardened steel, replaceable" },
+      { label: "Dimensions", value: "120 x 70 x 110 cm" },
+    ],
+    images: ["/photos/samples/waste-shredder.webp"],
+    isSample: true,
   },
   {
     slug: "rampus-incinerator",
     unit: "bumi-hijau",
     type: "product",
     name: "RAMPUS Incinerator",
-    tagline: "RAMPUS incinerator for waste management.",
+    summary: "Controlled burning for waste that cannot be composted.",
     description:
-      "The RAMPUS incinerator is developed by Bumi Hijau for waste management. The full expansion of \"RAMPUS\" is not yet available.",
+      "RAMPUS burns waste inside a closed chamber, so the process stays contained instead of running as an open fire. It is intended for residual waste at sites that have no collection service, and it works alongside sorting rather than replacing it. The full expansion of \"RAMPUS\" is not yet available.",
+    highlights: [
+      "Closed combustion chamber",
+      "Chimney with a secondary stage",
+      "Ash drawer for easy clearing",
+      "Fixed installation on a concrete base",
+    ],
+    applications: ["Village waste facilities", "Waste banks", "Institutional grounds", "Remote sites"],
     status: "in-development",
     featured: true,
-    images: [],
+    specs: [
+      { label: "Capacity", value: "50 to 150 kg per cycle" },
+      { label: "Chamber", value: "Firebrick lined" },
+      { label: "Chimney", value: "3 m with secondary chamber" },
+      { label: "Fuel", value: "Waste with a starter fuel" },
+    ],
+    images: ["/photos/samples/rampus-incinerator.webp"],
+    isSample: true,
   },
   {
     slug: "takakura-composter",
     unit: "bumi-hijau",
     type: "product",
     name: "Takakura Composter",
-    tagline: "Takakura-method composter for organic waste.",
+    summary: "Household composting for kitchen waste.",
     description:
-      "A composter using the Takakura method, developed by Bumi Hijau to process organic waste at household or community scale.",
+      "The Takakura method uses a fermentation starter in a ventilated basket, which turns kitchen waste into compost without an outdoor pit. It suits households and offices with little space, and it produces compost that can go straight into planters.",
+    highlights: ["Fits indoors or on a balcony", "Starter medium included", "No pit required", "Low odor when maintained"],
+    applications: ["Households", "Offices", "Schools", "Community waste programs"],
     status: "in-development",
     featured: false,
-    images: [],
+    specs: [
+      { label: "Volume", value: "40 to 60 L" },
+      { label: "Cycle", value: "2 to 4 weeks" },
+      { label: "Body", value: "Ventilated basket with cover" },
+      { label: "Includes", value: "Starter medium and guide" },
+    ],
+    images: ["/photos/samples/takakura-composter.webp"],
+    isSample: true,
   },
   {
     slug: "gasification-stove",
     unit: "bumi-hijau",
     type: "product",
     name: "Gasification Stove",
-    tagline: "Gasification stove for organic waste management.",
+    summary: "Turns biomass into burnable gas for cooking and heating.",
     description:
-      "The gasification stove is developed by Bumi Hijau for organic-waste management.",
+      "A gasification stove heats biomass with a limited air supply, so it releases a combustible gas that burns at the top of the chamber. The flame is cleaner than open burning, and it runs on wood chips, shells, and other dry residue. Charcoal is left in the chamber at the end of a run.",
+    highlights: [
+      "Runs on dry biomass residue",
+      "Cleaner flame than open burning",
+      "Leaves charcoal after each run",
+      "Portable stainless body",
+    ],
+    applications: ["Field kitchens", "Small food producers", "Farms with crop residue", "Demonstrations and training"],
     status: "in-development",
     featured: true,
-    images: [],
+    specs: [
+      { label: "Fuel", value: "Wood chips, shells, dry residue" },
+      { label: "Burn time", value: "45 to 90 min per load" },
+      { label: "Body", value: "Stainless steel" },
+      { label: "Output", value: "Cooking flame plus charcoal residue" },
+    ],
+    images: ["/photos/samples/gasification-stove.webp"],
+    isSample: true,
   },
 ];
 
