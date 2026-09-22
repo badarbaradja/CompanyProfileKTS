@@ -7,9 +7,12 @@
  *
  * Structure (business lines, business units, ESIC Network relationship)
  * is sourced from the 2026-09-14 meeting notes and the "Struktur" slide
- * — see REVISION_V0.2.md. Contact details, vision/mission, and team
- * data are placeholders until the PT KTS team supplies verified values
- * — see REVIEW_NOTES.md for the open-questions list.
+ * — see REVISION_V0.2.md. Contact details were supplied 2026-09-23 (see
+ * REVISION v0.6 part A) — the WhatsApp number is Pak Ramdlan's personal
+ * line, used temporarily as the contact person, and the address is not
+ * yet confirmed by the team. Vision/mission are a 2026-09-23 draft,
+ * still pending team approval. Team member data is still a placeholder.
+ * See REVIEW_NOTES.md for the open-questions list.
  *
  * All public-facing English copy lives in this file (never hardcoded in
  * a component) so an Indonesian translation layer can be added later
@@ -58,16 +61,29 @@ export const site = {
   description:
     "PT Kappa Technology Solution works in four areas: equipment supply, consulting, engineering development, and training. The work is carried out by three business units: Kappa Solution, Nara Aquaponics, and Bumi Hijau. PT KTS also supports ESIC Network.",
 
-  /** Official vision — not yet supplied by the team. Do not invent. */
-  vision: undefined as string | undefined,
-  /** Official mission — not yet supplied by the team. Do not invent. */
-  mission: undefined as string | undefined,
+  /** Draft vision — supplied 2026-09-23, still pending team approval. See REVIEW_NOTES.md. */
+  vision: "Appropriate technology that the people who use it can run and maintain themselves." as string | undefined,
+  /** Draft mission — supplied 2026-09-23, still pending team approval. See REVIEW_NOTES.md. */
+  mission: [
+    "Supply equipment that can be operated, serviced, and repaired locally.",
+    "Design systems that fit the site, the budget, and the skills of the people who will run them.",
+    "Develop our own equipment through engineering work, and test it in the field before we offer it.",
+    "Train every user, so the equipment keeps working long after handover.",
+    "Support education and research through ESIC Network.",
+  ] as string[] | undefined,
 
   contact: {
-    /** WhatsApp number in international format without symbols, e.g. "62812xxxxxxxx". Empty = not yet supplied. */
-    whatsapp: "",
-    email: "",
-    address: "",
+    /**
+     * WhatsApp number in international format without symbols. This is
+     * Pak Ramdlan's personal number, used temporarily as the contact
+     * person while PT KTS does not yet have its own company line — see
+     * REVIEW_NOTES.md. Labeled "WhatsApp (contact person)" on /contact,
+     * never "Company phone".
+     */
+    whatsapp: "6282119563800",
+    email: "kappasolution25@gmail.com",
+    /** Address supplied 2026-09-23, not yet confirmed by the team — see REVIEW_NOTES.md. Shown publicly as-is per that revision's instruction. */
+    address: "Jl. Sukasenang 143, Cigugur Tengah, Kec. Cimahi Tengah, Kota Cimahi, Jawa Barat 40522",
     instagram: "https://www.instagram.com/kappasolution/",
     instagramHandle: "@kappasolution",
     /**

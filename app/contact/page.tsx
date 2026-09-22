@@ -5,6 +5,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Pending } from "@/components/ui/Pending";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { site } from "@/content/site";
+import { buildWhatsAppUrl, formatPhoneDisplay } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -26,8 +27,22 @@ export default function ContactPage() {
             />
 
             <div className="mt-10 space-y-5">
-              <ContactRow label="WhatsApp" value={contact.whatsapp} missingLabel="Official WhatsApp number" />
-              <ContactRow label="Email" value={contact.email} missingLabel="Official email address" />
+              <ContactRow
+                label="WhatsApp (contact person)"
+                value={contact.whatsapp ? formatPhoneDisplay(contact.whatsapp) : ""}
+                href={
+                  contact.whatsapp
+                    ? buildWhatsAppUrl(contact.whatsapp, "Halo PT KTS, saya ingin bertanya.")
+                    : undefined
+                }
+                missingLabel="Official WhatsApp number"
+              />
+              <ContactRow
+                label="Email"
+                value={contact.email}
+                href={contact.email ? `mailto:${contact.email}` : undefined}
+                missingLabel="Official email address"
+              />
               <ContactRow label="Address" value={contact.address} missingLabel="Official office address" />
 
               <div className="flex flex-col gap-1">
@@ -87,10 +102,12 @@ export default function ContactPage() {
 function ContactRow({
   label,
   value,
+  href,
   missingLabel,
 }: {
   label: string;
   value: string;
+  href?: string;
   missingLabel: string;
 }) {
   return (
@@ -98,7 +115,16 @@ function ContactRow({
       <span className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)]">
         {label}
       </span>
-      {value ? (
+      {value && href ? (
+        <a
+          href={href}
+          target={href.startsWith("https://wa.me/") ? "_blank" : undefined}
+          rel={href.startsWith("https://wa.me/") ? "noopener noreferrer" : undefined}
+          className="text-sm text-[var(--color-accent)] hover:underline w-fit"
+        >
+          {value}
+        </a>
+      ) : value ? (
         <span className="text-sm text-[var(--color-text)]">{value}</span>
       ) : (
         <Pending label={missingLabel} />
