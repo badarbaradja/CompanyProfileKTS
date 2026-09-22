@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
+import { buttonClasses } from "@/components/ui/Button";
 
 export default function NotFound() {
   return (
@@ -10,19 +11,16 @@ export default function NotFound() {
             404
           </p>
           <h1
-            className="font-bold leading-tight tracking-tight mb-4"
+            className="leading-tight tracking-tight mb-4"
             style={{ fontSize: "var(--text-h1)" }}
           >
-            Halaman tidak ditemukan
+            Page not found
           </h1>
           <p className="text-[var(--color-text-muted)] leading-relaxed mb-8">
-            Halaman yang Anda cari tidak tersedia atau sudah dipindahkan.
+            The page you&apos;re looking for isn&apos;t available or has moved.
           </p>
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors duration-150"
-          >
-            Kembali ke Beranda
+          <Link href="/" className={buttonClasses("primary", "md")}>
+            Back to Home
           </Link>
         </div>
       </Container>

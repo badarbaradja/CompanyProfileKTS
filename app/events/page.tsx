@@ -13,19 +13,19 @@ import {
 } from "@/content/events";
 
 export const metadata: Metadata = {
-  title: "Kegiatan",
-  description: "Kalender kegiatan PT KTS: pelatihan, camp, dan aktivitas ESIC Network.",
+  title: "Events",
+  description: "PT KTS's events calendar: training, camps, and ESIC Network activities.",
 };
 
 const TYPE_LABEL: Record<KTSEventType, string> = {
-  pelatihan: "Pelatihan",
+  training: "Training",
   camp: "Camp",
   esic: "ESIC",
   jesic: "JESIC",
-  lainnya: "Kegiatan",
+  other: "Event",
 };
 
-export default function KegiatanPage() {
+export default function EventsPage() {
   const upcoming = getUpcomingEvents();
   const past = getPastEvents();
 
@@ -35,15 +35,15 @@ export default function KegiatanPage() {
         <Container>
           <FadeIn className="max-w-2xl">
             <SectionHeading
-              eyebrow="Kegiatan"
-              title="Kalender kegiatan"
-              description="Data di bawah ini bersumber dari content/events.ts dan diperbarui manual oleh tim PT KTS."
+              eyebrow="Events"
+              title="Events calendar"
+              description="Sourced from content/events.ts and updated manually by the PT KTS team."
             />
           </FadeIn>
 
           <div className="mt-14 grid grid-cols-1 lg:grid-cols-2 gap-14">
-            <EventList title="Akan datang" events={upcoming} emptyLabel="Belum ada kegiatan terjadwal." />
-            <EventList title="Sudah terlaksana" events={past} emptyLabel="Belum ada riwayat kegiatan." />
+            <EventList title="Upcoming" events={upcoming} emptyLabel="No events scheduled yet." />
+            <EventList title="Past" events={past} emptyLabel="No event history yet." />
           </div>
         </Container>
       </section>
@@ -66,7 +66,7 @@ function EventList({
 
   return (
     <div>
-      <h2 className="font-semibold text-[var(--color-text)] mb-6" style={{ fontSize: "var(--text-h3)" }}>
+      <h2 className="font-display font-medium text-[var(--color-text)] mb-6" style={{ fontSize: "var(--text-h3)" }}>
         {title}
       </h2>
 
@@ -83,7 +83,7 @@ function EventList({
                 {group.items.map((event) => (
                   <li
                     key={event.slug}
-                    className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4"
+                    className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] p-4"
                   >
                     <div className="flex items-center justify-between gap-2 mb-1.5">
                       <span className="text-xs font-semibold uppercase tracking-widest text-[var(--color-accent)]">
@@ -91,7 +91,7 @@ function EventList({
                       </span>
                       {event.isDummy && (
                         <span className="text-[10px] font-semibold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-200 rounded-full px-2 py-0.5">
-                          Contoh
+                          Example
                         </span>
                       )}
                     </div>

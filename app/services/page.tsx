@@ -7,20 +7,20 @@ import { BusinessUnitsSection } from "@/components/sections/BusinessUnitsSection
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Layanan",
-  description: `Empat lini usaha dan tiga unit usaha ${site.legalName}.`,
+  title: "Services",
+  description: `${site.legalName}'s four business lines and three business units.`,
 };
 
-export default function LayananPage() {
+export default function ServicesPage() {
   return (
     <>
       <section className="section-padding">
         <Container>
           <FadeIn className="max-w-2xl">
             <SectionHeading
-              eyebrow="Layanan"
-              title="Lini usaha & unit usaha kami"
-              description="PT KTS menjalankan empat lini usaha melalui tiga unit usaha."
+              eyebrow="Services"
+              title="Our business lines & units"
+              description="PT KTS runs four business lines through three business units."
             />
           </FadeIn>
         </Container>

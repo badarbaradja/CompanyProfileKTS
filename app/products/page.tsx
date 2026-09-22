@@ -9,29 +9,29 @@ import { getProductsByUnit } from "@/content/products";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Produk",
-  description: `Katalog produk dan layanan ${site.legalName}, dikelompokkan per unit usaha.`,
+  title: "Products",
+  description: `${site.legalName}'s product and service catalog, grouped by business unit.`,
 };
 
-export default function ProdukPage() {
+export default function ProductsPage() {
   return (
     <section className="section-padding">
       <Container>
         <FadeIn className="max-w-2xl mb-8">
           <SectionHeading
-            eyebrow="Produk"
-            title="Katalog produk & layanan"
-            description="Dikelompokkan berdasarkan unit usaha. Foto, spesifikasi teknis, dan skema harga belum tersedia untuk sebagian besar item."
+            eyebrow="Products"
+            title="Product & service catalog"
+            description="Grouped by business unit. Photos, technical specifications, and pricing are not yet available for most items."
           />
         </FadeIn>
 
-        <FadeIn className="mb-14 p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] flex gap-3 items-start max-w-2xl">
+        <FadeIn className="mb-14 p-4 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] flex gap-3 items-start max-w-2xl">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 mt-0.5" aria-hidden="true">
             <circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" />
           </svg>
           <p className="text-sm text-[var(--color-text-muted)]">
-            Deskripsi berikut hanya menjelaskan fungsi umum. Kapasitas, spesifikasi teknis,
-            sertifikasi, dan harga belum diverifikasi oleh tim PT KTS.
+            The descriptions below explain general function only. Capacity, technical
+            specifications, certifications, and pricing have not yet been verified by the PT KTS team.
           </p>
         </FadeIn>
 
@@ -42,7 +42,7 @@ export default function ProdukPage() {
               <div key={unit.slug} id={unit.slug} className="scroll-mt-[calc(var(--nav-height)+var(--banner-height)+1rem)]">
                 <div className="flex items-center gap-4 mb-8">
                   <UnitLogo unit={unit} className="h-9" />
-                  <h2 className="font-semibold text-[var(--color-text)]" style={{ fontSize: "var(--text-h3)" }}>
+                  <h2 className="font-display font-medium text-[var(--color-text)]" style={{ fontSize: "var(--text-h3)" }}>
                     {unit.name}
                   </h2>
                 </div>

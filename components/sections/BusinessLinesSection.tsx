@@ -1,42 +1,33 @@
 import { Container } from "@/components/layout/Container";
 import { FadeIn } from "@/components/motion/FadeIn";
-import { StaggerContainer, StaggerItem } from "@/components/motion/StaggerContainer";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { site } from "@/content/site";
 
 export function BusinessLinesSection() {
   return (
-    <section id="lini-usaha" aria-labelledby="lini-usaha-heading" className="section-padding-sm">
+    <section
+      id="business-lines"
+      aria-labelledby="business-lines-heading"
+      className="section-padding-sm section-dark"
+    >
       <Container>
-        <FadeIn className="max-w-2xl mb-12">
-          <SectionHeading
-            as="h2"
-            eyebrow="Lini Usaha"
-            title="Empat lini usaha PT KTS"
-            description="Dijalankan bersama oleh tiga unit usaha PT KTS."
-          />
+        <FadeIn className="max-w-xl mb-12">
+          <h2 id="business-lines-heading" className="leading-[1.1] tracking-tight" style={{ fontSize: "var(--text-h2)" }}>
+            What we do
+          </h2>
         </FadeIn>
 
-        <StaggerContainer
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
-          staggerDelay={0.07}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:divide-x divide-[var(--color-dark-border)]">
           {site.businessLines.map((line, i) => (
-            <StaggerItem key={line.name}>
-              <div className="h-full p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)]">
-                <span className="text-xs font-mono text-[var(--color-text-faint)]">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-3 font-semibold text-[var(--color-text)]" style={{ fontSize: "var(--text-h4)" }}>
-                  {line.name}
-                </h3>
-                <p className="mt-2 text-sm text-[var(--color-text-muted)] leading-relaxed">
-                  {line.description}
-                </p>
-              </div>
-            </StaggerItem>
+            <FadeIn key={line.name} delay={i * 0.06} className="py-6 lg:py-0 lg:px-6 first:lg:pl-0 border-t border-[var(--color-dark-border)] lg:border-t-0 first:border-t-0">
+              <h3 className="font-display text-xl font-medium text-[var(--color-canvas)] mb-2">
+                {line.name}
+              </h3>
+              <p className="text-sm text-[var(--color-dark-muted)] leading-relaxed">
+                {line.description}
+              </p>
+            </FadeIn>
           ))}
-        </StaggerContainer>
+        </div>
       </Container>
     </section>
   );

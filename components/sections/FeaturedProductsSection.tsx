@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { StaggerContainer, StaggerItem } from "@/components/motion/StaggerContainer";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProductCard } from "@/components/products/ProductCard";
 import { getFeaturedProducts } from "@/content/products";
 
@@ -10,14 +9,26 @@ export function FeaturedProductsSection() {
   const featured = getFeaturedProducts();
 
   return (
-    <section id="produk-unggulan" aria-labelledby="produk-unggulan-heading" className="section-padding-sm">
+    <section
+      id="featured-products"
+      aria-labelledby="featured-products-heading"
+      className="section-padding bg-[var(--color-surface-raised)]"
+    >
       <Container>
-        <FadeIn className="max-w-2xl mb-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
-          <SectionHeading
-            as="h2"
-            eyebrow="Produk Unggulan"
-            title="Sebagian produk dan layanan kami"
-          />
+        <FadeIn className="mb-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
+          <h2
+            id="featured-products-heading"
+            className="leading-[1.1] tracking-tight max-w-xl"
+            style={{ fontSize: "var(--text-h2)" }}
+          >
+            A look at our products &amp; services
+          </h2>
+          <Link
+            href="/products"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-accent)] hover:underline shrink-0"
+          >
+            View full catalog →
+          </Link>
         </FadeIn>
 
         <StaggerContainer
@@ -30,15 +41,6 @@ export function FeaturedProductsSection() {
             </StaggerItem>
           ))}
         </StaggerContainer>
-
-        <FadeIn className="mt-10">
-          <Link
-            href="/produk"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-accent)] hover:underline"
-          >
-            Lihat semua produk & layanan →
-          </Link>
-        </FadeIn>
       </Container>
     </section>
   );

@@ -7,11 +7,11 @@ import { Pending } from "@/components/ui/Pending";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Pelatihan",
-  description: "Pelatihan dan camp yang diselenggarakan PT KTS.",
+  title: "Training",
+  description: "Training and camps run by PT KTS.",
 };
 
-export default function PelatihanPage() {
+export default function TrainingPage() {
   const { training } = site;
 
   return (
@@ -20,8 +20,8 @@ export default function PelatihanPage() {
         <Container>
           <FadeIn className="max-w-2xl">
             <SectionHeading
-              eyebrow="Pelatihan"
-              title="Pelatihan & Camp"
+              eyebrow="Training"
+              title="Training & Camp"
               description={training.description}
             />
           </FadeIn>
@@ -33,10 +33,10 @@ export default function PelatihanPage() {
         <Container>
           <FadeIn className="max-w-2xl mb-10">
             <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-3">
-              Gambaran Pelatihan
+              A look at our training
             </h2>
             <p className="text-sm text-[var(--color-text-muted)]">
-              Dokumentasi pelatihan dapat dilihat langsung di Instagram kami.
+              Training documentation can be viewed directly on our Instagram.
             </p>
           </FadeIn>
 
@@ -50,7 +50,7 @@ export default function PelatihanPage() {
                   href={post.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex h-full flex-col justify-between rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 hover:border-[var(--color-border-strong)] hover:shadow-[0_4px_32px_rgba(0,0,0,0.06)] transition-all duration-300"
+                  className="group flex h-full flex-col justify-between rounded-[var(--radius-lg)] bg-[var(--color-surface)] p-6 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-lg)] hover:-translate-y-1 transition-all duration-300"
                 >
                   <InstagramIcon />
                   <div className="mt-6">
@@ -58,7 +58,7 @@ export default function PelatihanPage() {
                       {post.label}
                     </span>
                     <span className="text-sm text-[var(--color-text-muted)]">
-                      Lihat di Instagram →
+                      View on Instagram →
                     </span>
                   </div>
                 </a>
@@ -73,22 +73,22 @@ export default function PelatihanPage() {
         <Container>
           <FadeIn className="max-w-2xl mb-8">
             <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-3">
-              Video Dokumentasi
+              Documentation video
             </h2>
           </FadeIn>
           <FadeIn>
             {training.youtubeUrl ? (
-              <div className="aspect-video max-w-3xl rounded-2xl overflow-hidden border border-[var(--color-border)]">
+              <div className="aspect-video max-w-3xl rounded-[var(--radius-lg)] overflow-hidden">
                 <iframe
                   src={training.youtubeUrl}
-                  title="Video dokumentasi PT KTS"
+                  title="PT KTS documentation video"
                   className="w-full h-full"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
               </div>
             ) : (
-              <Pending label="Video dokumentasi (ESIC, Camp, abdimas)" className="max-w-2xl" />
+              <Pending label="Documentation video (ESIC, Camp, community service)" className="max-w-2xl" />
             )}
           </FadeIn>
         </Container>

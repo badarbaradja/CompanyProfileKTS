@@ -7,11 +7,11 @@ import { InquiryForm } from "@/components/forms/InquiryForm";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Kontak",
-  description: `Hubungi ${site.legalName}.`,
+  title: "Contact",
+  description: `Get in touch with ${site.legalName}.`,
 };
 
-export default function KontakPage() {
+export default function ContactPage() {
   const { contact } = site;
 
   return (
@@ -20,15 +20,15 @@ export default function KontakPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <FadeIn>
             <SectionHeading
-              eyebrow="Kontak"
-              title="Punya kebutuhan yang bisa kami bantu?"
-              description="Hubungi PT KTS untuk konsultasi, pertanyaan produk/layanan, atau kerja sama pelatihan."
+              eyebrow="Contact"
+              title="Got something we can help with?"
+              description="Reach out to PT KTS for a consultation, a product/service question, or a training partnership."
             />
 
             <div className="mt-10 space-y-5">
-              <ContactRow label="WhatsApp" value={contact.whatsapp} missingLabel="Nomor WhatsApp resmi" />
-              <ContactRow label="Email" value={contact.email} missingLabel="Alamat email resmi" />
-              <ContactRow label="Alamat" value={contact.address} missingLabel="Alamat kantor resmi" />
+              <ContactRow label="WhatsApp" value={contact.whatsapp} missingLabel="Official WhatsApp number" />
+              <ContactRow label="Email" value={contact.email} missingLabel="Official email address" />
+              <ContactRow label="Address" value={contact.address} missingLabel="Official office address" />
 
               <div className="flex flex-col gap-1">
                 <span className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)]">
@@ -47,7 +47,7 @@ export default function KontakPage() {
               {contact.shopUrl && (
                 <div className="flex flex-col gap-1">
                   <span className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)]">
-                    Toko Online
+                    Online Shop
                   </span>
                   <a
                     href={contact.shopUrl}
@@ -55,11 +55,11 @@ export default function KontakPage() {
                     rel="noopener noreferrer"
                     className="text-sm text-[var(--color-accent)] hover:underline w-fit"
                   >
-                    Kunjungi toko
+                    Visit the shop
                   </a>
                   {contact.shopIsPersonalAccount && (
                     <span className="text-xs text-[var(--color-text-faint)]">
-                      Sementara menggunakan akun pribadi, bukan akun resmi PT KTS.
+                      Currently a personal account, not yet an official PT KTS store.
                     </span>
                   )}
                 </div>
@@ -68,12 +68,12 @@ export default function KontakPage() {
           </FadeIn>
 
           <FadeIn direction="left">
-            <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-8">
-              <h2 className="font-semibold text-[var(--color-text)] mb-1" style={{ fontSize: "var(--text-h4)" }}>
-                Kirim pertanyaan
+            <div className="rounded-[var(--radius-lg)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] p-6 sm:p-8">
+              <h2 className="font-display font-medium text-[var(--color-text)] mb-1" style={{ fontSize: "var(--text-h4)" }}>
+                Send a question
               </h2>
               <p className="text-sm text-[var(--color-text-muted)] mb-6">
-                Isi pesan Anda, lalu kirim melalui WhatsApp atau email.
+                Write your message, then send it via WhatsApp or email.
               </p>
               <InquiryForm whatsapp={contact.whatsapp} email={contact.email} />
             </div>

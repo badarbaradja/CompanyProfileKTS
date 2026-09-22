@@ -8,12 +8,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     "",
-    "/tentang",
-    "/layanan",
-    "/produk",
-    "/pelatihan",
-    "/kegiatan",
-    "/kontak",
+    "/about",
+    "/services",
+    "/products",
+    "/training",
+    "/events",
+    "/contact",
   ].map((route) => ({
     url: `${siteUrl}${route}`,
     lastModified: new Date(),
@@ -22,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const productRoutes = products.map((product) => ({
-    url: `${siteUrl}/produk/${product.slug}`,
+    url: `${siteUrl}/products/${product.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.7,

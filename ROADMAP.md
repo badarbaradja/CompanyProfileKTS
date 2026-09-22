@@ -31,14 +31,14 @@ Goal: a coherent, navigable, English-language site using real structure
 -   [x] Content layer (`content/site.ts`, `content/products/index.ts`,
         `content/events.ts`) --- English
 -   [x] Self-hosted fonts (`next/font/local`)
--   [ ] Shared components restyled per `DESIGN.md`: `Pending`,
+-   [x] Shared components restyled per `DESIGN.md`: `Pending`,
         `DraftBanner`, KTS logo component
--   [ ] Home, About, Services, Products (+ detail), Training, Events,
+-   [x] Home, About, Services, Products (+ detail), Training, Events,
         Contact --- English + new design system
 -   [x] Redirects from v0.1 routes, updated `next.config.ts`
--   [ ] Updated `sitemap.ts`/`robots.ts`, English 404
--   [ ] `REVIEW_NOTES.md` updated for v0.3
--   [ ] Quality gate (see `CLAUDE.md`), including Playwright visual
+-   [x] Updated `sitemap.ts`/`robots.ts`, English 404
+-   [x] `REVIEW_NOTES.md` updated for v0.3
+-   [x] Quality gate (see `CLAUDE.md`), including Playwright visual
         verification across breakpoints
 
 ------------------------------------------------------------------------

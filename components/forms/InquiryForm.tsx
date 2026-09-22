@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { buildWhatsAppUrl } from "@/lib/utils";
+import { buttonClasses } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
 
 interface InquiryFormProps {
   whatsapp: string;
@@ -12,6 +14,10 @@ interface InquiryFormProps {
  * Client-side-only inquiry "form" — see REVISION_V0.2.md section 4.7.
  * No backend: it composes a message and opens WhatsApp/mailto. Nothing
  * is stored or transmitted anywhere else.
+ *
+ * The composed message stays in Indonesian (both WhatsApp and email
+ * route to the PT KTS team) — see REVISION_V0.3.md part A.4. Only the
+ * surrounding form UI is in English.
  */
 export function InquiryForm({ whatsapp, email }: InquiryFormProps) {
   const [name, setName] = useState("");
@@ -35,21 +41,21 @@ export function InquiryForm({ whatsapp, email }: InquiryFormProps) {
     >
       <div>
         <label htmlFor="inquiry-name" className="block text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-2">
-          Nama
+          Name
         </label>
         <input
           id="inquiry-name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full rounded-lg border border-[var(--color-border-strong)] bg-[var(--color-surface)] px-4 py-2.5 text-sm text-[var(--color-text)] focus-visible:outline-2 focus-visible:outline-[var(--color-accent)]"
-          placeholder="Nama Anda"
+          className="w-full rounded-[var(--radius-md)] border border-[var(--color-border-strong)] bg-[var(--color-surface)] px-4 py-2.5 text-sm text-[var(--color-text)] focus-visible:outline-2 focus-visible:outline-[var(--color-accent)]"
+          placeholder="Your name"
         />
       </div>
 
       <div>
         <label htmlFor="inquiry-message" className="block text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-2">
-          Pesan
+          Message
         </label>
         <textarea
           id="inquiry-message"
@@ -57,8 +63,8 @@ export function InquiryForm({ whatsapp, email }: InquiryFormProps) {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           rows={5}
-          className="w-full rounded-lg border border-[var(--color-border-strong)] bg-[var(--color-surface)] px-4 py-2.5 text-sm text-[var(--color-text)] focus-visible:outline-2 focus-visible:outline-[var(--color-accent)]"
-          placeholder="Tuliskan pertanyaan atau kebutuhan Anda"
+          className="w-full rounded-[var(--radius-md)] border border-[var(--color-border-strong)] bg-[var(--color-surface)] px-4 py-2.5 text-sm text-[var(--color-text)] focus-visible:outline-2 focus-visible:outline-[var(--color-accent)]"
+          placeholder="Write your question or what you need"
         />
       </div>
 
@@ -71,9 +77,9 @@ export function InquiryForm({ whatsapp, email }: InquiryFormProps) {
           onClick={(e) => {
             if (!canSubmit || !whatsappHref) e.preventDefault();
           }}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors duration-150 aria-disabled:opacity-40 aria-disabled:pointer-events-none"
+          className={cn(buttonClasses("primary", "md"), "aria-disabled:opacity-40 aria-disabled:pointer-events-none")}
         >
-          Kirim via WhatsApp
+          Send via WhatsApp
         </a>
         <a
           href={canSubmit ? mailtoHref : undefined}
@@ -81,14 +87,14 @@ export function InquiryForm({ whatsapp, email }: InquiryFormProps) {
           onClick={(e) => {
             if (!canSubmit || !mailtoHref) e.preventDefault();
           }}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold border border-[var(--color-border-strong)] text-[var(--color-text)] hover:bg-[var(--color-border)] transition-colors duration-150 aria-disabled:opacity-40 aria-disabled:pointer-events-none"
+          className={cn(buttonClasses("outline", "md"), "aria-disabled:opacity-40 aria-disabled:pointer-events-none")}
         >
-          Kirim via Email
+          Send via Email
         </a>
       </div>
 
       <p id="inquiry-form-note" className="text-xs text-[var(--color-text-faint)] pt-1">
-        Pesan tidak disimpan di server kami — tombol di atas hanya membuka WhatsApp atau aplikasi email Anda.
+        Your message isn&apos;t stored on our server — the buttons above only open WhatsApp or your email app.
       </p>
     </form>
   );
