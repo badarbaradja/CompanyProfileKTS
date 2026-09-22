@@ -15,14 +15,18 @@ product showcase.
 
 Always read, in this order:
 
-1.  `REVISION_V0.2.md` --- source of truth. If any other document
-    conflicts with it, `REVISION_V0.2.md` wins.
-2.  `PRD.md`
-3.  `DESIGN.md`
-4.  `ARCHITECTURE.md`
-5.  `CONTENT.md`
-6.  `PRODUCT_CATALOG.md`
-7.  `ROADMAP.md`
+1.  `REVISION_V0.3.md` --- source of truth, most recent. Corrects
+    `REVISION_V0.2.md` on language (English, not Indonesian) and design
+    direction; everything else in `REVISION_V0.2.md` still applies.
+2.  `REVISION_V0.2.md` --- source of truth for company structure,
+    product catalog, events schema, e-commerce rule, and the
+    draft-mode/`<Pending>` content rules.
+3.  `PRD.md`
+4.  `DESIGN.md`
+5.  `ARCHITECTURE.md`
+6.  `CONTENT.md`
+7.  `PRODUCT_CATALOG.md`
+8.  `ROADMAP.md`
 
 Do not begin a large implementation without understanding these
 documents.
@@ -34,20 +38,18 @@ documents.
 As of v0.2, the website must communicate PT KTS's real structure
 (see `REVISION_V0.2.md` section 2):
 
--   **4 business lines (lini usaha):** Penyediaan Barang, Konsultan,
-    Pengembangan Rekayasa, Pelatihan
--   **3 business units (unit usaha):** Kappa Solution, Nara Aquaponics,
-    Bumi Hijau
+-   **4 business lines:** Equipment Supply, Consulting, Engineering
+    Development, Training
+-   **3 business units:** Kappa Solution, Nara Aquaponics, Bumi Hijau
 -   PT KTS **supports** ESIC Network (ESIC, JESIC, Summer Camp,
-    Pelatihan) --- this relationship is now shown on the site.
+    Training) --- this relationship is now shown on the site.
 
 This replaces the earlier "From Research to Real-World Solutions" /
 research-to-product positioning from v0.1, which did not reflect the
 actual company structure.
 
-Pelatihan (training) and camp activities ARE part of the business and
-ARE shown on the site (`/pelatihan`, `/kegiatan`) --- this reverses the
-v0.1 exclusion.
+Training and camp activities ARE part of the business and ARE shown on
+the site (`/training`, `/events`) --- this reverses the v0.1 exclusion.
 
 PT KTS should still NOT be presented as:
 
@@ -91,59 +93,73 @@ must stay empty until the team supplies verified data.
 Never publish capacity, temperature, power draw, output figures, pricing,
 or certifications for a product/service until verified.
 
-Use status labels (shown in Indonesian on the site) such as:
-
--   Konsep (Concept)
--   Dalam Pengembangan (In Development)
--   Prototipe (Prototype)
--   Segera Hadir (Coming Soon)
-
-only when appropriate.
+Use status labels such as Concept, In Development, Prototype, or Coming
+Soon only when appropriate.
 
 ------------------------------------------------------------------------
 
 ## Language rule
 
-All site-facing content and routes are in **Bahasa Indonesia** (see
-`REVISION_V0.2.md` section 4.1 for the route list). Internal engineering
-docs (this file, `PRD.md`, `ARCHITECTURE.md`, etc.) stay in English.
+The site is **English-only** (see `REVISION_V0.3.md` part A) --- it will
+be accessed by external audiences. Brand names are never translated: PT
+Kappa Technology Solution, Kappa Solution, Nara Aquaponics, Bumi Hijau,
+ESIC Network, JESIC, RAMPUS. All public-facing strings live in
+`content/` (never hardcoded in a component), so an Indonesian
+translation layer can be added later without touching component code ---
+but do not build i18n infrastructure now. Exception: the pre-filled
+WhatsApp inquiry message may stay in Indonesian, since its recipient is
+the PT KTS team.
 
 ------------------------------------------------------------------------
 
 ## E-commerce rule
 
-No cart, checkout, or payment. A single "Toko Online" link
+No cart, checkout, or payment. A single "Online Shop" link
 (`site.contact.shopUrl` in `content/site.ts`) may appear in the
 navbar/footer/product detail, shown only when the URL is set. The current
 shop account belongs personally to Pak Ramdlan (company e-commerce
 account cannot be created yet --- documents incomplete) --- never label
 it as an official PT KTS store without team confirmation.
 
-Product/service CTAs use "Tanyakan" (WhatsApp `wa.me` with a pre-filled
-message) when a WhatsApp number exists, else link to `/kontak`.
+Product/service CTAs use an "Inquire" action (WhatsApp `wa.me` with a
+pre-filled message, in Indonesian) when a WhatsApp number exists, else
+link to `/contact`.
 
 ------------------------------------------------------------------------
 
 ## Design rule
 
+As of v0.3, the visual language is derived from two of the founder's own
+repos (`sparktalks`, `bestiego-app`) --- see `DESIGN.md` section "Reference
+analysis" for the full breakdown and exact tokens.
+
 The site should feel:
 
 -   premium
--   minimal
--   modern
--   technology-driven
--   editorial
--   precise
+-   editorial (serif display type + confident sans body)
+-   photography/visual-forward, not icon-and-card-forward
+-   varied in section rhythm --- not the same layout repeated
 
-Avoid:
+Avoid --- these read as generic AI-generated UI and are explicitly
+banned (see `REVISION_V0.3.md` part B step 3):
 
--   generic bootstrap-looking layouts
--   excessive cards
--   excessive gradients
--   excessive rounded corners
--   neon cyberpunk styling
--   unnecessary glassmorphism
--   excessive animation
+-   a small-caps eyebrow label with a short accent line above every
+    single section
+-   the same 3/4-card uniform grid repeated in nearly every section
+-   line icons sitting inside a small tinted box
+-   rotated/stacked "fanned" cards with a generic soft shadow
+-   SVG grid-pattern or radial gradient "blob" backgrounds
+-   decorative "01 / 02 / 03" numbering
+-   slogan-shaped headings ("X, built from the ground up.") and
+    overuse of em dashes in copy
+
+Also avoid the older generic-Bootstrap failure modes: excessive
+gradients, excessive rounded corners on everything uniformly, neon
+cyberpunk styling, unnecessary glassmorphism, excessive animation.
+
+For product photography that doesn't exist yet, use an intentional
+placeholder treatment (per the reference repos' style), never a fake
+technical illustration standing in for a real photo.
 
 ------------------------------------------------------------------------
 

@@ -1,17 +1,20 @@
 # PT KTS Website Roadmap
 
-> v0.2. Corrected against `REVISION_V0.2.md`.
+> v0.3. Corrected against `REVISION_V0.2.md` and `REVISION_V0.3.md`
+> (English language, sparktalks/bestiego-derived design system).
 
 ## Phase 0 --- Foundation
 
-Status: DONE for v0.2 skeleton
+Status: DONE
 
--   [x] Define company structure (4 lini usaha, 3 unit usaha, ESIC
-        Network relationship) --- source: 2026-09-14 meeting + Struktur
-        slide
--   [x] Define v0.2 sitemap (`/`, `/tentang`, `/layanan`, `/produk`,
-        `/produk/[slug]`, `/pelatihan`, `/kegiatan`, `/kontak`)
+-   [x] Define company structure (4 business lines, 3 business units,
+        ESIC Network relationship) --- source: 2026-09-14 meeting +
+        Struktur slide
+-   [x] Define v0.3 sitemap (`/`, `/about`, `/services`, `/products`,
+        `/products/[slug]`, `/training`, `/events`, `/contact`)
 -   [x] Receive unit/company logos (`public/brand/`)
+-   [x] Derive a design system from the founder's own reference repos
+        (sparktalks, bestiego-app) --- see `DESIGN.md`
 -   [ ] Verify company facts (vision/mission, contact details, legal
         info) --- see `REVIEW_NOTES.md`
 -   [ ] Gather real product/service photos and specifications
@@ -19,22 +22,24 @@ Status: DONE for v0.2 skeleton
 
 ------------------------------------------------------------------------
 
-## Phase 1 --- v0.2 skeleton (current)
+## Phase 1 --- v0.3 skeleton (current)
 
-Goal: a coherent, navigable site using real structure + dummy/placeholder
-detail, explicitly marked as such (draft banner + `<Pending>`).
+Goal: a coherent, navigable, English-language site using real structure
++ dummy/placeholder detail, explicitly marked as such (draft banner +
+`<Pending>`), styled per `DESIGN.md`.
 
--   [ ] Content layer (`content/site.ts`, `content/products/index.ts`,
-        `content/events.ts`)
--   [ ] Self-hosted Inter font (`next/font/local`)
--   [ ] Shared components: `SectionHeading`, `Pending`, `DraftBanner`,
-        KTS logo component
--   [ ] Beranda, Tentang, Layanan, Produk (+ detail), Pelatihan,
-        Kegiatan, Kontak
--   [ ] Redirects from v0.1 routes, updated `sitemap.ts`/`robots.ts`,
-        Indonesian 404
--   [ ] `REVIEW_NOTES.md` for lecturer/team review
--   [ ] Quality gate (see `CLAUDE.md`)
+-   [x] Content layer (`content/site.ts`, `content/products/index.ts`,
+        `content/events.ts`) --- English
+-   [x] Self-hosted fonts (`next/font/local`)
+-   [ ] Shared components restyled per `DESIGN.md`: `Pending`,
+        `DraftBanner`, KTS logo component
+-   [ ] Home, About, Services, Products (+ detail), Training, Events,
+        Contact --- English + new design system
+-   [x] Redirects from v0.1 routes, updated `next.config.ts`
+-   [ ] Updated `sitemap.ts`/`robots.ts`, English 404
+-   [ ] `REVIEW_NOTES.md` updated for v0.3
+-   [ ] Quality gate (see `CLAUDE.md`), including Playwright visual
+        verification across breakpoints
 
 ------------------------------------------------------------------------
 
@@ -93,6 +98,7 @@ commercial model:
 
 ## Phase 6 --- Scale
 
-Potential: multilingual (Indonesian stays primary), product comparison,
+Potential: multilingual (add an Indonesian translation on top of the
+English content, per REVISION_V0.3.md part A.5), product comparison,
 downloadable brochures, partner portal, analytics dashboard, CRM
 integration.

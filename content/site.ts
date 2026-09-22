@@ -11,6 +11,10 @@
  * data are placeholders until the PT KTS team supplies verified values
  * — see REVIEW_NOTES.md for the open-questions list.
  *
+ * All public-facing English copy lives in this file (never hardcoded in
+ * a component) so an Indonesian translation layer can be added later
+ * without touching component code — see REVISION_V0.3.md item A.5.
+ *
  * NEVER hardcode company facts directly in a component — add/edit them
  * here instead.
  */
@@ -33,7 +37,7 @@ export interface BusinessUnit {
   activities: string[];
 }
 
-export type EsicActivityStatus = "aktif" | "segera-hadir";
+export type EsicActivityStatus = "active" | "coming-soon";
 
 export interface EsicActivity {
   name: string;
@@ -49,10 +53,10 @@ export const site = {
   legalName: "PT Kappa Technology Solution",
   shortName: "PT KTS",
 
-  tagline: "Empat lini usaha, tiga unit usaha, satu jaringan inovasi.",
+  tagline: "Four business lines, three business units, one innovation network.",
 
   description:
-    "PT Kappa Technology Solution menjalankan empat lini usaha — Penyediaan Barang, Konsultan, Pengembangan Rekayasa, dan Pelatihan — melalui tiga unit usaha: Kappa Solution, Nara Aquaponics, dan Bumi Hijau, serta mendukung ESIC Network.",
+    "PT Kappa Technology Solution runs four business lines — Equipment Supply, Consulting, Engineering Development, and Training — through three business units: Kappa Solution, Nara Aquaponics, and Bumi Hijau, and supports ESIC Network.",
 
   /** Official vision — not yet supplied by the team. Do not invent. */
   vision: undefined as string | undefined,
@@ -67,11 +71,11 @@ export const site = {
     instagram: "https://www.instagram.com/kappasolution/",
     instagramHandle: "@kappasolution",
     /**
-     * "Toko Online" URL. Empty until confirmed — the current shop
-     * account belongs personally to Pak Ramdlan because PT KTS's own
-     * legal/e-commerce documents (NIB, NPWP, bank account, akta, cap)
-     * are not yet complete. Never label this as an "official PT KTS
-     * store" without explicit team confirmation.
+     * Online shop URL. Empty until confirmed — the current shop account
+     * belongs personally to Pak Ramdlan because PT KTS's own legal/
+     * e-commerce documents (NIB, NPWP, bank account, akta, cap) are not
+     * yet complete. Never label this as an "official PT KTS store"
+     * without explicit team confirmation.
      */
     shopUrl: "",
     shopIsPersonalAccount: true,
@@ -79,24 +83,24 @@ export const site = {
 
   businessLines: [
     {
-      name: "Penyediaan Barang",
+      name: "Equipment Supply",
       description:
-        "Menyediakan alat dan perangkat hasil pengembangan rekayasa dari unit-unit usaha PT KTS.",
+        "Supplying tools and equipment developed by PT KTS's business units.",
     },
     {
-      name: "Konsultan",
+      name: "Consulting",
       description:
-        "Layanan konsultasi teknis untuk kebutuhan rekayasa dan penerapan teknologi.",
+        "Technical consulting for engineering needs and technology adoption.",
     },
     {
-      name: "Pengembangan Rekayasa",
+      name: "Engineering Development",
       description:
-        "Rancang bangun dan pengembangan sistem/alat sesuai kebutuhan lapangan.",
+        "Design and development of systems and equipment for real-world needs.",
     },
     {
-      name: "Pelatihan",
+      name: "Training",
       description:
-        "Pelatihan dan camp yang diselenggarakan bersama unit usaha, khususnya Kappa Solution.",
+        "Training and camps run together with our business units, especially Kappa Solution.",
     },
   ] satisfies BusinessLine[],
 
@@ -105,14 +109,14 @@ export const site = {
       slug: "kappa-solution",
       name: "Kappa Solution",
       logo: "/brand/kappa-solution.png",
-      field: "Alat, sistem, dan pelatihan rekayasa",
+      field: "Equipment, systems, and engineering training",
       description:
-        "Mengembangkan alat hasil pengembangan rekayasa dan alat praktikum, menyediakan desain sistem, serta menyelenggarakan pelatihan dan camp.",
+        "Develops engineering-developed equipment and lab practicum equipment, provides system design, and runs training and camps.",
       activities: [
-        "Alat hasil pengembangan rekayasa",
-        "Alat praktikum",
-        "Desain sistem",
-        "Pelatihan",
+        "Engineering-developed equipment",
+        "Lab practicum equipment",
+        "System design",
+        "Training",
         "Camp",
       ],
     },
@@ -120,14 +124,14 @@ export const site = {
       slug: "nara-aquaponics",
       name: "Nara Aquaponics",
       logo: "/brand/nara-aquaponics.png",
-      field: "Sistem hidroponik & akuaponik",
+      field: "Hydroponic & aquaponic systems",
       description:
-        "Merancang dan membangun sistem hidroponik dan akuaponik, lengkap dengan filter mekanik & biologi, sistem aerasi, dan kolam bioflok.",
+        "Designs and builds hydroponic and aquaponic systems, complete with mechanical & biological filters, aeration systems, and biofloc ponds.",
       activities: [
-        "Rancang bangun sistem hidroponik & akuaponik",
-        "Filter mekanik dan biologi",
-        "Sistem aerasi",
-        "Kolam bioflok",
+        "Hydroponic & aquaponic system design-build",
+        "Mechanical & biological filters",
+        "Aeration systems",
+        "Biofloc ponds",
       ],
     },
     {
@@ -135,14 +139,14 @@ export const site = {
       name: "Bumi Hijau",
       logo: "/brand/bumi-hijau.png",
       logoBlend: "multiply",
-      field: "Pengelolaan sampah & limbah organik",
+      field: "Waste & organic-waste management",
       description:
-        "Mengembangkan alat pengelolaan sampah dan limbah organik: pencacah sampah, insinerator RAMPUS, komposter Takakura, dan tungku gasifikasi.",
+        "Develops waste and organic-waste management equipment: waste shredders, RAMPUS incinerators, Takakura composters, and gasification stoves.",
       activities: [
-        "Pencacah sampah",
-        "Insinerator RAMPUS",
-        "Komposter Takakura",
-        "Tungku gasifikasi",
+        "Waste shredder",
+        "RAMPUS incinerator",
+        "Takakura composter",
+        "Gasification stove",
       ],
     },
   ] satisfies BusinessUnit[],
@@ -150,25 +154,25 @@ export const site = {
   esicNetwork: {
     name: "ESIC Network",
     logo: "/brand/esic-network.png",
-    relationship: "PT KTS mendukung (support) ESIC Network.",
+    relationship: "PT KTS supports ESIC Network.",
     /** Full expansion of "ESIC" not yet supplied — see REVIEW_NOTES.md */
     expansion: undefined as string | undefined,
     activities: [
-      { name: "ESIC", status: "aktif" },
-      { name: "JESIC", status: "segera-hadir" },
-      { name: "Summer Camp", status: "aktif" },
-      { name: "Pelatihan", status: "aktif" },
+      { name: "ESIC", status: "active" },
+      { name: "JESIC", status: "coming-soon" },
+      { name: "Summer Camp", status: "active" },
+      { name: "Training", status: "active" },
     ] satisfies EsicActivity[],
   },
 
   training: {
     description:
-      "PT KTS, melalui lini usaha Pelatihan dan unit Kappa Solution, menyelenggarakan pelatihan dan camp. Berikut gambaran pelatihan dari dokumentasi Instagram kami.",
+      "Through its Training business line and the Kappa Solution unit, PT KTS runs training sessions and camps. Here's a look at our training from our Instagram documentation.",
     /** Reference posts from the 2026-09-14 meeting — link cards only, never scraped/mirrored. */
     instagramShowcase: [
-      { label: "Dokumentasi pelatihan 1", url: "https://www.instagram.com/p/DOat_4CgZHA/" },
-      { label: "Dokumentasi pelatihan 2", url: "https://www.instagram.com/p/DJ24bwcTH2n/" },
-      { label: "Dokumentasi pelatihan 3", url: "https://www.instagram.com/p/DHsFbx1pzw-/" },
+      { label: "Training documentation 1", url: "https://www.instagram.com/p/DOat_4CgZHA/" },
+      { label: "Training documentation 2", url: "https://www.instagram.com/p/DJ24bwcTH2n/" },
+      { label: "Training documentation 3", url: "https://www.instagram.com/p/DHsFbx1pzw-/" },
     ] satisfies TrainingReference[],
     /** YouTube documentation video — iframe only renders when this is set. */
     youtubeUrl: "",

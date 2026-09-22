@@ -1,50 +1,53 @@
-# Product Catalog --- v0.2
+# Product Catalog --- v0.3
 
-> Corrected against `REVISION_V0.2.md` section 4.3. These are **real**
-> catalog items sourced from the 2026-09-14 "Struktur" meeting slide,
-> grouped by business unit --- not invented concepts like v0.1's
-> "Livestock Waste Carbonization System" (removed).
+> Corrected against `REVISION_V0.2.md` section 4.3 and `REVISION_V0.3.md`
+> part A.3 (English names/slugs). These are **real** catalog items
+> sourced from the 2026-09-14 "Struktur" meeting slide, grouped by
+> business unit --- not invented concepts like v0.1's "Livestock Waste
+> Carbonization System" (removed).
 
 Every entry below is a genuine product/service name from the source
-slide. What is still missing --- photos, specifications, pricing --- must
-stay empty (`specs: undefined`, `images: []`) until the PT KTS team
-supplies verified data. See `REVIEW_NOTES.md` open question #5.
+slide, translated to English per `REVISION_V0.3.md`. What is still
+missing --- photos, specifications, pricing --- must stay empty
+(`specs: undefined`, `images: []`) until the PT KTS team supplies
+verified data. See `REVIEW_NOTES.md` open question #5.
 
 ------------------------------------------------------------------------
 
 ## Kappa Solution
 
-Alat hasil pengembangan rekayasa, alat praktikum, desain sistem,
-pelatihan, camp.
+Engineering-developed equipment, lab practicum equipment, system
+design, training, camp.
 
-1.  **Alat Praktikum** (produk)
-2.  **Alat Hasil Pengembangan Rekayasa** (produk)
-3.  **Desain Sistem** (layanan)
+1.  **Lab Practicum Equipment** (product) --- `/products/lab-practicum-equipment`
+2.  **Engineering-Developed Equipment** (product) --- `/products/engineering-developed-equipment`
+3.  **System Design** (service) --- `/products/system-design`
 
 ------------------------------------------------------------------------
 
 ## Nara Aquaponics
 
-Rancang bangun sistem hidroponik & akuaponik, filter mekanik & biologi,
-sistem aerasi, kolam bioflok.
+Hydroponic & aquaponic system design-build, mechanical & biological
+filters, aeration systems, biofloc ponds.
 
-1.  **Rancang Bangun Sistem Hidroponik & Akuaponik** (layanan)
-2.  **Filter Mekanik dan Biologi** (produk)
-3.  **Sistem Aerasi** (produk)
-4.  **Kolam Bioflok** (produk)
+1.  **Hydroponic & Aquaponic System Design-Build** (service) --- `/products/hydroponic-aquaponic-design-build`
+2.  **Mechanical & Biological Filters** (product) --- `/products/mechanical-biological-filters`
+3.  **Aeration Systems** (product) --- `/products/aeration-systems`
+4.  **Biofloc Ponds** (product) --- `/products/biofloc-ponds`
 
 ------------------------------------------------------------------------
 
 ## Bumi Hijau
 
-Pencacah sampah, insinerator RAMPUS, komposter Takakura, tungku
-gasifikasi.
+Waste shredder, RAMPUS incinerator, Takakura composter, gasification
+stove.
 
-1.  **Pencacah Sampah** (produk)
-2.  **Insinerator RAMPUS** (produk) --- "RAMPUS" is not yet expanded;
-    see `REVIEW_NOTES.md` open question #5.
-3.  **Komposter Takakura** (produk)
-4.  **Tungku Gasifikasi** (produk)
+1.  **Waste Shredder** (product) --- `/products/waste-shredder`
+2.  **RAMPUS Incinerator** (product) --- `/products/rampus-incinerator`
+    --- "RAMPUS" is not yet expanded; see `REVIEW_NOTES.md` open
+    question #5.
+3.  **Takakura Composter** (product) --- `/products/takakura-composter`
+4.  **Gasification Stove** (product) --- `/products/gasification-stove`
 
 ------------------------------------------------------------------------
 
@@ -70,10 +73,10 @@ Every catalog entry currently provides only:
 
 ``` text
 Unit (Kappa Solution / Nara Aquaponics / Bumi Hijau)
-Type (produk / layanan)
+Type (product / service)
 Name
 Short description (general function only)
-Status (Konsep / Dalam Pengembangan / Prototipe / Segera Hadir)
+Status (Concept / In Development / Prototype / Coming Soon)
 ```
 
 Once verified data exists, entries may add: specifications, dimensions,
@@ -87,5 +90,6 @@ published; use `<Pending>` for the rest.
 
 Featured items must be a multiple of 3 so the grid renders full rows.
 Current selection (`featured: true` in `content/products/index.ts`):
-all 3 Kappa Solution items, plus 3 selected Nara Aquaponics items, plus
-3 selected Bumi Hijau items (9 total).
+all 3 Kappa Solution items, plus 3 selected Nara Aquaponics items
+(excluding Mechanical & Biological Filters), plus 3 selected Bumi Hijau
+items (excluding Takakura Composter) --- 9 total.

@@ -8,6 +8,13 @@
 > sebagai catatan rapat / sumber kebenaran; dokumen operasional lain (PRD.md,
 > CLAUDE.md, CONTENT.md, PRODUCT_CATALOG.md, ROADMAP.md, README.md) telah
 > diperbarui mengikuti isi dokumen ini.
+>
+> **DIKOREKSI oleh REVISION_V0.3.md (part A):** seluruh instruksi "Bahasa
+> Indonesia untuk konten dan route" di dokumen ini (bagian 3 baris #6, bagian
+> 4.1 nama-nama route, dan bagian 5) **tidak lagi berlaku** — situs sekarang
+> berbahasa Inggris, lihat `REVISION_V0.3.md`. Semua bagian lain dari dokumen
+> ini (struktur perusahaan, katalog produk per unit, skema kalender kegiatan,
+> aturan e-commerce, aturan konten dummy/Pending) tetap berlaku.
 
 ---
 

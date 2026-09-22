@@ -1,8 +1,9 @@
 # Product Requirements Document --- PT KTS Website
 
-> v0.2. Corrected against `REVISION_V0.2.md` (source of truth --- meeting
-> notes 2026-09-14 and the company "Struktur" slide). Where this document
-> and `REVISION_V0.2.md` disagree, `REVISION_V0.2.md` wins.
+> v0.3. Corrected against `REVISION_V0.2.md` (meeting notes 2026-09-14 +
+> "Struktur" slide) and `REVISION_V0.3.md` (English language, redesign
+> direction). Where this document disagrees with either, the newer
+> revision doc wins --- `REVISION_V0.3.md` over `REVISION_V0.2.md`.
 
 ## 1. Product overview
 
@@ -135,25 +136,26 @@ These can be added later if the business requires them.
 
 ``` text
 /
-├── /tentang
-├── /layanan
-├── /produk
-│   └── /produk/[slug]
-├── /pelatihan
-├── /kegiatan
-└── /kontak
+├── /about
+├── /services
+├── /products
+│   └── /products/[slug]
+├── /training
+├── /events
+└── /contact
 ```
 
-Old v0.1 routes (`/about`, `/innovation`, `/products`, `/products/[slug]`,
-`/projects`, `/insights`, `/contact`) permanently redirect to their v0.2
-equivalents, or are dropped (`/innovation`, `/insights`, `/projects` have
-no v0.2 equivalent and redirect to `/`).
+`/about`, `/products`, `/products/[slug]`, and `/contact` are unchanged
+v0.1 paths. `/innovation`, `/projects`, and `/insights` have no direct
+v0.3 equivalent and permanently redirect to the closest replacement
+(`/services`, `/events`, `/events` respectively) --- see
+`REVISION_V0.3.md` part A.1.
 
 ### Main navigation
 
-Beranda · Tentang · Layanan · Produk · Pelatihan · Kegiatan · Kontak
+Home · About · Services · Products · Training · Events · Contact
 
-Primary CTA (conditional): **Toko Online** --- shown only when
+Primary CTA (conditional): **Online Shop** --- shown only when
 `site.contact.shopUrl` is set.
 
 ------------------------------------------------------------------------
@@ -163,22 +165,23 @@ Primary CTA (conditional): **Toko Online** --- shown only when
 1.  **Hero** --- company name, one-line summary of the 4 business lines
     and 3 business units. Visual uses the real logos and real structure,
     not a fictional product illustration.
-2.  **4 lini usaha** --- Penyediaan Barang, Konsultan, Pengembangan
-    Rekayasa, Pelatihan.
-3.  **3 unit usaha** --- Kappa Solution, Nara Aquaponics, Bumi Hijau,
-    each with logo, field, and activity list per the Struktur slide.
-4.  **Produk unggulan** --- featured items in a multiple of 3 (full
+2.  **4 business lines** --- Equipment Supply, Consulting, Engineering
+    Development, Training.
+3.  **3 business units** --- Kappa Solution, Nara Aquaponics, Bumi
+    Hijau, each with logo, field, and activity list per the Struktur
+    slide.
+4.  **Featured products** --- featured items in a multiple of 3 (full
     grid rows).
-5.  **Pelatihan & kegiatan terdekat** --- pulled from `content/events.ts`.
+5.  **Upcoming training & events** --- pulled from `content/events.ts`.
 6.  **ESIC Network** --- what it is, and that PT KTS supports it.
-7.  **CTA kontak** + Toko Online link (conditional).
+7.  **Contact CTA** + Online Shop link (conditional).
 
 ------------------------------------------------------------------------
 
 ## 8. Product/service page requirements
 
-Each catalog item belongs to a business unit and is either a produk
-(product) or layanan (service). Structure:
+Each catalog item belongs to a business unit and is either a product or
+a service. Structure:
 
 ``` text
 Header (unit, category, status)
@@ -187,7 +190,7 @@ Description (general function only)
 ↓
 Specifications (only if verified --- otherwise omitted/Pending)
 ↓
-CTA: "Tanyakan" → WhatsApp with a pre-filled message, or /kontak if no
+CTA: "Inquire" → WhatsApp with a pre-filled message, or /contact if no
      WhatsApp number is configured yet
 ```
 

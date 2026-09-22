@@ -5,19 +5,17 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(__dirname),
   },
-  // v0.1 → v0.2 route renames — see REVISION_V0.2.md section 4.1.
-  // /innovation, /insights, and /projects have no v0.2 equivalent and
-  // fall back to the homepage.
+  // v0.1 → v0.3 route renames — see REVISION_V0.3.md part A.1.
+  // /about, /products, /products/[slug], and /contact are unchanged
+  // v0.1 paths and need no redirect. /innovation, /projects, and
+  // /insights have no direct v0.3 equivalent and map to the closest
+  // replacement page.
   async redirects() {
     return [
-      { source: "/about", destination: "/tentang", permanent: true },
-      { source: "/products", destination: "/produk", permanent: true },
-      { source: "/products/:slug", destination: "/produk/:slug", permanent: true },
-      { source: "/contact", destination: "/kontak", permanent: true },
-      { source: "/innovation", destination: "/", permanent: true },
-      { source: "/insights", destination: "/", permanent: true },
-      { source: "/insights/:slug", destination: "/", permanent: true },
-      { source: "/projects", destination: "/", permanent: true },
+      { source: "/innovation", destination: "/services", permanent: true },
+      { source: "/projects", destination: "/events", permanent: true },
+      { source: "/insights", destination: "/events", permanent: true },
+      { source: "/insights/:slug", destination: "/events", permanent: true },
     ];
   },
 };

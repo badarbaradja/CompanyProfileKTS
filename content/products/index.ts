@@ -1,7 +1,7 @@
 /**
  * content/products/index.ts
  *
- * PT KTS product/service catalog — v0.2.
+ * PT KTS product/service catalog — v0.3.
  *
  * These are real catalog items sourced from the 2026-09-14 "Struktur"
  * meeting slide, grouped by business unit (see PRODUCT_CATALOG.md and
@@ -15,7 +15,7 @@
 import type { BusinessUnitSlug } from "@/content/site";
 import type { ProductStatus } from "@/components/ui/Badge";
 
-export type ProductType = "produk" | "layanan";
+export type ProductType = "product" | "service";
 
 export interface Product {
   /** URL slug for the product/service detail page */
@@ -43,37 +43,37 @@ export interface Product {
 export const products: Product[] = [
   // --- Kappa Solution ---
   {
-    slug: "alat-praktikum",
+    slug: "lab-practicum-equipment",
     unit: "kappa-solution",
-    type: "produk",
-    name: "Alat Praktikum",
-    tagline: "Alat penunjang praktikum hasil pengembangan Kappa Solution.",
+    type: "product",
+    name: "Lab Practicum Equipment",
+    tagline: "Practicum equipment developed by Kappa Solution.",
     description:
-      "Alat praktikum yang dikembangkan oleh Kappa Solution untuk mendukung kegiatan pembelajaran dan pelatihan berbasis praktik.",
+      "Lab practicum equipment developed by Kappa Solution to support hands-on learning and training activities.",
     status: "in-development",
     featured: true,
     images: [],
   },
   {
-    slug: "alat-hasil-pengembangan-rekayasa",
+    slug: "engineering-developed-equipment",
     unit: "kappa-solution",
-    type: "produk",
-    name: "Alat Hasil Pengembangan Rekayasa",
-    tagline: "Alat hasil rekayasa yang dikembangkan langsung oleh Kappa Solution.",
+    type: "product",
+    name: "Engineering-Developed Equipment",
+    tagline: "Equipment engineered directly by Kappa Solution.",
     description:
-      "Kategori alat yang dihasilkan dari proses pengembangan rekayasa Kappa Solution, disesuaikan dengan kebutuhan penerapan di lapangan.",
+      "A category of equipment produced through Kappa Solution's engineering development process, tailored to field application needs.",
     status: "in-development",
     featured: true,
     images: [],
   },
   {
-    slug: "desain-sistem",
+    slug: "system-design",
     unit: "kappa-solution",
-    type: "layanan",
-    name: "Desain Sistem",
-    tagline: "Layanan desain sistem untuk kebutuhan rekayasa spesifik.",
+    type: "service",
+    name: "System Design",
+    tagline: "System design services for specific engineering needs.",
     description:
-      "Layanan konsultasi dan desain sistem oleh Kappa Solution, untuk mendukung penerapan solusi rekayasa sesuai kebutuhan klien.",
+      "Consulting and system design services from Kappa Solution, supporting the implementation of engineering solutions tailored to client needs.",
     status: "in-development",
     featured: true,
     images: [],
@@ -81,49 +81,49 @@ export const products: Product[] = [
 
   // --- Nara Aquaponics ---
   {
-    slug: "rancang-bangun-sistem-hidroponik-akuaponik",
+    slug: "hydroponic-aquaponic-design-build",
     unit: "nara-aquaponics",
-    type: "layanan",
-    name: "Rancang Bangun Sistem Hidroponik & Akuaponik",
-    tagline: "Layanan rancang bangun sistem hidroponik dan akuaponik.",
+    type: "service",
+    name: "Hydroponic & Aquaponic System Design-Build",
+    tagline: "Design-build service for hydroponic and aquaponic systems.",
     description:
-      "Layanan Nara Aquaponics untuk merancang dan membangun sistem hidroponik maupun akuaponik sesuai kebutuhan lokasi dan skala.",
+      "Nara Aquaponics' service for designing and building hydroponic and aquaponic systems tailored to site and scale.",
     status: "in-development",
     featured: true,
     images: [],
   },
   {
-    slug: "filter-mekanik-dan-biologi",
+    slug: "mechanical-biological-filters",
     unit: "nara-aquaponics",
-    type: "produk",
-    name: "Filter Mekanik dan Biologi",
-    tagline: "Komponen filter untuk sistem akuaponik.",
+    type: "product",
+    name: "Mechanical & Biological Filters",
+    tagline: "Filter components for aquaponic systems.",
     description:
-      "Filter mekanik dan biologi yang digunakan sebagai bagian dari sistem akuaponik Nara Aquaponics untuk menjaga kualitas air.",
+      "Mechanical and biological filters used as part of Nara Aquaponics systems to maintain water quality.",
     status: "in-development",
     featured: false,
     images: [],
   },
   {
-    slug: "sistem-aerasi",
+    slug: "aeration-systems",
     unit: "nara-aquaponics",
-    type: "produk",
-    name: "Sistem Aerasi",
-    tagline: "Sistem aerasi untuk mendukung kolam dan sistem akuaponik.",
+    type: "product",
+    name: "Aeration Systems",
+    tagline: "Aeration systems for ponds and aquaponic systems.",
     description:
-      "Sistem aerasi yang dikembangkan Nara Aquaponics untuk mendukung kebutuhan oksigenasi pada kolam dan sistem akuaponik.",
+      "Aeration systems developed by Nara Aquaponics to support oxygenation needs in ponds and aquaponic systems.",
     status: "in-development",
     featured: true,
     images: [],
   },
   {
-    slug: "kolam-bioflok",
+    slug: "biofloc-ponds",
     unit: "nara-aquaponics",
-    type: "produk",
-    name: "Kolam Bioflok",
-    tagline: "Kolam bioflok untuk budidaya ikan.",
+    type: "product",
+    name: "Biofloc Ponds",
+    tagline: "Biofloc ponds for fish farming.",
     description:
-      "Kolam bioflok yang dirancang Nara Aquaponics untuk mendukung sistem budidaya ikan dengan pendekatan bioflok.",
+      "Biofloc ponds designed by Nara Aquaponics to support fish farming using the biofloc approach.",
     status: "in-development",
     featured: true,
     images: [],
@@ -131,49 +131,49 @@ export const products: Product[] = [
 
   // --- Bumi Hijau ---
   {
-    slug: "pencacah-sampah",
+    slug: "waste-shredder",
     unit: "bumi-hijau",
-    type: "produk",
-    name: "Pencacah Sampah",
-    tagline: "Alat pencacah untuk pengelolaan sampah.",
+    type: "product",
+    name: "Waste Shredder",
+    tagline: "Shredding equipment for waste management.",
     description:
-      "Alat pencacah sampah yang dikembangkan Bumi Hijau untuk mendukung proses pengelolaan sampah sebelum diolah lebih lanjut.",
+      "A waste shredder developed by Bumi Hijau to support waste processing before further treatment.",
     status: "in-development",
     featured: true,
     images: [],
   },
   {
-    slug: "insinerator-rampus",
+    slug: "rampus-incinerator",
     unit: "bumi-hijau",
-    type: "produk",
-    name: "Insinerator RAMPUS",
-    tagline: "Insinerator RAMPUS untuk pengelolaan sampah.",
+    type: "product",
+    name: "RAMPUS Incinerator",
+    tagline: "RAMPUS incinerator for waste management.",
     description:
-      "Insinerator RAMPUS yang dikembangkan Bumi Hijau sebagai bagian dari solusi pengelolaan sampah. Kepanjangan RAMPUS belum tersedia.",
+      "The RAMPUS incinerator developed by Bumi Hijau as part of its waste management solutions. The full expansion of \"RAMPUS\" is not yet available.",
     status: "in-development",
     featured: true,
     images: [],
   },
   {
-    slug: "komposter-takakura",
+    slug: "takakura-composter",
     unit: "bumi-hijau",
-    type: "produk",
-    name: "Komposter Takakura",
-    tagline: "Komposter metode Takakura untuk pengelolaan sampah organik.",
+    type: "product",
+    name: "Takakura Composter",
+    tagline: "Takakura-method composter for organic waste.",
     description:
-      "Komposter dengan metode Takakura yang dikembangkan Bumi Hijau untuk mengolah sampah organik skala rumah tangga maupun komunitas.",
+      "A composter using the Takakura method, developed by Bumi Hijau to process organic waste at household or community scale.",
     status: "in-development",
     featured: false,
     images: [],
   },
   {
-    slug: "tungku-gasifikasi",
+    slug: "gasification-stove",
     unit: "bumi-hijau",
-    type: "produk",
-    name: "Tungku Gasifikasi",
-    tagline: "Tungku gasifikasi untuk pengelolaan limbah organik.",
+    type: "product",
+    name: "Gasification Stove",
+    tagline: "Gasification stove for organic waste management.",
     description:
-      "Tungku gasifikasi yang dikembangkan Bumi Hijau sebagai bagian dari solusi pengelolaan limbah organik.",
+      "A gasification stove developed by Bumi Hijau as part of its organic-waste management solutions.",
     status: "in-development",
     featured: true,
     images: [],

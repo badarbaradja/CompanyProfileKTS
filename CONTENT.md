@@ -1,7 +1,8 @@
 # Content Source of Truth --- PT KTS
 
-> v0.2. Corrected against `REVISION_V0.2.md`. Where this document and
-> `REVISION_V0.2.md` disagree, `REVISION_V0.2.md` wins.
+> v0.3. Corrected against `REVISION_V0.2.md` and `REVISION_V0.3.md`
+> (English language). Where this document disagrees with either, the
+> newer revision doc wins --- `REVISION_V0.3.md` over `REVISION_V0.2.md`.
 
 ## 1. Verified information currently supplied
 
@@ -51,7 +52,7 @@ Instagram: https://www.instagram.com/kappasolution/
 
 ### Training references (meeting 2026-09-14)
 
-Three Instagram posts used only as external link cards on `/pelatihan`
+Three Instagram posts used only as external link cards on `/training`
 --- never scraped, mirrored, or captioned from:
 
 -   https://www.instagram.com/p/DOat_4CgZHA/
@@ -62,10 +63,10 @@ Three Instagram posts used only as external link cards on `/pelatihan`
 
 ## 2. Public positioning draft
 
-> PT Kappa Technology Solution menjalankan empat lini usaha (Penyediaan
-> Barang, Konsultan, Pengembangan Rekayasa, Pelatihan) melalui tiga unit
-> usaha --- Kappa Solution, Nara Aquaponics, dan Bumi Hijau --- serta
-> mendukung ESIC Network.
+> PT Kappa Technology Solution runs four business lines (Equipment
+> Supply, Consulting, Engineering Development, Training) through three
+> business units --- Kappa Solution, Nara Aquaponics, and Bumi Hijau ---
+> and supports ESIC Network.
 
 This replaces the v0.1 "From Research to Real-World Solutions" draft,
 which did not reflect the company's actual structure. This is still
@@ -115,40 +116,46 @@ label in the UI --- never presented as a real, confirmed date/fact.
 
 ------------------------------------------------------------------------
 
-## 5. Temporary website copy (Bahasa Indonesia)
+## 5. Temporary website copy (English)
 
-All site-facing copy is in Bahasa Indonesia as of v0.2.
+As of v0.3, all site-facing copy is in **English** --- the site is
+accessed by external audiences (see `REVISION_V0.3.md` part A). Brand
+names are never translated: PT Kappa Technology Solution, Kappa
+Solution, Nara Aquaponics, Bumi Hijau, ESIC Network, JESIC, RAMPUS.
+Every string lives in `content/`, never hardcoded in a component, so an
+Indonesian translation layer can be added later without touching
+component code. Exception: the pre-filled WhatsApp inquiry message may
+stay in Indonesian, since its recipient is the PT KTS team.
 
 ### Hero
 
-> PT Kappa Technology Solution --- empat lini usaha, tiga unit usaha,
-> satu jaringan inovasi.
+> Four business lines, three business units, one innovation network.
 
-> Kami menyediakan barang, jasa konsultasi, pengembangan rekayasa, dan
-> pelatihan melalui Kappa Solution, Nara Aquaponics, dan Bumi Hijau.
+> We supply equipment, provide consulting and engineering development,
+> and run training through Kappa Solution, Nara Aquaponics, and Bumi
+> Hijau.
 
-### Layanan CTA
+### Services CTA
 
-> Lihat layanan kami.
+> See our services.
 
-### Produk CTA
+### Products CTA
 
-> Jelajahi produk.
+> Explore our products.
 
-### Kontak CTA
+### Contact CTA
 
-> Punya kebutuhan yang bisa kami bantu?
+> Got something we can help with?
 
-> Hubungi PT KTS.
+> Get in touch with PT KTS.
 
 ------------------------------------------------------------------------
 
 ## 6. Relationship with ESIC Network
 
-**Reversed from v0.1.** ESIC Network, JESIC, Summer Camp, and Pelatihan
+**Reversed from v0.1.** ESIC Network, JESIC, Summer Camp, and Training
 ARE part of the public information architecture as of v0.2, per the
 2026-09-14 meeting notes and Struktur slide. PT KTS's role is described
 as "support" (PT KTS ──support──▶ ESIC Network) --- do not describe PT
 KTS as being the same organization as ESIC Network. JESIC is shown with
-a "segera hadir" (coming soon) label until Pak Abrar/Aisha/Intan finalize
-it.
+a "Coming Soon" label until Pak Abrar/Aisha/Intan finalize it.

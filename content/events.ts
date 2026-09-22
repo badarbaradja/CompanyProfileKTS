@@ -1,17 +1,17 @@
 /**
  * content/events.ts
  *
- * Static activity-calendar data for /kegiatan — see REVISION_V0.2.md
+ * Static activity-calendar data for /events — see REVISION_V0.2.md
  * section 4.5. No CMS, no database: this file IS the data source.
  *
  * All entries below are example/dummy data (`isDummy: true`) and are
- * labeled "Contoh" in the title and in the UI. Do not invent real
+ * labeled "Example" in the title and in the UI. Do not invent real
  * schedule dates — replace these once the PT KTS team supplies actual
  * activity dates (see REVIEW_NOTES.md open question #7).
  */
 
-export type KTSEventType = "pelatihan" | "camp" | "esic" | "jesic" | "lainnya";
-export type KTSEventStatus = "terjadwal" | "selesai" | "tentatif";
+export type KTSEventType = "training" | "camp" | "esic" | "jesic" | "other";
+export type KTSEventStatus = "scheduled" | "completed" | "tentative";
 
 export interface KTSEvent {
   slug: string;
@@ -24,66 +24,66 @@ export interface KTSEvent {
   description?: string;
   registrationUrl?: string;
   status: KTSEventStatus;
-  /** Marks example/placeholder data — always show a visible "Contoh" label */
+  /** Marks example/placeholder data — always show a visible "Example" label */
   isDummy: boolean;
 }
 
 export const events: KTSEvent[] = [
   {
-    slug: "contoh-pelatihan-alat-praktikum",
-    title: "Pelatihan Alat Praktikum (Contoh)",
-    type: "pelatihan",
+    slug: "example-lab-equipment-training",
+    title: "Lab Equipment Training (Example)",
+    type: "training",
     startDate: "2026-10-15",
-    location: "Menyusul",
+    location: "TBD",
     description:
-      "Contoh data kegiatan — jadwal sebenarnya belum ditentukan oleh tim PT KTS.",
-    status: "terjadwal",
+      "Example event data — the real schedule has not yet been set by the PT KTS team.",
+    status: "scheduled",
     isDummy: true,
   },
   {
-    slug: "contoh-camp-rekayasa-bumi-hijau",
-    title: "Camp Rekayasa Bumi Hijau (Contoh)",
+    slug: "example-bumi-hijau-engineering-camp",
+    title: "Bumi Hijau Engineering Camp (Example)",
     type: "camp",
     startDate: "2026-11-02",
     endDate: "2026-11-05",
-    location: "Menyusul",
+    location: "TBD",
     description:
-      "Contoh data kegiatan — jadwal sebenarnya belum ditentukan oleh tim PT KTS.",
-    status: "tentatif",
+      "Example event data — the real schedule has not yet been set by the PT KTS team.",
+    status: "tentative",
     isDummy: true,
   },
   {
-    slug: "contoh-jesic",
-    title: "JESIC (Contoh — segera hadir)",
+    slug: "example-jesic",
+    title: "JESIC (Example — Coming Soon)",
     type: "jesic",
     startDate: "2026-12-01",
-    location: "Menyusul",
+    location: "TBD",
     description:
-      "JESIC masih dibahas oleh Pak Abrar, Aisha, dan Intan. Tanggal ini hanya contoh, bukan jadwal resmi.",
-    status: "tentatif",
+      "JESIC is still being discussed by Pak Abrar, Aisha, and Intan. This date is only an example, not an official schedule.",
+    status: "tentative",
     isDummy: true,
   },
   {
-    slug: "contoh-pelatihan-sistem-aquaponik",
-    title: "Pelatihan Sistem Aquaponik (Contoh)",
-    type: "pelatihan",
+    slug: "example-aquaponic-system-training",
+    title: "Aquaponic System Training (Example)",
+    type: "training",
     startDate: "2026-08-10",
-    location: "Menyusul",
+    location: "TBD",
     description:
-      "Contoh data kegiatan yang telah lewat — jadwal sebenarnya belum ditentukan oleh tim PT KTS.",
-    status: "selesai",
+      "Example past event data — the real schedule has not yet been set by the PT KTS team.",
+    status: "completed",
     isDummy: true,
   },
   {
-    slug: "contoh-esic-summer-camp",
-    title: "ESIC Summer Camp (Contoh)",
+    slug: "example-esic-summer-camp",
+    title: "ESIC Summer Camp (Example)",
     type: "esic",
     startDate: "2026-07-20",
     endDate: "2026-07-25",
-    location: "Menyusul",
+    location: "TBD",
     description:
-      "Contoh data kegiatan yang telah lewat — jadwal sebenarnya belum ditentukan oleh tim PT KTS.",
-    status: "selesai",
+      "Example past event data — the real schedule has not yet been set by the PT KTS team.",
+    status: "completed",
     isDummy: true,
   },
 ];
@@ -110,17 +110,17 @@ function startOfDay(date: Date): Date {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
 
-const INDONESIAN_MONTHS = [
-  "Januari", "Februari", "Maret", "April", "Mei", "Juni",
-  "Juli", "Agustus", "September", "Oktober", "November", "Desember",
+const MONTHS = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
 ];
 
-/** Groups events by "Bulan Tahun" label (Indonesian), preserving input order. */
+/** Groups events by "Month Year" label, preserving input order. */
 export function groupEventsByMonth(list: KTSEvent[]): { label: string; items: KTSEvent[] }[] {
   const groups = new Map<string, KTSEvent[]>();
   for (const event of list) {
     const d = toDate(event.startDate);
-    const label = `${INDONESIAN_MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+    const label = `${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
     if (!groups.has(label)) groups.set(label, []);
     groups.get(label)!.push(event);
   }
@@ -129,14 +129,14 @@ export function groupEventsByMonth(list: KTSEvent[]): { label: string; items: KT
 
 export function formatEventDate(event: KTSEvent): string {
   const start = toDate(event.startDate);
-  const startLabel = `${start.getDate()} ${INDONESIAN_MONTHS[start.getMonth()]} ${start.getFullYear()}`;
+  const startLabel = `${MONTHS[start.getMonth()]} ${start.getDate()}, ${start.getFullYear()}`;
   if (!event.endDate) return startLabel;
 
   const end = toDate(event.endDate);
   const sameMonth = start.getMonth() === end.getMonth() && start.getFullYear() === end.getFullYear();
   if (sameMonth) {
-    return `${start.getDate()}–${end.getDate()} ${INDONESIAN_MONTHS[end.getMonth()]} ${end.getFullYear()}`;
+    return `${MONTHS[start.getMonth()]} ${start.getDate()}–${end.getDate()}, ${end.getFullYear()}`;
   }
-  const endLabel = `${end.getDate()} ${INDONESIAN_MONTHS[end.getMonth()]} ${end.getFullYear()}`;
+  const endLabel = `${MONTHS[end.getMonth()]} ${end.getDate()}, ${end.getFullYear()}`;
   return `${startLabel} – ${endLabel}`;
 }
