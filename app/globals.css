@@ -55,6 +55,11 @@
     --max-width-text: 720px;
     --nav-height: 4rem;
     --padding-x: clamp(1rem, 5vw, 2.5rem);
+    --banner-height: 0px;
+  }
+
+  html[data-draft="true"] {
+    --banner-height: 2.125rem;
   }
 
   /* --- Base resets --- */

@@ -4,21 +4,25 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { KTSLogo } from "@/components/brand/Logo";
+import { site } from "@/content/site";
 import { MobileNav } from "./MobileNav";
 
 const navLinks = [
-  { label: "About", href: "/about" },
-  { label: "Innovation", href: "/innovation" },
-  { label: "Products", href: "/products" },
-  { label: "Projects", href: "/projects" },
-  { label: "Insights", href: "/insights" },
-  { label: "Contact", href: "/contact" },
+  { label: "Beranda", href: "/" },
+  { label: "Tentang", href: "/tentang" },
+  { label: "Layanan", href: "/layanan" },
+  { label: "Produk", href: "/produk" },
+  { label: "Pelatihan", href: "/pelatihan" },
+  { label: "Kegiatan", href: "/kegiatan" },
+  { label: "Kontak", href: "/kontak" },
 ];
 
 export function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const shopUrl = site.contact.shopUrl;
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 24);
@@ -41,7 +45,7 @@ export function Navbar() {
       <header
         role="banner"
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+          "fixed inset-x-0 top-[var(--banner-height)] z-50 transition-all duration-300",
           scrolled
             ? "bg-[var(--color-canvas)]/95 backdrop-blur-sm border-b border-[var(--color-border)] shadow-[0_1px_12px_rgba(0,0,0,0.05)]"
             : "bg-transparent"
@@ -54,11 +58,11 @@ export function Navbar() {
           {/* Wordmark */}
           <Link
             href="/"
-            aria-label="PT Kappa Technology Solution — Home"
+            aria-label="PT Kappa Technology Solution — Beranda"
             className="flex items-center gap-2.5 shrink-0 group"
             id="navbar-logo"
           >
-            <KTSMark />
+            <KTSLogo variant="mark" priority className="h-8" />
             <span
               className="text-[15px] font-semibold tracking-[-0.01em] text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-200"
               aria-hidden="true"
@@ -69,7 +73,7 @@ export function Navbar() {
 
           {/* Desktop nav */}
           <nav
-            aria-label="Primary navigation"
+            aria-label="Navigasi utama"
             className="hidden lg:flex items-center gap-1"
           >
             {navLinks.map((link) => {
@@ -93,20 +97,24 @@ export function Navbar() {
 
           {/* CTA + hamburger */}
           <div className="flex items-center gap-3">
-            <Link
-              href="/products"
-              id="navbar-cta"
-              className="hidden lg:inline-flex items-center gap-1.5 px-4 py-2 rounded-md text-sm font-semibold bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-[var(--color-accent)]"
-            >
-              Explore Products
-            </Link>
+            {shopUrl && (
+              <a
+                href={shopUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                id="navbar-cta"
+                className="hidden lg:inline-flex items-center gap-1.5 px-4 py-2 rounded-md text-sm font-semibold bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-[var(--color-accent)]"
+              >
+                Toko Online
+              </a>
+            )}
 
             {/* Hamburger */}
             <button
               id="mobile-menu-toggle"
               onClick={() => setMobileOpen(true)}
               className="lg:hidden flex flex-col items-center justify-center w-10 h-10 rounded-md hover:bg-[var(--color-border)] transition-colors duration-150"
-              aria-label="Open navigation menu"
+              aria-label="Buka menu navigasi"
               aria-expanded={mobileOpen}
               aria-controls="mobile-nav"
             >
@@ -118,8 +126,11 @@ export function Navbar() {
         </div>
       </header>
 
-      {/* Spacer so content doesn't hide under fixed nav */}
-      <div style={{ height: "var(--nav-height)" }} aria-hidden="true" />
+      {/* Spacer so content doesn't hide under fixed nav (+ draft banner, if shown) */}
+      <div
+        style={{ height: "calc(var(--nav-height) + var(--banner-height))" }}
+        aria-hidden="true"
+      />
 
       <MobileNav
         id="mobile-nav"
@@ -127,33 +138,8 @@ export function Navbar() {
         onClose={() => setMobileOpen(false)}
         links={navLinks}
         pathname={pathname}
+        shopUrl={shopUrl}
       />
     </>
-  );
-}
-
-/** KTS geometric monogram mark */
-function KTSMark() {
-  return (
-    <svg
-      width="28"
-      height="28"
-      viewBox="0 0 28 28"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      className="shrink-0"
-    >
-      {/* Square base */}
-      <rect width="28" height="28" rx="6" fill="var(--color-accent)" />
-      {/* K letterform */}
-      <path
-        d="M8 7.5V20.5M8 14H15.5L20 7.5M15.5 14L20 20.5"
-        stroke="white"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }

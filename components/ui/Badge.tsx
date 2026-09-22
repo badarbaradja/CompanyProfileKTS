@@ -13,22 +13,22 @@ interface BadgeProps {
 
 const statusConfig: Record<ProductStatus, { label: string; classes: string }> = {
   prototype: {
-    label: "Prototype",
+    label: "Prototipe",
     classes:
       "bg-amber-50 text-amber-700 border border-amber-200",
   },
   "in-development": {
-    label: "In Development",
+    label: "Dalam Pengembangan",
     classes:
       "bg-blue-50 text-blue-700 border border-blue-200",
   },
   concept: {
-    label: "Concept",
+    label: "Konsep",
     classes:
       "bg-[var(--color-border)] text-[var(--color-text-muted)] border border-[var(--color-border-strong)]",
   },
   "coming-soon": {
-    label: "Coming Soon",
+    label: "Segera Hadir",
     classes:
       "bg-[var(--color-accent-light)] text-[var(--color-accent)] border border-[#b3d9cf]",
   },

@@ -1,18 +1,21 @@
 import Link from "next/link";
+import { KTSLogo } from "@/components/brand/Logo";
+import { Pending } from "@/components/ui/Pending";
+import { site } from "@/content/site";
 
 const footerLinks = {
-  Company: [
-    { label: "About", href: "/about" },
-    { label: "Innovation", href: "/innovation" },
-    { label: "Products", href: "/products" },
-    { label: "Projects", href: "/projects" },
+  Perusahaan: [
+    { label: "Tentang", href: "/tentang" },
+    { label: "Layanan", href: "/layanan" },
+    { label: "Produk", href: "/produk" },
+    { label: "Pelatihan", href: "/pelatihan" },
   ],
-  Connect: [
-    { label: "Insights", href: "/insights" },
-    { label: "Contact", href: "/contact" },
+  Terhubung: [
+    { label: "Kegiatan", href: "/kegiatan" },
+    { label: "Kontak", href: "/kontak" },
     {
       label: "Instagram",
-      href: "https://www.instagram.com/kappasolution/",
+      href: site.contact.instagram,
       external: true,
     },
   ],
@@ -20,6 +23,7 @@ const footerLinks = {
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const hasContact = site.contact.whatsapp || site.contact.email || site.contact.address;
 
   return (
     <footer
@@ -33,28 +37,30 @@ export function Footer() {
             <Link
               href="/"
               className="inline-flex items-center gap-2.5 group mb-4"
-              aria-label="PT Kappa Technology Solution — Home"
+              aria-label="PT Kappa Technology Solution — Beranda"
             >
-              <FooterMark />
+              <KTSLogo variant="mark" className="h-6" />
               <span className="text-[15px] font-semibold tracking-[-0.01em] text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-200">
                 KTS
               </span>
             </Link>
             <p className="text-sm text-[var(--color-text-muted)] max-w-xs leading-relaxed mt-2">
-              PT Kappa Technology Solution develops practical technology
-              originating from research, experimentation, and engineering
-              innovation.
+              {site.description}
             </p>
             <a
-              href="https://www.instagram.com/kappasolution/"
+              href={site.contact.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="PT KTS on Instagram (opens in new tab)"
+              aria-label="PT KTS di Instagram (buka di tab baru)"
               className="inline-flex items-center gap-2 mt-5 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors duration-150"
             >
               <InstagramIcon />
-              @kappasolution
+              {site.contact.instagramHandle}
             </a>
+
+            {!hasContact && (
+              <Pending label="Kontak resmi (WhatsApp, email, alamat)" className="mt-5 max-w-xs" />
+            )}
           </div>
 
           {/* Link columns */}
@@ -85,6 +91,18 @@ export function Footer() {
                     )}
                   </li>
                 ))}
+                {site.contact.shopUrl && (
+                  <li>
+                    <a
+                      href={site.contact.shopUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors duration-150"
+                    >
+                      Toko Online
+                    </a>
+                  </li>
+                )}
               </ul>
             </div>
           ))}
@@ -93,38 +111,11 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-[var(--color-border)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <p className="text-xs text-[var(--color-text-faint)]">
-            &copy; {currentYear} PT Kappa Technology Solution. All rights
-            reserved.
-          </p>
-          <p className="text-xs text-[var(--color-text-faint)]">
-            {/* Contact details placeholder — to be updated */}
-            Contact information to be updated.
+            &copy; {currentYear} PT Kappa Technology Solution. Hak cipta dilindungi.
           </p>
         </div>
       </div>
     </footer>
-  );
-}
-
-function FooterMark() {
-  return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 28 28"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <rect width="28" height="28" rx="6" fill="var(--color-accent)" />
-      <path
-        d="M8 7.5V20.5M8 14H15.5L20 7.5M15.5 14L20 20.5"
-        stroke="white"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }
 

@@ -3,6 +3,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Navbar } from "@/components/navigation/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { DraftBanner } from "@/components/layout/DraftBanner";
+import { isDraftMode } from "@/lib/draft";
+import { site } from "@/content/site";
 
 // Self-hosted Inter — see REVISION_V0.2.md item #7 (v0.1 misconception
 // table): next/font/google made the build depend on network access to
@@ -19,43 +22,43 @@ const inter = localFont({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+const draft = isDraftMode();
 
 export const metadata: Metadata = {
   metadataBase: siteUrl ? new URL(siteUrl) : undefined,
   title: {
-    default: "PT Kappa Technology Solution — From Research to Real-World Solutions",
+    default: `${site.legalName} — ${site.tagline}`,
     template: "%s | PT KTS",
   },
-  description:
-    "PT Kappa Technology Solution develops and commercializes practical technology originating from research, experimentation, and engineering innovation.",
+  description: site.description,
   keywords: [
     "PT Kappa Technology Solution",
     "PT KTS",
-    "technology innovation",
-    "research to product",
-    "engineering Indonesia",
+    "Kappa Solution",
+    "Nara Aquaponics",
+    "Bumi Hijau",
+    "ESIC Network",
   ],
-  authors: [{ name: "PT Kappa Technology Solution" }],
-  creator: "PT Kappa Technology Solution",
+  authors: [{ name: site.legalName }],
+  creator: site.legalName,
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "id_ID",
     ...(siteUrl ? { url: siteUrl } : {}),
-    siteName: "PT Kappa Technology Solution",
-    title: "PT KTS — From Research to Real-World Solutions",
-    description:
-      "We turn research and engineering ideas into practical technology for real-world impact.",
+    siteName: site.legalName,
+    title: `PT KTS — ${site.tagline}`,
+    description: site.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "PT KTS — From Research to Real-World Solutions",
-    description:
-      "We turn research and engineering ideas into practical technology for real-world impact.",
+    title: `PT KTS — ${site.tagline}`,
+    description: site.description,
   },
+  // Draft-mode sites stay out of search results — see REVISION_V0.2.md section 5.
   robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true },
+    index: !draft,
+    follow: !draft,
+    googleBot: { index: !draft, follow: !draft },
   },
 };
 
@@ -71,8 +74,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="id" data-draft={draft ? "true" : "false"} className={inter.variable}>
       <body>
+        <DraftBanner />
         <Navbar />
         <main id="main-content">{children}</main>
         <Footer />
