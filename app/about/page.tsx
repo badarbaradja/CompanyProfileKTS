@@ -4,6 +4,7 @@ import { Container } from "@/components/layout/Container";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Pending } from "@/components/ui/Pending";
+import { SampleBadge } from "@/components/ui/SampleBadge";
 import { UnitLogo } from "@/components/brand/Logo";
 import { site } from "@/content/site";
 import { photos } from "@/content/photos";
@@ -30,23 +31,38 @@ export default function AboutPage() {
                 />
               </FadeIn>
 
-              <FadeIn className="mt-10 space-y-6">
+              <FadeIn className="mt-10 space-y-8">
                 <div>
-                  <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-3">
-                    Vision
-                  </h2>
+                  <div className="flex items-center gap-2 mb-3">
+                    <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)]">
+                      Vision
+                    </h2>
+                    {site.vision && <SampleBadge label="Draft, pending approval" />}
+                  </div>
                   {site.vision ? (
-                    <p className="text-[var(--color-text-muted)] leading-relaxed">{site.vision}</p>
+                    <p
+                      className="font-display italic leading-snug text-[var(--color-text)]"
+                      style={{ fontSize: "var(--text-h3)" }}
+                    >
+                      {site.vision}
+                    </p>
                   ) : (
                     <Pending label="Official vision statement" />
                   )}
                 </div>
                 <div>
-                  <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-3">
-                    Mission
-                  </h2>
-                  {site.mission ? (
-                    <p className="text-[var(--color-text-muted)] leading-relaxed">{site.mission}</p>
+                  <div className="flex items-center gap-2 mb-3">
+                    <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)]">
+                      Mission
+                    </h2>
+                    {site.mission && <SampleBadge label="Draft, pending approval" />}
+                  </div>
+                  {site.mission && site.mission.length > 0 ? (
+                    <ol className="list-decimal list-outside pl-5 space-y-2 text-[var(--color-text-muted)] leading-relaxed">
+                      {site.mission.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ol>
                   ) : (
                     <Pending label="Official mission statement" />
                   )}
