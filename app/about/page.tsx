@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/layout/Container";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Pending } from "@/components/ui/Pending";
 import { UnitLogo } from "@/components/brand/Logo";
 import { site } from "@/content/site";
+import { photos } from "@/content/photos";
+
+const aboutPhoto = photos.find((p) => p.src.includes("camp-lunch-together"));
 
 export const metadata: Metadata = {
   title: "About",
@@ -16,36 +20,59 @@ export default function AboutPage() {
     <>
       <section className="section-padding">
         <Container>
-          <FadeIn className="max-w-2xl">
-            <SectionHeading
-              eyebrow="About"
-              title={`About ${site.legalName}`}
-              description={site.description}
-            />
-          </FadeIn>
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-start">
+            <div>
+              <FadeIn>
+                <SectionHeading
+                  eyebrow="About"
+                  title={`About ${site.legalName}`}
+                  description={site.description}
+                />
+              </FadeIn>
 
-          <FadeIn className="max-w-2xl mt-10 space-y-6">
-            <div>
-              <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-3">
-                Vision
-              </h2>
-              {site.vision ? (
-                <p className="text-[var(--color-text-muted)] leading-relaxed">{site.vision}</p>
-              ) : (
-                <Pending label="Official vision statement" />
-              )}
+              <FadeIn className="mt-10 space-y-6">
+                <div>
+                  <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-3">
+                    Vision
+                  </h2>
+                  {site.vision ? (
+                    <p className="text-[var(--color-text-muted)] leading-relaxed">{site.vision}</p>
+                  ) : (
+                    <Pending label="Official vision statement" />
+                  )}
+                </div>
+                <div>
+                  <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-3">
+                    Mission
+                  </h2>
+                  {site.mission ? (
+                    <p className="text-[var(--color-text-muted)] leading-relaxed">{site.mission}</p>
+                  ) : (
+                    <Pending label="Official mission statement" />
+                  )}
+                </div>
+              </FadeIn>
             </div>
-            <div>
-              <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-3">
-                Mission
-              </h2>
-              {site.mission ? (
-                <p className="text-[var(--color-text-muted)] leading-relaxed">{site.mission}</p>
-              ) : (
-                <Pending label="Official mission statement" />
-              )}
-            </div>
-          </FadeIn>
+
+            {aboutPhoto && (
+              <FadeIn direction="left">
+                <div className="relative aspect-[4/5] rounded-[var(--radius-lg)] overflow-hidden shadow-[var(--shadow-md)]">
+                  <Image
+                    src={aboutPhoto.src}
+                    alt={aboutPhoto.alt}
+                    fill
+                    sizes="(min-width: 1024px) 40vw, 90vw"
+                    className="object-cover"
+                  />
+                  {aboutPhoto.caption && (
+                    <span className="absolute bottom-4 left-4 text-xs font-semibold uppercase tracking-widest text-white/85 bg-black/30 rounded-full px-3 py-1 backdrop-blur-sm">
+                      {aboutPhoto.caption}
+                    </span>
+                  )}
+                </div>
+              </FadeIn>
+            )}
+          </div>
         </Container>
       </section>
 

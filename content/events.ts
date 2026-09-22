@@ -4,8 +4,11 @@
  * Static activity-calendar data for /events — see REVISION_V0.2.md
  * section 4.5. No CMS, no database: this file IS the data source.
  *
- * All entries below are example/dummy data (`isDummy: true`) and are
- * labeled "Example" in the title and in the UI. Do not invent real
+ * As of v0.4, two entries are real (`isDummy: false`), sourced from
+ * documentation photos — see REVIEW_NOTES.md for how each date was
+ * derived (slide text / EXIF / filename timestamps) and what's still
+ * unconfirmed. Everything else below is example/dummy data
+ * (`isDummy: true`), labeled "Example" in the UI. Do not invent real
  * schedule dates — replace these once the PT KTS team supplies actual
  * activity dates (see REVIEW_NOTES.md open question #7).
  */
@@ -64,27 +67,32 @@ export const events: KTSEvent[] = [
     isDummy: true,
   },
   {
-    slug: "example-aquaponic-system-training",
-    title: "Aquaponic System Training (Example)",
-    type: "training",
-    startDate: "2026-08-10",
-    location: "TBD",
+    slug: "esic-conference-2026",
+    title: "ESIC Conference 2026",
+    type: "esic",
+    // Date confirmed from a visible presentation slide ("Ibis Hotel,
+    // September 1st, 2026") and corroborated by photo EXIF timestamps.
+    startDate: "2026-09-01",
+    location: "Ibis Hotel",
     description:
-      "Example past event data — the real schedule has not yet been set by the PT KTS team.",
+      "A research/engineering presentation conference held by ESIC Network, supported by PT KTS.",
     status: "completed",
-    isDummy: true,
+    isDummy: false,
   },
   {
-    slug: "example-esic-summer-camp",
-    title: "ESIC Summer Camp (Example)",
-    type: "esic",
-    startDate: "2026-07-20",
-    endDate: "2026-07-25",
-    location: "TBD",
+    slug: "engineering-camp-2026",
+    title: "Engineering Camp 2026",
+    type: "camp",
+    // Confirmed from drone-camera filename timestamps in the supplied
+    // photos (Day 3 = Sep 3, Day 4 = Sep 4, Day 5 folder implies Sep 5).
+    // No Day 1/2 photos were supplied, so the camp's actual start date
+    // is not confirmed — see REVIEW_NOTES.md.
+    startDate: "2026-09-03",
+    endDate: "2026-09-05",
     description:
-      "Example past event data — the real schedule has not yet been set by the PT KTS team.",
+      "A multi-day engineering camp held by ESIC Network, supported by PT KTS, including site visits and team activities.",
     status: "completed",
-    isDummy: true,
+    isDummy: false,
   },
 ];
 

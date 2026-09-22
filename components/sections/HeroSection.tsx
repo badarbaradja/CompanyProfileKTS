@@ -1,11 +1,14 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { FadeIn } from "@/components/motion/FadeIn";
-import { UnitLogo } from "@/components/brand/Logo";
 import { buttonClasses } from "@/components/ui/Button";
 import { site } from "@/content/site";
+import { getHeroPhoto } from "@/content/photos";
 
 export function HeroSection() {
+  const heroPhoto = getHeroPhoto();
+
   return (
     <section id="hero" aria-labelledby="hero-heading" className="bg-[var(--color-canvas)]">
       <Container className="pt-14 pb-16 lg:pt-20 lg:pb-24">
@@ -53,20 +56,35 @@ export function HeroSection() {
             </FadeIn>
           </div>
 
-          {/* Visual — real unit logos on an intentional placeholder panel, not a fictional product illustration */}
+          {/* Visual — real documentation photo (Engineering Camp 2026), the site's LCP element */}
           <FadeIn delay={0.2} direction="left">
-            <div className="relative rounded-[var(--radius-xl)] bg-[var(--color-dark)] aspect-[4/5] lg:aspect-[3/4] overflow-hidden flex flex-col items-center justify-center px-8 shadow-[var(--shadow-lg)]">
-              <span className="absolute top-5 right-5 text-[10px] font-semibold uppercase tracking-widest text-white/45 bg-white/10 rounded-full px-2.5 py-1">
-                Photo coming soon
-              </span>
-              <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-8">
-                Our business units
-              </p>
-              <div className="flex flex-col gap-8 items-center">
-                {site.businessUnits.map((unit) => (
-                  <UnitLogo key={unit.slug} unit={unit} monochrome className="h-9" />
-                ))}
-              </div>
+            <div className="relative rounded-[var(--radius-xl)] bg-[var(--color-dark)] aspect-[4/5] lg:aspect-[3/4] overflow-hidden shadow-[var(--shadow-lg)]">
+              {heroPhoto ? (
+                <>
+                  <Image
+                    src={heroPhoto.src}
+                    alt={heroPhoto.alt}
+                    width={heroPhoto.width}
+                    height={heroPhoto.height}
+                    priority
+                    sizes="(min-width: 1024px) 45vw, 90vw"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/0 to-black/0"
+                    aria-hidden="true"
+                  />
+                  {heroPhoto.caption && (
+                    <span className="absolute bottom-5 left-5 text-xs font-semibold uppercase tracking-widest text-white/80">
+                      {heroPhoto.caption}
+                    </span>
+                  )}
+                </>
+              ) : (
+                <span className="absolute top-5 right-5 text-[10px] font-semibold uppercase tracking-widest text-white/45 bg-white/10 rounded-full px-2.5 py-1">
+                  Photo coming soon
+                </span>
+              )}
             </div>
           </FadeIn>
         </div>

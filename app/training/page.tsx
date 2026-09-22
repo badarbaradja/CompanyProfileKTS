@@ -4,7 +4,9 @@ import { FadeIn } from "@/components/motion/FadeIn";
 import { StaggerContainer, StaggerItem } from "@/components/motion/StaggerContainer";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Pending } from "@/components/ui/Pending";
+import { PhotoGallery } from "@/components/ui/PhotoGallery";
 import { site } from "@/content/site";
+import { getPhotosByUsage } from "@/content/photos";
 
 export const metadata: Metadata = {
   title: "Training",
@@ -13,18 +15,25 @@ export const metadata: Metadata = {
 
 export default function TrainingPage() {
   const { training } = site;
+  const galleryPhotos = getPhotosByUsage("training");
 
   return (
     <>
       <section className="section-padding">
         <Container>
-          <FadeIn className="max-w-2xl">
+          <FadeIn className="max-w-2xl mb-12">
             <SectionHeading
               eyebrow="Training"
               title="Training & Camp"
               description={training.description}
             />
           </FadeIn>
+
+          {galleryPhotos.length > 0 && (
+            <FadeIn>
+              <PhotoGallery photos={galleryPhotos} />
+            </FadeIn>
+          )}
         </Container>
       </section>
 
