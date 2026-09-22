@@ -15,18 +15,24 @@ product showcase.
 
 Always read, in this order:
 
-1.  `REVISION_V0.3.md` --- source of truth, most recent. Corrects
-    `REVISION_V0.2.md` on language (English, not Indonesian) and design
-    direction; everything else in `REVISION_V0.2.md` still applies.
-2.  `REVISION_V0.2.md` --- source of truth for company structure,
+1.  `REVISION_V0.6.md` --- source of truth, most recent. Real contact
+    details, a draft vision/mission, and sample catalog content
+    (`summary`/`highlights`/`applications`/`specs`/photos, all marked
+    `isSample: true`) for every product.
+2.  `REVISION_V0.5.md` --- writing-rules pass (see the "Writing rules"
+    section below); no content-fact or layout changes.
+3.  `REVISION_V0.3.md` --- corrects `REVISION_V0.2.md` on language
+    (English, not Indonesian) and design direction; everything else in
+    `REVISION_V0.2.md` still applies.
+4.  `REVISION_V0.2.md` --- source of truth for company structure,
     product catalog, events schema, e-commerce rule, and the
     draft-mode/`<Pending>` content rules.
-3.  `PRD.md`
-4.  `DESIGN.md`
-5.  `ARCHITECTURE.md`
-6.  `CONTENT.md`
-7.  `PRODUCT_CATALOG.md`
-8.  `ROADMAP.md`
+5.  `PRD.md`
+6.  `DESIGN.md`
+7.  `ARCHITECTURE.md`
+8.  `CONTENT.md`
+9.  `PRODUCT_CATALOG.md`
+10. `ROADMAP.md`
 
 Do not begin a large implementation without understanding these
 documents.
@@ -62,9 +68,9 @@ PT KTS should still NOT be presented as:
 
 ## Critical content rule
 
-NEVER invent company facts.
+NEVER invent company facts and present them as real.
 
-Never fabricate:
+Never fabricate, as a verified fact:
 
 -   products
 -   technical specifications
@@ -81,17 +87,30 @@ Never fabricate:
 
 If information is unavailable, use an explicit placeholder or omit it.
 
+**Exception (as of v0.6):** illustrative content used only to preview a
+page's finished shape (e.g. the sample product catalog, see the Product
+rule below) is allowed, but only when it is impossible to mistake for a
+verified fact: mark it `isSample: true` in the data and show a visible
+"Sample data" badge next to it in the UI. Never let sample content
+appear without that marker.
+
 ------------------------------------------------------------------------
 
 ## Product rule
 
 Products/services in `PRODUCT_CATALOG.md` are real catalog items sourced
 from the "Struktur" meeting slide (2026-09-14), grouped by business unit.
-They are not concept placeholders, but their `specs` and `images` fields
-must stay empty until the team supplies verified data.
+They are not concept placeholders.
 
-Never publish capacity, temperature, power draw, output figures, pricing,
-or certifications for a product/service until verified.
+As of v0.6, every product's `summary`, `description`, `highlights`,
+`applications`, `specs`, and photo (`content/photos.ts` →
+`sampleProductPhotos`) are illustrative sample content, not verified
+data --- see `REVISION_V0.6.md` part C and `REVIEW_NOTES.md` section 6.3
+for the full list of what the team must still supply. Every product has
+`isSample: true`, and the detail page shows a "Sample data" badge on the
+specs block and a "Sample" badge on the photo. Do not remove those
+badges, and do not quote any sample figure (capacity, dimensions,
+power draw, timeline, price) to a customer as if verified.
 
 Use status labels such as Concept, In Development, Prototype, or Coming
 Soon only when appropriate.
@@ -124,6 +143,24 @@ it as an official PT KTS store without team confirmation.
 Product/service CTAs use an "Ask about this product" / "Ask about this
 service" action (WhatsApp `wa.me` with a pre-filled message, in
 Indonesian) when a WhatsApp number exists, else link to `/contact`.
+
+------------------------------------------------------------------------
+
+## Contact and profile rule
+
+As of v0.6, `content/site.ts` → `contact` (WhatsApp, email, address) and
+`vision`/`mission` are filled in --- see `REVISION_V0.6.md` parts A/B and
+`REVIEW_NOTES.md` sections 6.1/6.2 for status:
+
+-   The WhatsApp number is Pak Ramdlan's **personal** number, used
+    temporarily as the contact person. Always label it "WhatsApp
+    (contact person)", never "Company phone".
+-   The office address has **not** been confirmed by the team. It is
+    still shown publicly as supplied (per the v0.6 instruction), but
+    don't treat it as settled if asked to change contact-related UI.
+-   Vision/mission are a draft pending team approval, shown on `/about`
+    with a "Draft, pending approval" badge (`SampleBadge`). Don't remove
+    that badge or present the text as final without the team's sign-off.
 
 ------------------------------------------------------------------------
 
@@ -203,8 +240,12 @@ gradients, excessive rounded corners on everything uniformly, neon
 cyberpunk styling, unnecessary glassmorphism, excessive animation.
 
 For product photography that doesn't exist yet, use an intentional
-placeholder treatment (per the reference repos' style), never a fake
-technical illustration standing in for a real photo.
+placeholder treatment (per the reference repos' style) rather than a
+fake technical illustration. As of v0.6, a labeled sample stock photo
+(with a visible "Sample" badge, see the Product rule above) is also an
+acceptable stand-in for real product photography, since it's clearly
+marked as not the actual item --- but never leave a sample photo
+unlabeled.
 
 ------------------------------------------------------------------------
 

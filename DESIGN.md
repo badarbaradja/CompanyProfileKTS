@@ -206,11 +206,12 @@ table for why the drawer mechanics are kept from v0.2).
 
 ## 7. Cards
 
-- **Product cards:** photo-first (or an intentional placeholder, see
-  section 10), a small pill/tag row over the photo (unit + type), title,
-  one-line tagline, and a simple text+arrow CTA. No star ratings, no
-  fake pricing, no "HOT" labels, no crowded spec tables on listing
-  cards.
+- **Product cards:** photo-first (a sample photo with a small "Sample"
+  corner badge as of v0.6, or an intentional placeholder if a product
+  has none — see section 10), a small pill/tag row over the photo
+  (unit + type), title, one-line summary, and a simple text+arrow CTA.
+  No star ratings, no fake pricing, no "HOT" labels, no crowded spec
+  tables on listing cards.
 - **Feature/pillar strips:** plain colored icon (no tinted box) above a
   title and short description, laid out as a divided row (à la
   sparktalks `StatsBar`) or a loose grid — not a uniform bordered card
@@ -225,9 +226,13 @@ table for why the drawer mechanics are kept from v0.2).
 
 ## 8. Product detail
 
-Header (unit, type, status) → description → specifications (or
-`<Pending>`) → "Inquire" CTA. Kept from v0.2's information architecture;
-only the visual skin changes.
+As of v0.6: photo (with a "Sample data" badge when `isSample`) → header
+(unit, type, status) → summary → description → highlights (plain list,
+not a card grid) → applications (tag list, not a card grid) →
+specifications (or `<Pending>`; "Sample data" badge when `isSample`) →
+"Ask about this product/service" CTA. Highlights and applications
+deliberately use two different list styles so they don't read as the
+same repeated block.
 
 ------------------------------------------------------------------------
 
@@ -244,13 +249,18 @@ from v0.2's `globals.css` rule).
 ## 10. Imagery & placeholders
 
 Priority: real product/unit photography > real event/training photos >
-an **intentional placeholder** > a fake technical illustration. Since
-PT KTS has no product photography yet, every product card and hero
-visual uses a deliberately-styled placeholder in the reference repos'
-visual language (a solid ink/accent-tinted panel with a small, clearly
-labeled "Photo coming soon" caption and the unit's real logo watermark)
-— never a fabricated exploded-diagram illustration standing in for a
-photo (that was v0.1's "CARBONIZATION SYSTEM" mistake).
+a **labeled sample photo** > an **intentional placeholder** > a fake
+technical illustration. Since PT KTS has no product photography yet, as
+of v0.6 every product card and detail page uses one sourced, free-
+license sample photo (see `content/photos.ts` → `sampleProductPhotos`
+and `REVIEW_NOTES.md` section 9) with a small "Sample"/"Sample data"
+badge — a real photo of the general equipment category, honestly
+labeled as not the actual item, not a placeholder panel. A product with
+no sample photo yet falls back to the deliberately-styled placeholder
+(a solid ink/accent-tinted panel with a small, clearly labeled "Photo
+coming soon" caption and the unit's real logo watermark) — never a
+fabricated exploded-diagram illustration standing in for a photo (that
+was v0.1's "CARBONIZATION SYSTEM" mistake).
 
 ------------------------------------------------------------------------
 
