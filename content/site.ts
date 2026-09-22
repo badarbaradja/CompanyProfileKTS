@@ -53,10 +53,10 @@ export const site = {
   legalName: "PT Kappa Technology Solution",
   shortName: "PT KTS",
 
-  tagline: "Four business lines, three business units, one innovation network.",
+  tagline: "Equipment supply, consulting, engineering development, and training",
 
   description:
-    "PT Kappa Technology Solution runs four business lines — Equipment Supply, Consulting, Engineering Development, and Training — through three business units: Kappa Solution, Nara Aquaponics, and Bumi Hijau, and supports ESIC Network.",
+    "PT Kappa Technology Solution works in four areas: equipment supply, consulting, engineering development, and training. The work is carried out by three business units: Kappa Solution, Nara Aquaponics, and Bumi Hijau. PT KTS also supports ESIC Network.",
 
   /** Official vision — not yet supplied by the team. Do not invent. */
   vision: undefined as string | undefined,
@@ -124,12 +124,12 @@ export const site = {
       slug: "nara-aquaponics",
       name: "Nara Aquaponics",
       logo: "/brand/nara-aquaponics.png",
-      field: "Hydroponic & aquaponic systems",
+      field: "Hydroponic and aquaponic systems",
       description:
-        "Designs and builds hydroponic and aquaponic systems, complete with mechanical & biological filters, aeration systems, and biofloc ponds.",
+        "Designs and builds hydroponic and aquaponic systems, complete with mechanical and biological filters, aeration systems, and biofloc ponds.",
       activities: [
-        "Hydroponic & aquaponic system design-build",
-        "Mechanical & biological filters",
+        "Hydroponic and aquaponic system design-build",
+        "Mechanical and biological filters",
         "Aeration systems",
         "Biofloc ponds",
       ],
@@ -139,7 +139,7 @@ export const site = {
       name: "Bumi Hijau",
       logo: "/brand/bumi-hijau.png",
       logoBlend: "multiply",
-      field: "Waste & organic-waste management",
+      field: "Waste and organic-waste management",
       description:
         "Develops waste and organic-waste management equipment: waste shredders, RAMPUS incinerators, Takakura composters, and gasification stoves.",
       activities: [
@@ -167,7 +167,7 @@ export const site = {
 
   training: {
     description:
-      "Through its Training business line and the Kappa Solution unit, PT KTS runs training sessions and camps. Here's a look at our training from our Instagram documentation.",
+      "Through its Training business line and the Kappa Solution unit, PT KTS runs training sessions and camps.",
     /** Reference posts from the 2026-09-14 meeting — link cards only, never scraped/mirrored. */
     instagramShowcase: [
       { label: "Training documentation 1", url: "https://www.instagram.com/p/DOat_4CgZHA/" },

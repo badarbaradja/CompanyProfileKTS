@@ -39,7 +39,7 @@ export const events: KTSEvent[] = [
     startDate: "2026-10-15",
     location: "TBD",
     description:
-      "Example event data — the real schedule has not yet been set by the PT KTS team.",
+      "Example event data. The real schedule has not yet been set by the PT KTS team.",
     status: "scheduled",
     isDummy: true,
   },
@@ -51,13 +51,13 @@ export const events: KTSEvent[] = [
     endDate: "2026-11-05",
     location: "TBD",
     description:
-      "Example event data — the real schedule has not yet been set by the PT KTS team.",
+      "Example event data. The real schedule has not yet been set by the PT KTS team.",
     status: "tentative",
     isDummy: true,
   },
   {
     slug: "example-jesic",
-    title: "JESIC (Example — Coming Soon)",
+    title: "JESIC (Example: Coming Soon)",
     type: "jesic",
     startDate: "2026-12-01",
     location: "TBD",
@@ -90,7 +90,7 @@ export const events: KTSEvent[] = [
     startDate: "2026-09-03",
     endDate: "2026-09-05",
     description:
-      "A multi-day engineering camp held by ESIC Network, supported by PT KTS, including site visits and team activities.",
+      "A multi-day engineering camp held by ESIC Network and supported by PT KTS. It included site visits and team activities.",
     status: "completed",
     isDummy: false,
   },
@@ -143,8 +143,8 @@ export function formatEventDate(event: KTSEvent): string {
   const end = toDate(event.endDate);
   const sameMonth = start.getMonth() === end.getMonth() && start.getFullYear() === end.getFullYear();
   if (sameMonth) {
-    return `${MONTHS[start.getMonth()]} ${start.getDate()}–${end.getDate()}, ${end.getFullYear()}`;
+    return `${MONTHS[start.getMonth()]} ${start.getDate()} to ${end.getDate()}, ${end.getFullYear()}`;
   }
   const endLabel = `${MONTHS[end.getMonth()]} ${end.getDate()}, ${end.getFullYear()}`;
-  return `${startLabel} – ${endLabel}`;
+  return `${startLabel} to ${endLabel}`;
 }

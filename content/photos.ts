@@ -71,7 +71,7 @@ export const photos: Photo[] = [
   // --- Engineering Camp 2026 ---
   {
     src: "/photos/camp/camp-outdoor-briefing.webp",
-    alt: "A large group of Engineering Camp 2026 participants sitting outdoors on a field, listening to an instructor giving a briefing with a megaphone, with all-terrain vehicles and a building in the background.",
+    alt: "A large group of Engineering Camp 2026 participants sitting outdoors, listening to an instructor with a megaphone. All-terrain vehicles and a building are in the background.",
     event: "engineering-camp-2026",
     day: "Day 3",
     width: 2000,

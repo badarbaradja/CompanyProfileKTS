@@ -149,7 +149,7 @@ export const products: Product[] = [
     name: "RAMPUS Incinerator",
     tagline: "RAMPUS incinerator for waste management.",
     description:
-      "The RAMPUS incinerator developed by Bumi Hijau as part of its waste management solutions. The full expansion of \"RAMPUS\" is not yet available.",
+      "The RAMPUS incinerator is developed by Bumi Hijau for waste management. The full expansion of \"RAMPUS\" is not yet available.",
     status: "in-development",
     featured: true,
     images: [],
@@ -173,7 +173,7 @@ export const products: Product[] = [
     name: "Gasification Stove",
     tagline: "Gasification stove for organic waste management.",
     description:
-      "A gasification stove developed by Bumi Hijau as part of its organic-waste management solutions.",
+      "The gasification stove is developed by Bumi Hijau for organic-waste management.",
     status: "in-development",
     featured: true,
     images: [],
