@@ -51,9 +51,9 @@ details --- contact info, product specs/pricing, team roles, vision/mission
 --- remain **placeholders** and must never be presented as verified
 facts. See `REVIEW_NOTES.md` for the full list of what's still needed.
 
-While `NEXT_PUBLIC_DRAFT_MODE` is `true` (the default), the site shows a
-"Site under development" banner and marks every missing field with a
-`<Pending>` indicator, and is set to `noindex`.
+While `NEXT_PUBLIC_DRAFT_MODE` is `true` (the default), the site marks
+every missing field with a `<Pending>` indicator and is set to
+`noindex`.
 
 ## Development
 
