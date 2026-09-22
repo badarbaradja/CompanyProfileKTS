@@ -1,6 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import { StatusBadge } from "@/components/ui/Badge";
 import { site } from "@/content/site";
+import { getSampleProductPhoto } from "@/content/photos";
 import type { Product } from "@/content/products";
 
 interface ProductCardProps {
@@ -9,12 +11,13 @@ interface ProductCardProps {
 
 /**
  * Editorial, photo-first product card — per DESIGN.md section 7.
- * No fake prices, ratings, or reviews. No real photography exists yet,
- * so the image slot uses an intentional placeholder (section 10) rather
- * than a fabricated technical illustration.
+ * No fake prices, ratings, or reviews. Photos are sample photography
+ * (see REVISION v0.6 part C.2) marked with a "Sample" corner badge;
+ * a product without a photo falls back to the intentional placeholder.
  */
 export function ProductCard({ product }: ProductCardProps) {
   const unit = site.businessUnits.find((u) => u.slug === product.unit)!;
+  const photo = getSampleProductPhoto(product.images[0] ?? "");
 
   return (
     <Link
@@ -22,7 +25,24 @@ export function ProductCard({ product }: ProductCardProps) {
       className="group flex flex-col bg-[var(--color-surface)] rounded-[var(--radius-lg)] overflow-hidden shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-lg)] hover:-translate-y-1 transition-all duration-300"
       aria-label={`View ${product.name}`}
     >
-      <PlaceholderPhoto unitName={unit.name} />
+      {photo ? (
+        <div className="relative aspect-[4/3] overflow-hidden">
+          <Image
+            src={photo.src}
+            alt={photo.alt}
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+          {product.isSample && (
+            <span className="absolute bottom-3 right-3 text-[10px] font-semibold uppercase tracking-widest text-white/90 bg-black/40 rounded-full px-2.5 py-1 backdrop-blur-sm">
+              Sample
+            </span>
+          )}
+        </div>
+      ) : (
+        <PlaceholderPhoto unitName={unit.name} />
+      )}
 
       {/* Card content */}
       <div className="flex flex-col flex-1 p-6">
@@ -39,7 +59,7 @@ export function ProductCard({ product }: ProductCardProps) {
           {product.name}
         </h3>
         <p className="text-sm text-[var(--color-text-muted)] leading-relaxed flex-1">
-          {product.tagline}
+          {product.summary}
         </p>
 
         <div className="mt-5 flex items-center gap-1.5 text-sm font-medium text-[var(--color-accent)] group-hover:gap-3 transition-all duration-300">
