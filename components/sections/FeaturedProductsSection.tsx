@@ -21,7 +21,7 @@ export function FeaturedProductsSection() {
             className="leading-[1.1] tracking-tight max-w-xl"
             style={{ fontSize: "var(--text-h2)" }}
           >
-            A look at our products &amp; services
+            Products and services
           </h2>
           <Link
             href="/products"

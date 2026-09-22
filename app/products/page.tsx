@@ -20,7 +20,7 @@ export default function ProductsPage() {
         <FadeIn className="max-w-2xl mb-8">
           <SectionHeading
             eyebrow="Products"
-            title="Product & service catalog"
+            title="Products and services"
             description="Grouped by business unit. Photos, technical specifications, and pricing are not yet available for most items."
           />
         </FadeIn>

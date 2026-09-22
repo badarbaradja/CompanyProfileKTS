@@ -27,11 +27,11 @@ export function HeroSection() {
                 className="leading-[1.08] tracking-tight mb-6"
                 style={{ fontSize: "var(--text-display)" }}
               >
-                Four business lines,
+                Equipment, consulting, engineering
                 <br />
-                three business units,
+                development, and training.
                 <br />
-                <em className="italic text-[var(--color-accent)]">one innovation network.</em>
+                <em className="italic text-[var(--color-accent)]">Three business units.</em>
               </h1>
             </FadeIn>
 
@@ -47,10 +47,10 @@ export function HeroSection() {
             <FadeIn delay={0.24}>
               <div className="flex flex-wrap gap-3">
                 <Link href="/services" className={buttonClasses("primary", "lg")}>
-                  See Our Services
+                  See our services
                 </Link>
                 <Link href="/products" className={buttonClasses("outline", "lg")}>
-                  Explore Products
+                  View products
                 </Link>
               </div>
             </FadeIn>

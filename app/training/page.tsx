@@ -24,7 +24,7 @@ export default function TrainingPage() {
           <FadeIn className="max-w-2xl mb-12">
             <SectionHeading
               eyebrow="Training"
-              title="Training & Camp"
+              title="Training and camps"
               description={training.description}
             />
           </FadeIn>
@@ -42,7 +42,7 @@ export default function TrainingPage() {
         <Container>
           <FadeIn className="max-w-2xl mb-10">
             <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-3">
-              A look at our training
+              Instagram documentation
             </h2>
             <p className="text-sm text-[var(--color-text-muted)]">
               Training documentation can be viewed directly on our Instagram.

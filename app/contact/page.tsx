@@ -21,8 +21,8 @@ export default function ContactPage() {
           <FadeIn>
             <SectionHeading
               eyebrow="Contact"
-              title="Got something we can help with?"
-              description="Reach out to PT KTS for a consultation, a product/service question, or a training partnership."
+              title="Contact PT KTS"
+              description="PT KTS can help with consultations, product questions, and training."
             />
 
             <div className="mt-10 space-y-5">

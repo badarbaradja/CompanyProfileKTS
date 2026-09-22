@@ -9,7 +9,7 @@ import { ContactCtaSection } from "@/components/sections/ContactCtaSection";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: `${site.legalName} — ${site.tagline}`,
+  title: `${site.legalName} | ${site.tagline}`,
   description: site.description,
 };
 

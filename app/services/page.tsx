@@ -19,7 +19,7 @@ export default function ServicesPage() {
           <FadeIn className="max-w-2xl">
             <SectionHeading
               eyebrow="Services"
-              title="Our business lines & units"
+              title="Business lines and units"
               description="PT KTS runs four business lines through three business units."
             />
           </FadeIn>

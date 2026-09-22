@@ -44,7 +44,7 @@ const draft = isDraftMode();
 export const metadata: Metadata = {
   metadataBase: siteUrl ? new URL(siteUrl) : undefined,
   title: {
-    default: `${site.legalName} — ${site.tagline}`,
+    default: `${site.legalName} | ${site.tagline}`,
     template: "%s | PT KTS",
   },
   description: site.description,
@@ -63,12 +63,12 @@ export const metadata: Metadata = {
     locale: "en_US",
     ...(siteUrl ? { url: siteUrl } : {}),
     siteName: site.legalName,
-    title: `PT KTS — ${site.tagline}`,
+    title: `PT KTS | ${site.tagline}`,
     description: site.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `PT KTS — ${site.tagline}`,
+    title: `PT KTS | ${site.tagline}`,
     description: site.description,
   },
   // Draft-mode sites stay out of search results — see REVISION_V0.2.md section 5.

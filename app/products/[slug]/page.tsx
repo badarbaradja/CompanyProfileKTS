@@ -116,10 +116,10 @@ export default async function ProductDetailPage({ params }: Props) {
               className="mb-3"
               style={{ fontSize: "var(--text-h4)" }}
             >
-              Interested in this {product.type === "service" ? "service" : "product"}?
+              Ask about this {product.type === "service" ? "service" : "product"}
             </h2>
             <p className="text-[var(--color-text-muted)] text-sm mb-5">
-              Contact PT KTS to ask for more information.
+              Contact PT KTS for more information.
             </p>
             <a
               href={inquiryHref}
@@ -127,7 +127,7 @@ export default async function ProductDetailPage({ params }: Props) {
               rel={whatsapp ? "noopener noreferrer" : undefined}
               className={buttonClasses("primary", "md")}
             >
-              Inquire
+              Ask about this {product.type === "service" ? "service" : "product"}
             </a>
           </div>
         </FadeIn>

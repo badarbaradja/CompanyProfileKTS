@@ -37,7 +37,7 @@ export function Footer() {
             <Link
               href="/"
               className="inline-flex items-center gap-2.5 mb-4"
-              aria-label="PT Kappa Technology Solution — Home"
+              aria-label="PT Kappa Technology Solution, home"
             >
               <KTSLogo variant="mark" className="h-7" />
               <span className="font-display text-xl font-medium text-[var(--color-canvas)]">

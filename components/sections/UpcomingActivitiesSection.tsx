@@ -27,10 +27,10 @@ export function UpcomingActivitiesSection() {
               className="leading-[1.1] tracking-tight mb-4"
               style={{ fontSize: "var(--text-h2)" }}
             >
-              Training &amp; upcoming events
+              Training and upcoming events
             </h2>
             <p className="text-[var(--color-text-muted)] leading-relaxed mb-6">
-              A look at what&apos;s coming up across training, camps, and ESIC Network.
+              Upcoming training, camps, and ESIC Network activities.
             </p>
             <Link href="/events" className={buttonClasses("outline", "md")}>
               View full calendar

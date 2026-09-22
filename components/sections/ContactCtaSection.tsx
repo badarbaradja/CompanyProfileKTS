@@ -13,12 +13,12 @@ export function ContactCtaSection() {
           <AccentHeading
             as="h2"
             align="center"
-            line1="Got something we can help with?"
-            line2="Let's talk."
+            line1="Contact PT KTS"
+            line2="for products, services, or training."
             className="mb-6"
           />
           <p className="text-[var(--color-text-muted)] leading-relaxed mb-8 max-w-lg mx-auto" style={{ fontSize: "var(--text-body-lg)" }}>
-            Reach out for a consultation, a product question, or a training partnership.
+            Use the contact page to reach the team.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link href="/contact" className={buttonClasses("primary", "lg")}>
@@ -31,7 +31,7 @@ export function ContactCtaSection() {
                 rel="noopener noreferrer"
                 className={buttonClasses("outline", "lg")}
               >
-                Online Shop
+                Shop online
               </a>
             )}
           </div>

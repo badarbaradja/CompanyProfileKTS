@@ -94,7 +94,7 @@ export function InquiryForm({ whatsapp, email }: InquiryFormProps) {
       </div>
 
       <p id="inquiry-form-note" className="text-xs text-[var(--color-text-faint)] pt-1">
-        Your message isn&apos;t stored on our server — the buttons above only open WhatsApp or your email app.
+        Your message isn&apos;t stored on our server. The buttons above only open WhatsApp or your email app.
       </p>
     </form>
   );

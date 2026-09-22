@@ -110,7 +110,7 @@ export default function AboutPage() {
             <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-10">
               <div>
                 <h3 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-4 text-center md:text-left">
-                  Business Lines
+                  Business lines
                 </h3>
                 <div className="flex flex-wrap justify-center md:justify-start gap-2">
                   {site.businessLines.map((line) => (
@@ -126,7 +126,7 @@ export default function AboutPage() {
 
               <div>
                 <h3 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-4 text-center md:text-left">
-                  Business Units
+                  Business units
                 </h3>
                 <div className="flex flex-wrap justify-center md:justify-start items-center gap-6">
                   {site.businessUnits.map((unit) => (

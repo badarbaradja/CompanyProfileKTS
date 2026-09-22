@@ -20,7 +20,7 @@ export default function NotFound() {
             The page you&apos;re looking for isn&apos;t available or has moved.
           </p>
           <Link href="/" className={buttonClasses("primary", "md")}>
-            Back to Home
+            Back to home
           </Link>
         </div>
       </Container>

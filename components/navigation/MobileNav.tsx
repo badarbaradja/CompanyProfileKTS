@@ -151,7 +151,7 @@ export function MobileNav({
               id="mobile-nav-cta"
               className={cn(buttonClasses("primary", "md"), "w-full")}
             >
-              Online Shop
+              Shop online
             </a>
           )}
           <Link

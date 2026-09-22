@@ -59,7 +59,7 @@ export function Navbar() {
           {/* Wordmark */}
           <Link
             href="/"
-            aria-label="PT Kappa Technology Solution — Home"
+            aria-label="PT Kappa Technology Solution, home"
             className="flex items-center gap-2.5 shrink-0 group"
             id="navbar-logo"
           >
@@ -103,7 +103,7 @@ export function Navbar() {
                 id="navbar-cta"
                 className={cn(buttonClasses("primary", "sm"), "hidden lg:inline-flex")}
               >
-                Online Shop
+                Shop online
               </a>
             )}
 
