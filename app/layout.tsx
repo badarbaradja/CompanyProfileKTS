@@ -1,11 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Navbar } from "@/components/navigation/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
-const inter = Inter({
-  subsets: ["latin"],
+// Self-hosted Inter — see REVISION_V0.2.md item #7 (v0.1 misconception
+// table): next/font/google made the build depend on network access to
+// Google Fonts. next/font/local removes that dependency.
+const inter = localFont({
+  src: [
+    { path: "./fonts/inter/inter-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/inter/inter-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/inter/inter-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/inter/inter-700.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-inter",
   display: "swap",
 });
