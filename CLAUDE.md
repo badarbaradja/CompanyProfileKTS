@@ -13,14 +13,16 @@ product showcase.
 
 ## Read before coding
 
-Always read:
+Always read, in this order:
 
-1.  `PRD.md`
-2.  `DESIGN.md`
-3.  `ARCHITECTURE.md`
-4.  `CONTENT.md`
-5.  `PRODUCT_CATALOG.md`
-6.  `ROADMAP.md`
+1.  `REVISION_V0.2.md` --- source of truth. If any other document
+    conflicts with it, `REVISION_V0.2.md` wins.
+2.  `PRD.md`
+3.  `DESIGN.md`
+4.  `ARCHITECTURE.md`
+5.  `CONTENT.md`
+6.  `PRODUCT_CATALOG.md`
+7.  `ROADMAP.md`
 
 Do not begin a large implementation without understanding these
 documents.
@@ -29,17 +31,30 @@ documents.
 
 ## Core product principle
 
-The website must communicate:
+As of v0.2, the website must communicate PT KTS's real structure
+(see `REVISION_V0.2.md` section 2):
 
-> Research → Engineering → Product → Real-world impact
+-   **4 business lines (lini usaha):** Penyediaan Barang, Konsultan,
+    Pengembangan Rekayasa, Pelatihan
+-   **3 business units (unit usaha):** Kappa Solution, Nara Aquaponics,
+    Bumi Hijau
+-   PT KTS **supports** ESIC Network (ESIC, JESIC, Summer Camp,
+    Pelatihan) --- this relationship is now shown on the site.
 
-PT KTS is not currently being presented as:
+This replaces the earlier "From Research to Real-World Solutions" /
+research-to-product positioning from v0.1, which did not reflect the
+actual company structure.
 
--   an event organizer
--   a training company
+Pelatihan (training) and camp activities ARE part of the business and
+ARE shown on the site (`/pelatihan`, `/kegiatan`) --- this reverses the
+v0.1 exclusion.
+
+PT KTS should still NOT be presented as:
+
 -   a student organization
 -   a generic software house
--   a marketplace
+-   a marketplace (no cart, checkout, or payment --- see the e-commerce
+    rule below)
 
 ------------------------------------------------------------------------
 
@@ -68,19 +83,44 @@ If information is unavailable, use an explicit placeholder or omit it.
 
 ## Product rule
 
-The provisional products in `PRODUCT_CATALOG.md` exist only to build the
-UI.
+Products/services in `PRODUCT_CATALOG.md` are real catalog items sourced
+from the "Struktur" meeting slide (2026-09-14), grouped by business unit.
+They are not concept placeholders, but their `specs` and `images` fields
+must stay empty until the team supplies verified data.
 
-They must not be represented as verified commercial products.
+Never publish capacity, temperature, power draw, output figures, pricing,
+or certifications for a product/service until verified.
 
-Use status labels such as:
+Use status labels (shown in Indonesian on the site) such as:
 
--   Concept
--   In Development
--   Prototype
--   Coming Soon
+-   Konsep (Concept)
+-   Dalam Pengembangan (In Development)
+-   Prototipe (Prototype)
+-   Segera Hadir (Coming Soon)
 
 only when appropriate.
+
+------------------------------------------------------------------------
+
+## Language rule
+
+All site-facing content and routes are in **Bahasa Indonesia** (see
+`REVISION_V0.2.md` section 4.1 for the route list). Internal engineering
+docs (this file, `PRD.md`, `ARCHITECTURE.md`, etc.) stay in English.
+
+------------------------------------------------------------------------
+
+## E-commerce rule
+
+No cart, checkout, or payment. A single "Toko Online" link
+(`site.contact.shopUrl` in `content/site.ts`) may appear in the
+navbar/footer/product detail, shown only when the URL is set. The current
+shop account belongs personally to Pak Ramdlan (company e-commerce
+account cannot be created yet --- documents incomplete) --- never label
+it as an official PT KTS store without team confirmation.
+
+Product/service CTAs use "Tanyakan" (WhatsApp `wa.me` with a pre-filled
+message) when a WhatsApp number exists, else link to `/kontak`.
 
 ------------------------------------------------------------------------
 
@@ -166,6 +206,8 @@ Prefer:
 -   minimal client components
 -   Cloudflare Workers deployment
 -   current Cloudflare-recommended Next.js deployment path
+-   self-hosted fonts via `next/font/local` (not `next/font/google` ---
+    the build must not depend on network access to Google Fonts)
 
 Do not introduce:
 

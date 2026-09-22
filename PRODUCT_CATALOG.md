@@ -1,161 +1,91 @@
-# Product Catalog --- Provisional v0.1
+# Product Catalog --- v0.2
 
-This document contains **conceptual placeholder products** created to
-allow the website UI to be built before the real product catalog is
-available.
+> Corrected against `REVISION_V0.2.md` section 4.3. These are **real**
+> catalog items sourced from the 2026-09-14 "Struktur" meeting slide,
+> grouped by business unit --- not invented concepts like v0.1's
+> "Livestock Waste Carbonization System" (removed).
 
-These are NOT confirmed PT KTS products.
-
-Every item below must be replaced, renamed, edited, or removed after
-validation by the PT KTS team.
+Every entry below is a genuine product/service name from the source
+slide. What is still missing --- photos, specifications, pricing --- must
+stay empty (`specs: undefined`, `images: []`) until the PT KTS team
+supplies verified data. See `REVIEW_NOTES.md` open question #5.
 
 ------------------------------------------------------------------------
 
-## Product concept 01 --- Livestock Waste Carbonization System
+## Kappa Solution
 
-### Working name
+Alat hasil pengembangan rekayasa, alat praktikum, desain sistem,
+pelatihan, camp.
 
-Livestock Waste Carbonization System
+1.  **Alat Praktikum** (produk)
+2.  **Alat Hasil Pengembangan Rekayasa** (produk)
+3.  **Desain Sistem** (layanan)
 
-### Concept
+------------------------------------------------------------------------
 
-A machine/system concept for processing livestock waste, such as cattle
-manure, into carbon-based material.
+## Nara Aquaponics
 
-### Problem
+Rancang bangun sistem hidroponik & akuaponik, filter mekanik & biologi,
+sistem aerasi, kolam bioflok.
 
-Livestock waste can create handling, odor, sanitation, and
-waste-management challenges.
+1.  **Rancang Bangun Sistem Hidroponik & Akuaponik** (layanan)
+2.  **Filter Mekanik dan Biologi** (produk)
+3.  **Sistem Aerasi** (produk)
+4.  **Kolam Bioflok** (produk)
 
-### Intended value proposition
+------------------------------------------------------------------------
 
-Convert a waste stream into a potentially useful material through a
-controlled processing system.
+## Bumi Hijau
 
-### Status
+Pencacah sampah, insinerator RAMPUS, komposter Takakura, tungku
+gasifikasi.
 
-Prototype / Information to be verified.
+1.  **Pencacah Sampah** (produk)
+2.  **Insinerator RAMPUS** (produk) --- "RAMPUS" is not yet expanded;
+    see `REVIEW_NOTES.md` open question #5.
+3.  **Komposter Takakura** (produk)
+4.  **Tungku Gasifikasi** (produk)
 
-### Target users
+------------------------------------------------------------------------
 
-Potentially:
+## Content rules for every entry
 
--   livestock farms
--   agricultural businesses
--   waste-processing operators
--   community-scale processing initiatives
-
-Target users are provisional.
-
-### Important
-
-Do not publish:
+Description is a general explanation of function only. **Never**
+publish:
 
 -   capacity
 -   temperature
--   energy consumption
--   output percentage
--   product yield
+-   power/energy consumption
+-   output percentage / yield
 -   pricing
 -   certifications
 
-until verified.
+until the PT KTS team verifies them.
 
 ------------------------------------------------------------------------
 
-## Product concept 02 --- Agricultural Waste Processing Technology
+## Product/service detail template
 
-### Working name
-
-Agricultural Waste Processing Technology
-
-### Concept
-
-A product family for converting agricultural waste into useful materials
-or outputs.
-
-### Status
-
-Concept / placeholder.
-
-------------------------------------------------------------------------
-
-## Product concept 03 --- Organic Waste Processing System
-
-### Working name
-
-Organic Waste Processing System
-
-### Concept
-
-A technology concept for processing selected organic waste streams into
-more useful outputs.
-
-### Status
-
-Concept / placeholder.
-
-------------------------------------------------------------------------
-
-## Product concept 04 --- Research-to-Product Engineering System
-
-### Working name
-
-KTS Applied Technology Platform
-
-### Concept
-
-A placeholder category for future research-derived engineering products
-that do not yet fit a single product family.
-
-### Status
-
-Concept / placeholder.
-
-------------------------------------------------------------------------
-
-## Product detail template
-
-Every real product should eventually provide:
+Every catalog entry currently provides only:
 
 ``` text
+Unit (Kappa Solution / Nara Aquaponics / Bumi Hijau)
+Type (produk / layanan)
 Name
-One-line value proposition
-Problem
-Solution
-Technology
-How it works
-Applications
-Target users
-Benefits
-Specifications
-Dimensions
-Capacity
-Power
-Materials
-Safety
-Certifications
-Gallery
-Documentation
-Status
-Price / inquiry model
-Contact CTA
+Short description (general function only)
+Status (Konsep / Dalam Pengembangan / Prototipe / Segera Hadir)
 ```
 
-Only verified fields should be published.
+Once verified data exists, entries may add: specifications, dimensions,
+capacity, power, materials, safety, certifications, gallery,
+documentation, and a price/inquiry model. Only verified fields should be
+published; use `<Pending>` for the rest.
 
 ------------------------------------------------------------------------
 
-## Recommended MVP behavior
+## Featured selection (homepage)
 
-If no real products are ready:
-
-Show the product showcase with:
-
-> **Innovations in Development**
-
-and explain:
-
-> PT KTS is currently developing a portfolio of research-derived
-> technologies. Product information will be published as each solution
-> reaches an appropriate stage of development and validation.
+Featured items must be a multiple of 3 so the grid renders full rows.
+Current selection (`featured: true` in `content/products/index.ts`):
+all 3 Kappa Solution items, plus 3 selected Nara Aquaponics items, plus
+3 selected Bumi Hijau items (9 total).
