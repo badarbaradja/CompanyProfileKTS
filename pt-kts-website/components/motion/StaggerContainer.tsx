@@ -75,6 +75,7 @@ export function StaggerContainer({
     <motion.div
       ref={ref}
       className={cn(className)}
+      data-motion-reveal
       variants={containerVariants(shouldReduceMotion ? 0 : staggerDelay)}
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
@@ -91,6 +92,7 @@ export function StaggerItem({ children, className }: StaggerItemProps) {
   return (
     <motion.div
       className={cn(className)}
+      data-motion-reveal
       variants={shouldReduceMotion ? itemVariantsReduced : itemVariants}
     >
       {children}

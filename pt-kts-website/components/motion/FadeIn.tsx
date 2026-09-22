@@ -65,6 +65,7 @@ export function FadeIn({
     <motion.div
       ref={ref}
       className={cn(className)}
+      data-motion-reveal
       initial={{ opacity: 0, ...directionOffset }}
       animate={
         inView
