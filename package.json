@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm run check:copy",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:copy": "node scripts/check-copy.mjs"
   },
   "dependencies": {
     "framer-motion": "^13.4.0",
