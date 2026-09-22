@@ -114,16 +114,61 @@ the PT KTS team.
 
 ## E-commerce rule
 
-No cart, checkout, or payment. A single "Online Shop" link
-(`site.contact.shopUrl` in `content/site.ts`) may appear in the
+No cart, checkout, or payment. A single "Shop online" / "Online Shop"
+link (`site.contact.shopUrl` in `content/site.ts`) may appear in the
 navbar/footer/product detail, shown only when the URL is set. The current
 shop account belongs personally to Pak Ramdlan (company e-commerce
 account cannot be created yet --- documents incomplete) --- never label
 it as an official PT KTS store without team confirmation.
 
-Product/service CTAs use an "Inquire" action (WhatsApp `wa.me` with a
-pre-filled message, in Indonesian) when a WhatsApp number exists, else
-link to `/contact`.
+Product/service CTAs use an "Ask about this product" / "Ask about this
+service" action (WhatsApp `wa.me` with a pre-filled message, in
+Indonesian) when a WhatsApp number exists, else link to `/contact`.
+
+------------------------------------------------------------------------
+
+## Writing rules
+
+As of v0.5, these apply to every piece of user-visible text on the site
+(`content/*.ts`, strings and JSX text in `app/**` and `components/**`,
+metadata, alt text, aria-labels, form copy, the WhatsApp message). See
+`REVISION_V0.5.md` part B for the full brief and worked example.
+
+1.  **No em dash (---) or en dash (--) anywhere in user-visible text.**
+    Use a period, colon, comma, or parentheses instead. Number/date
+    ranges use the word "to" ("September 3 to 5"), not a dash.
+    `scripts/check-copy.mjs` (`npm run check:copy`, runs automatically
+    before `npm run build`) fails the build if one slips in.
+2.  **One sentence, one idea.** Split sentences that stack two or more
+    inserted clauses. Aim for under 20 words per sentence; 28 is the
+    hard ceiling.
+3.  **No AI-cliché patterns.** Banned: "not just X, but Y"; forced
+    three-item lists of empty adjectives ("innovative, reliable, and
+    impactful"); "from X to Y" as an opener; "built from the ground
+    up", "at the heart of", "in today's world", "bridging the gap";
+    filler words used as empty flourish --- seamless, cutting-edge,
+    state-of-the-art, empowering, unlock, leverage, robust, holistic,
+    end-to-end, journey, "solutions" as a vague noun; "designed to" /
+    "ensuring" / "allowing you to" when a direct verb says the same
+    thing; rhetorical-question headings ("Have a problem worth
+    solving?"); content-free flattery ("Technology that actually
+    works").
+4.  **Factual and concrete.** If a sentence doesn't add information,
+    cut it. Short beats brochure-sounding.
+5.  **Page and section titles are short descriptive phrases, not
+    slogans, with no trailing period.** E.g. "Products", "Business
+    units", "Training and camps" --- not "Technology in development."
+6.  **Buttons use short, direct verbs.** E.g. "View products",
+    "Contact us", "Ask about this item". Avoid "Explore", "Discover",
+    "Learn more about X".
+7.  **Alt text is a factual description of what's in the photo** --- no
+    dashes, no marketing language.
+8.  **American English, sentence case for titles, "and" instead of
+    "&"** in prose (brand names and official product names, e.g.
+    "Mechanical & Biological Filters", are never changed).
+9.  **Never change a fact or add a new claim while editing style.**
+    Brand, unit, product, and event names stay exactly as given. When
+    in doubt, keep the fact and cut the decoration around it.
 
 ------------------------------------------------------------------------
 

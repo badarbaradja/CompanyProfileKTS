@@ -303,3 +303,34 @@ AI-generated UI and are explicitly banned on this project:
 - Decorative "01 / 02 / 03" numbering.
 - Slogan-shaped headings ("X, built from the ground up.", "Have a
   problem worth solving?") and overuse of em dashes in body copy.
+
+------------------------------------------------------------------------
+
+## 16. Writing rules
+
+Per `REVISION_V0.5.md` part B. Applies to every string a visitor can
+read: `content/*.ts`, JSX text and string props in `app/**` and
+`components/**`, metadata, alt text, aria-labels, form copy.
+
+1.  No em dash (---) or en dash (--). Use a period, colon, comma, or
+    parentheses; date/number ranges use "to". Enforced by
+    `npm run check:copy` (runs before every build).
+2.  One sentence, one idea --- split anything stacking two or more
+    inserted clauses. Under 20 words per sentence on average, 28 max.
+3.  Cut AI-cliché phrasing: forced adjective triads, "not just X, but
+    Y", "from X to Y" openers, "built from the ground up", "at the
+    heart of", filler words (seamless, cutting-edge, empowering,
+    leverage, robust, holistic, journey, "solutions" as vague filler),
+    "designed to" / "ensuring" where a direct verb works, rhetorical-
+    question headings, content-free flattery.
+4.  Factual and concrete; cut sentences that don't add information.
+5.  Titles are short descriptive phrases, not slogans, no trailing
+    period ("Products", "Business units" --- not "Technology in
+    development.").
+6.  Buttons are short direct verbs ("View products", "Contact us"),
+    never "Explore" / "Discover" / "Learn more about X".
+7.  Alt text factually describes the photo --- no dashes, no marketing
+    language.
+8.  American English, sentence case for titles, "and" instead of "&"
+    in prose (official brand/product names are never changed).
+9.  Never change a fact or add a new claim while editing for style.
