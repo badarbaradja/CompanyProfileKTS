@@ -15,29 +15,31 @@ product showcase.
 
 Always read, in this order:
 
-1.  `REVISION_V0.7.md` --- source of truth, most recent. Fixes from a
-    visual review: removed the invented "In Development" status badge,
-    restored the team names section, fixed a copy contradiction on
-    `/products`, replaced two scale-misleading sample photos, trimmed a
-    repeated heading pattern to hero-only, and closed empty-space/
-    Pending-only-section gaps.
-2.  `REVISION_V0.6.md` --- real contact details, a draft vision/mission,
+1.  `REVISION_V0.8.md` --- source of truth, most recent. Replaces the
+    static `/contact` map image with an interactive Leaflet/OpenStreetMap
+    map using precise office coordinates.
+2.  `REVISION_V0.7.md` --- fixes from a visual review: removed the
+    invented "In Development" status badge, restored the team names
+    section, fixed a copy contradiction on `/products`, replaced two
+    scale-misleading sample photos, trimmed a repeated heading pattern
+    to hero-only, and closed empty-space/Pending-only-section gaps.
+3.  `REVISION_V0.6.md` --- real contact details, a draft vision/mission,
     and sample catalog content (`summary`/`highlights`/`applications`/
     `specs`/photos, all marked `isSample: true`) for every product.
-3.  `REVISION_V0.5.md` --- writing-rules pass (see the "Writing rules"
+4.  `REVISION_V0.5.md` --- writing-rules pass (see the "Writing rules"
     section below); no content-fact or layout changes.
-4.  `REVISION_V0.3.md` --- corrects `REVISION_V0.2.md` on language
+5.  `REVISION_V0.3.md` --- corrects `REVISION_V0.2.md` on language
     (English, not Indonesian) and design direction; everything else in
     `REVISION_V0.2.md` still applies.
-5.  `REVISION_V0.2.md` --- source of truth for company structure,
+6.  `REVISION_V0.2.md` --- source of truth for company structure,
     product catalog, events schema, e-commerce rule, and the
     draft-mode/`<Pending>` content rules.
-6.  `PRD.md`
-7.  `DESIGN.md`
-8.  `ARCHITECTURE.md`
-9.  `CONTENT.md`
-10. `PRODUCT_CATALOG.md`
-11. `ROADMAP.md`
+7.  `PRD.md`
+8.  `DESIGN.md`
+9.  `ARCHITECTURE.md`
+10. `CONTENT.md`
+11. `PRODUCT_CATALOG.md`
+12. `ROADMAP.md`
 
 Do not begin a large implementation without understanding these
 documents.
@@ -179,6 +181,49 @@ As of v0.6, `content/site.ts` → `contact` (WhatsApp, email, address) and
     title, a photo, or a corrected spelling that the team hasn't
     actually supplied --- the `<Pending>` note below the two lists
     covers exactly those three gaps.
+-   As of v0.8, `content/site.ts` → `contact.coordinates` holds the
+    office's precise `{ lat, lng }`, supplied directly by Badar --- see
+    `REVISION_V0.8.md` part A. Never hardcode these numbers in a
+    component; read them from `site.ts` (`app/contact/page.tsx` already
+    does this correctly for `LocationMap` and its Google Maps links).
+    The postal address text itself is still the unconfirmed v0.6 value
+    (see above) --- the coordinates being precise doesn't mean the
+    street-address text has been double-checked by the wider team.
+
+------------------------------------------------------------------------
+
+## Map rule
+
+`/contact` shows an interactive map via `components/contact/LocationMap.tsx`
+(Leaflet + raw OpenStreetMap tiles, no `react-leaflet`) --- see
+`REVISION_V0.8.md` part A/B:
+
+-   **Never** switch to Google Maps Embed, Mapbox, or any other service
+    that needs an API key, and never embed a Google Maps iframe. A
+    plain link to Google Maps (not an embed) is fine and already used
+    for "Open in Google Maps"/"Get directions".
+-   Leaflet is imported dynamically inside `useEffect` (not at module
+    scope, not via `next/dynamic`) because it touches `window`; this
+    keeps `/contact` statically prerenderable (verify with `next build`
+    that `/contact` still shows `○`, not a dynamic marker) and keeps
+    Leaflet's ~148KB out of the shared chunk, isolated to its own
+    async chunk that only loads on `/contact`.
+-   The OpenStreetMap attribution ("&copy; OpenStreetMap contributors")
+    is required by their tile usage policy --- never remove it.
+-   `leaflet/dist/leaflet.css` is imported inside `LocationMap.tsx`,
+    not added to `globals.css`.
+-   The map's default marker icon (`marker-icon.png`/`marker-shadow.png`)
+    404s once bundled, because Leaflet resolves those paths relative to
+    its own runtime location, which breaks under Next.js. Use a custom
+    `L.divIcon` instead (already done) rather than re-introducing the
+    default icon.
+-   `scrollWheelZoom` starts disabled and only enables on click,
+    disabling again on blur, so the map never hijacks page scroll ---
+    don't change this default.
+-   If tiles fail to load (blocked network), `LocationMap` renders
+    `LocationFallback` (address + the same two Google Maps links, no
+    empty box) after an 8-second timeout or a `tileerror`-with-no-
+    successful-`tileload` signal. Don't remove this fallback.
 
 ------------------------------------------------------------------------
 
