@@ -1,9 +1,9 @@
 // scripts/verify-pages.mjs
 //
-// Text-only Playwright verification — see REVISION_V0.7.md part G.3.
-// No screenshots are taken or saved. Opens every route at 390px and
-// 1440px against a running server (npm run start, or npm run dev) and
-// prints one summary table:
+// Text-only Playwright verification — see REVISION_V0.7.md part G.3 and
+// REVISION_V0.8.md part D. No screenshots are taken or saved. Opens
+// every route at 390px and 1440px against a running server and prints
+// one summary table:
 //
 //   - route, viewport width
 //   - document.documentElement.scrollWidth - window.innerWidth (must be 0)
@@ -13,6 +13,10 @@
 //   - largest vertical empty gap between top-level section/footer
 //     blocks, in px (reported, not enforced)
 //   - full page height, in px
+//
+// Then, added in v0.8: a dedicated /contact map check (Leaflet or its
+// fallback), since that page's requirements are shaped differently
+// from the generic per-route table above.
 //
 // The viewport is reset to a fixed base size before every navigation —
 // this script never resizes to full-page height (no screenshot step),
@@ -25,10 +29,21 @@
 //   npm run build && npm run start
 
 import { chromium } from "playwright";
+import fs from "fs";
+import { fileURLToPath } from "url";
+import path from "path";
 
 const BASE_URL = process.argv[2] || "http://localhost:3000";
 const WIDTHS = [390, 1440];
 const BASE_HEIGHT = 900;
+
+// Read the office coordinates from content/site.ts rather than
+// hardcoding them here too — keeps this script honest about the same
+// single source of truth the app itself uses.
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const siteSrc = fs.readFileSync(path.join(__dirname, "../content/site.ts"), "utf8");
+const CONTACT_LAT = parseFloat(siteSrc.match(/lat:\s*(-?\d+\.\d+)/)[1]);
+const CONTACT_LNG = parseFloat(siteSrc.match(/lng:\s*(-?\d+\.\d+)/)[1]);
 
 const PRODUCT_SLUGS = [
   "lab-practicum-equipment",
@@ -102,9 +117,37 @@ async function measurePage(page) {
   });
 }
 
+async function checkContactMap(page) {
+  await page.waitForSelector("[data-location-map]", { timeout: 5000 }).catch(() => {});
+  // Give Leaflet's dynamic import + tile requests (or the 8s fallback
+  // timer in LocationMap.tsx) time to resolve one way or the other.
+  await page.waitForTimeout(9000);
+
+  return page.evaluate(
+    ({ lat, lng }) => {
+      const mapEl = document.querySelector("[data-location-map]");
+      const heightPx = mapEl ? Math.round(mapEl.getBoundingClientRect().height) : 0;
+      const isLeaflet = !!document.querySelector(".leaflet-container");
+      const mode = isLeaflet ? "leaflet" : mapEl ? "fallback" : "missing";
+      const attributionPresent = document.body.textContent.includes("OpenStreetMap");
+
+      const query = `${lat},${lng}`;
+      const mapsLinks = Array.from(document.querySelectorAll('a[href*="google.com/maps"]')).map((a) =>
+        a.getAttribute("href")
+      );
+      const searchLinkOk = mapsLinks.some((h) => h.includes("/maps/search/") && h.includes(query));
+      const dirLinkOk = mapsLinks.some((h) => h.includes("/maps/dir/") && h.includes(query));
+
+      return { mode, heightPx, attributionPresent, searchLinkOk, dirLinkOk, mapsLinkCount: mapsLinks.length };
+    },
+    { lat: CONTACT_LAT, lng: CONTACT_LNG }
+  );
+}
+
 async function run() {
   const browser = await chromium.launch();
   const rows = [];
+  const contactChecks = [];
 
   for (const width of WIDTHS) {
     const context = await browser.newContext({ viewport: { width, height: BASE_HEIGHT } });
@@ -124,6 +167,15 @@ async function run() {
       const res = await page.goto(`${BASE_URL}${route}`, { waitUntil: "networkidle" });
       const status = res ? res.status() : 0;
       const metrics = await measurePage(page);
+
+      if (route === "/contact") {
+        // Runs before the row below is pushed, so any console errors
+        // that occur while waiting for tiles/the fallback timer are
+        // still captured in this route's consoleErrors count.
+        const mapResult = await checkContactMap(page);
+        contactChecks.push({ width, consoleErrors, ...mapResult });
+      }
+
       rows.push({ route, width, status, consoleErrors, ...metrics });
     }
 
@@ -150,13 +202,13 @@ async function run() {
     });
   }
 
-  function printRow(cells) {
-    console.log(cells.map((c, i) => c.padEnd(colWidths[i])).join("  "));
+  function printRow(cells, widths) {
+    console.log(cells.map((c, i) => c.padEnd(widths[i])).join("  "));
   }
 
-  printRow(header);
-  printRow(colWidths.map((w) => "-".repeat(w)));
-  for (const row of formattedRows) printRow(row);
+  printRow(header, colWidths);
+  printRow(colWidths.map((w) => "-".repeat(w)), colWidths);
+  for (const row of formattedRows) printRow(row, colWidths);
 
   const failures = rows.filter(
     (r) => r.overflowPx !== 0 || r.consoleErrors !== 0 || r.pendingOnlySections !== 0 || r.status >= 400
@@ -168,6 +220,46 @@ async function run() {
     console.log(`${failures.length} of ${rows.length} checks have a nonzero flag (Overflow/ConsoleErr/PendingOnly/HTTP):`);
     for (const f of failures) {
       console.log(`  - ${f.route} @ ${f.width}px: overflow=${f.overflowPx} consoleErr=${f.consoleErrors} pendingOnly=${f.pendingOnlySections} http=${f.status}`);
+    }
+  }
+
+  // /contact map check — REVISION_V0.8.md part D.2.
+  console.log("");
+  console.log(`/contact map check (office coordinates: ${CONTACT_LAT}, ${CONTACT_LNG})`);
+  const mapHeader = ["W", "Mode", "MapHeightPx", "OSMAttribution", "SearchLinkOk", "DirLinkOk", "ConsoleErr"];
+  const mapColWidths = mapHeader.map((h) => h.length);
+  const mapFormattedRows = contactChecks.map((c) => [
+    String(c.width),
+    c.mode,
+    String(c.heightPx),
+    String(c.attributionPresent),
+    String(c.searchLinkOk),
+    String(c.dirLinkOk),
+    String(c.consoleErrors),
+  ]);
+  for (const row of mapFormattedRows) {
+    row.forEach((cell, i) => {
+      mapColWidths[i] = Math.max(mapColWidths[i], cell.length);
+    });
+  }
+  printRow(mapHeader, mapColWidths);
+  printRow(mapColWidths.map((w) => "-".repeat(w)), mapColWidths);
+  for (const row of mapFormattedRows) printRow(row, mapColWidths);
+  console.log("");
+  for (const c of contactChecks) {
+    if (c.mode === "leaflet") {
+      console.log(
+        `  @ ${c.width}px: Leaflet tiles loaded successfully (network reachable). Map height ${c.heightPx}px, attribution ${c.attributionPresent ? "present" : "MISSING"}.`
+      );
+    } else if (c.mode === "fallback") {
+      console.log(
+        `  @ ${c.width}px: NOTE - tiles did not load (likely no network access to tile.openstreetmap.org in this environment). LocationFallback rendered correctly instead (height ${c.heightPx}px, no empty gap). OSM attribution is expected to be absent in fallback mode.`
+      );
+    } else {
+      console.log(`  @ ${c.width}px: FAIL - no [data-location-map] element found in the DOM at all.`);
+    }
+    if (!c.searchLinkOk || !c.dirLinkOk) {
+      console.log(`  @ ${c.width}px: FAIL - Google Maps link(s) missing or coordinates don't match (searchLinkOk=${c.searchLinkOk}, dirLinkOk=${c.dirLinkOk}).`);
     }
   }
 }
