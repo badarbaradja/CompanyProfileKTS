@@ -1,13 +1,13 @@
-# Review Notes --- v0.1 → v0.6
+# Review Notes --- v0.1 → v0.7
 
 For the PT KTS team and advising lecturer. This documents what changed,
 what's still a placeholder, and what needs a decision from the team.
 Sources: `REVISION_V0.2.md` (meeting notes 2026-09-14 + "Struktur" slide),
 `REVISION_V0.3.md` (English language + design direction), the v0.4
 photo/draft-banner revision (chat instructions, not saved as a separate
-file that round), `REVISION_V0.5.md` (copy/writing-rules pass), and the
-v0.6 contact/vision-mission/sample-catalog revision (chat instructions,
-not saved as a separate file this round).
+file that round), `REVISION_V0.5.md` (copy/writing-rules pass),
+`REVISION_V0.6.md` (contact/vision-mission/sample-catalog), and
+`REVISION_V0.7.md` (fixes from a visual review of v0.6).
 
 ------------------------------------------------------------------------
 
@@ -39,9 +39,9 @@ not saved as a separate file this round).
 | # | v0.3 | v0.4 |
 |---|------|------|
 | 1 | Visible "Website under development" banner on every page | Banner and `DraftBanner` component removed entirely. `NEXT_PUBLIC_DRAFT_MODE` is kept, but only drives `robots`/`noindex` now --- the site just isn't submitted for indexing yet, with no visible "under construction" messaging |
-| 2 | No real photography anywhere; hero/product visuals were placeholders or logo panels | 13 curated, optimized documentation photos from ESIC Conference 2026 and Engineering Camp 2026 (see section 7 below), used for the Home hero, an `/about` photo, a `/training` gallery, and `/events` (documentation gallery + a thumbnail per completed event) |
+| 2 | No real photography anywhere; hero/product visuals were placeholders or logo panels | 13 curated, optimized documentation photos from ESIC Conference 2026 and Engineering Camp 2026 (see section 8 below), used for the Home hero, an `/about` photo, a `/training` gallery, and `/events` (documentation gallery + a thumbnail per completed event) |
 | 3 | `content/events.ts` had only example/dummy entries | Added two real, non-dummy events: **ESIC Conference 2026** (2026-09-01) and **Engineering Camp 2026** (2026-09-03 to 09-05), both `status: "completed"` |
-| 4 | Product cards used a generic dark placeholder | Unchanged --- product cards still use the placeholder pattern. None of the reviewed photos were confirmed as product photography (see section 8) |
+| 4 | Product cards used a generic dark placeholder | Unchanged in v0.4 --- product cards still used the placeholder pattern (later replaced with sample photos in v0.6, see section 10). None of the photos reviewed for v0.4 were confirmed as product photography (see section 9) |
 
 ## 4. What changed (v0.4 → v0.5)
 
@@ -60,16 +60,34 @@ revision's report (not duplicated here — see git history for
 
 | # | v0.5 | v0.6 |
 |---|------|------|
-| 1 | Contact details empty, `<Pending>` shown everywhere | Real WhatsApp, email, and address filled in (see section 6.1) --- `<Pending>` no longer shows for these three fields, the inquiry form and product CTA links are live |
-| 2 | Vision/mission `undefined`, shown as `<Pending>` | Draft vision (one sentence) and mission (5-item numbered list) added to `/about`, marked with a "Draft, pending approval" badge (see section 6.2) |
-| 3 | All 11 products had empty `specs`/`images`; product cards used a placeholder panel | Full sample catalog content added: `summary`, `highlights`, `applications`, `specs` (as an ordered `{label, value}[]`, replacing the old `Record<string,string>`), and one sourced sample photo per product, all flagged `isSample: true` and marked with a "Sample data"/"Sample" badge (see section 6.3 and section 8) |
+| 1 | Contact details empty, `<Pending>` shown everywhere | Real WhatsApp, email, and address filled in (see section 7.1) --- `<Pending>` no longer shows for these three fields, the inquiry form and product CTA links are live |
+| 2 | Vision/mission `undefined`, shown as `<Pending>` | Draft vision (one sentence) and mission (5-item numbered list) added to `/about`, marked with a "Draft, pending approval" badge (see section 7.2) |
+| 3 | All 11 products had empty `specs`/`images`; product cards used a placeholder panel | Full sample catalog content added: `summary`, `highlights`, `applications`, `specs` (as an ordered `{label, value}[]`, replacing the old `Record<string,string>`), and one sourced sample photo per product, all flagged `isSample: true` and marked with a "Sample data"/"Sample" badge (see section 7.3 and section 10) |
 | 4 | `Product.specs` was `Record<string, string>` (unordered) | `Product.specs` is now `ProductSpec[]` (`{label, value}[]`), so spec order is stable and matches the source content |
 | 5 | `Product.tagline` (card blurb, doubled as the detail-page lede) | Renamed to `Product.summary` --- same role (card blurb, metadata description, detail-page lede), one field instead of two near-duplicate ones |
 
-## 6. What's still placeholder / dummy
+## 6. What changed (v0.6 → v0.7)
+
+A visual-review fix pass --- no new facts added, several invented or
+contradictory bits removed.
+
+| # | v0.6 | v0.7 |
+|---|------|------|
+| 1 | Every product card/detail showed an "In Development" status badge | Removed entirely --- `status` field and `StatusBadge`/`ProductStatus` deleted (`components/ui/Badge.tsx` removed). Nobody confirmed a real status for any item, and "In Development" made no sense for a service like System Design. Card badges are now just the type (Product/Service) and, when `isSample`, a "Sample" corner badge |
+| 2 | `/about` Team section showed only a `<Pending>` block | Restored the two name lists (Founders, Team) that existed in an earlier version --- `content/site.ts` → `team`, initials-only avatars, no invented job titles. `<Pending>` now covers only what's still missing: job titles, official name spelling, photos |
+| 3 | `/products` had two overlapping/contradictory notices ("not yet available for most items" + a second "not yet verified" info box), even though every item now has a photo and sample specs | Both replaced with one sentence: "Photos and specifications on this page are sample data. The PT KTS team will replace them." |
+| 4 | Mechanical & Biological Filters photo: aerial industrial water-treatment plant. RAMPUS Incinerator photo: industrial incineration-plant chimneys | Both replaced with small-scale equivalents (a backyard filter-tank row; wood burning in a metal barrel) --- see section 10 |
+| 5 | Hero h1: "Equipment, consulting, engineering development, and training. Three business units." (a list, 5 lines on desktop) | "Equipment built to be run / by the people who use it." (2 lines, one sentence, keeps the hero's upright-line-plus-italic-accent pattern) |
+| 6 | The upright-line-plus-italic-accent heading pattern also appeared on the contact CTA (`AccentHeading`) | Reserved for the hero only --- `AccentHeading` component deleted, the contact CTA is now a plain upright `<h2>` |
+| 7 | `/about` structure diagram connector rendered as "SUPPORTS" (`uppercase` CSS on lowercase text) | Renders as "supports" --- the `uppercase` transform removed |
+| 8 | `/contact` left column ended after Instagram, leaving a large gap before the footer | Added a static location map image (`public/photos/map/cimahi-location.webp`, generated once from raw OpenStreetMap tiles by `scripts/generate-location-map.mjs` --- no client-side map script) |
+| 9 | `/events` order: calendar → documentation photos → ESIC Network block (last, right before the footer) | ESIC Network moved up to right after the calendar, before the documentation photos |
+| 10 | `/training`'s "Documentation video" section rendered a heading plus only a `<Pending>` box when no video URL was set | Section now hidden entirely until `training.youtubeUrl` is set (new site-wide rule: a `<Pending>` block can never be a section's only content --- see CLAUDE.md's Empty-section rule) |
+
+## 7. What's still placeholder / dummy
 
 - **Contact details** (`content/site.ts` → `contact`): WhatsApp, email,
-  and address are now filled in (see section 6.1) --- no longer
+  and address are now filled in (see section 7.1) --- no longer
   `<Pending>`. The WhatsApp number is Pak Ramdlan's **personal** line,
   used temporarily as the contact person (labeled "WhatsApp (contact
   person)" on `/contact`, never "Company phone"). The address has
@@ -77,18 +95,22 @@ revision's report (not duplicated here — see git history for
   as supplied, per the v0.6 instruction, but treat it as unverified
   until confirmed.
 - **Vision & mission** (`content/site.ts` → `vision`/`mission`): a draft
-  supplied 2026-09-23 (see section 6.2), shown on `/about` with a
+  supplied 2026-09-23 (see section 7.2), shown on `/about` with a
   "Draft, pending approval" badge. Not yet approved by the PT KTS team
   --- do not treat as final copy.
-- **Team** (`/about`): intentionally shows only a `<Pending>` block ---
-  we did not decide who appears on the site or with what titles/photos
-  (see open question #4 below), so no names are published yet.
+- **Team** (`content/site.ts` → `team`, `/about`): names only are shown
+  (see section 7.4) --- job titles, the official spelling of each name,
+  and photos are still missing. The `<Pending>` note directly under the
+  two name lists covers exactly those three gaps; open question #4
+  below tracks it.
 - **Product/service data** (`content/products/index.ts`): all 11 items
   now have sample `summary`, `description`, `highlights`, `applications`,
   `specs`, and one sample photo each, all marked `isSample: true` with a
   visible "Sample data"/"Sample" badge on the detail page and card. None
-  of it is verified --- see section 6.3 for the full list of what the
-  team needs to replace, and section 8 for photo sourcing.
+  of it is verified --- see section 7.3 for the full list of what the
+  team needs to replace, and section 10 for photo sourcing. There is
+  also no per-item status field ("In Development" etc.) as of v0.7 ---
+  see section 7.5.
 - **Activity calendar** (`content/events.ts`): 3 of 5 entries are still
   example data (`isDummy: true`, "(Example)" suffix, visible "Example"
   badge). Two entries (ESIC Conference 2026, Engineering Camp 2026) are
@@ -96,19 +118,22 @@ revision's report (not duplicated here — see git history for
 - **Online Shop**: `site.contact.shopUrl` is empty, so the button is
   hidden everywhere (navbar, footer, product detail, contact CTA).
 - **ESIC expansion** (`site.esicNetwork.expansion`): not set, shown as
-  `<Pending>` on the homepage ESIC section.
+  `<Pending>` on the homepage/`/events` ESIC section (alongside the
+  real activities grid, so that section is never Pending-only).
 - **YouTube documentation** (`site.training.youtubeUrl`): empty, so
-  `/training` shows `<Pending>` instead of an iframe.
+  `/training` hides the "Documentation video" section entirely (as of
+  v0.7 --- previously it showed a heading plus a lone `<Pending>` box,
+  which is no longer allowed; see the Empty-section rule in CLAUDE.md).
 
 Turn `NEXT_PUBLIC_DRAFT_MODE=false` once real data replaces these --- as
 of v0.4 that only removes every `<Pending>` marker and switches
-`robots.ts` back to indexable. Note it does **not** hide the v0.6
-"Sample data"/"Sample" badges or the vision/mission draft badge --- those
-are controlled by `isSample`/the presence of `site.vision`/`site.mission`
+`robots.ts` back to indexable. Note it does **not** hide the "Sample
+data"/"Sample" badges or the vision/mission draft badge --- those are
+controlled by `isSample`/the presence of `site.vision`/`site.mission`
 themselves, not draft mode, since the underlying content is genuinely
 unverified either way (see `components/ui/SampleBadge.tsx`).
 
-### 6.1 Contact details supplied (v0.6)
+### 7.1 Contact details supplied (v0.6)
 
 | Field | Value | Status |
 |---|---|---|
@@ -117,7 +142,7 @@ unverified either way (see `components/ui/SampleBadge.tsx`).
 | Address | Jl. Sukasenang 143, Cigugur Tengah, Kec. Cimahi Tengah, Kota Cimahi, Jawa Barat 40522 | **Not yet confirmed by the team** --- shown publicly per the v0.6 instruction, but flagged here for follow-up |
 | Instagram | @kappasolution | Unchanged from v0.2 |
 
-### 6.2 Vision & mission draft (v0.6)
+### 7.2 Vision & mission draft (v0.6)
 
 Supplied 2026-09-23, explicitly a draft pending team approval --- do not
 present as final:
@@ -132,7 +157,7 @@ present as final:
 > 4. Train every user, so the equipment keeps working long after handover.
 > 5. Support education and research through ESIC Network.
 
-### 6.3 Sample catalog content --- fields the team must replace (v0.6)
+### 7.3 Sample catalog content --- fields the team must replace (v0.6)
 
 All 11 items in `content/products/index.ts` got sample `summary`,
 `description`, `highlights`, `applications`, and `specs` values so the
@@ -150,10 +175,41 @@ replacement, not just the numbers:
   kg/h", "Power: 220V AC") --- **every number, dimension, material, and
   time estimate in every spec table is illustrative, not measured or
   confirmed.** Do not quote any of these figures to a customer.
-- **Photos** --- see section 8; every photo is a generic stock photo of
+- **Photos** --- see section 10; every photo is a generic stock photo of
   the general equipment category, not the actual PT KTS/unit item.
 
-## 7. Photo curation (v0.4)
+### 7.4 Team names restored (v0.7)
+
+Supplied 2026-09-23. These names appeared on an earlier version of the
+site; only the names are confirmed, nothing else:
+
+> **Founders:** Abrar, Mukhammad Ramdlan KI, Tri Ayodha
+>
+> **Team:** Galuh Intan Khumaira, Febianeu Putri Agna, Aisha Laila
+> Mardiyah, Badar Zaki Baradja
+
+Still missing (shown as a `<Pending>` note under the two lists): job
+titles, the officially correct spelling of each name, and photos.
+Avatars are initials-only placeholders (`TeamMemberCard` in
+`app/about/page.tsx`), not invented photos.
+
+### 7.5 Product status field removed (v0.7)
+
+Every product previously showed an "In Development" `StatusBadge`.
+Nobody on the PT KTS team ever confirmed a real status for any of the
+11 items, so this was an invented claim --- and a visibly wrong one for
+a service like System Design, which isn't a physical item that can be
+"in development." The `status` field, the `StatusBadge` component, and
+the `ProductStatus` type were all deleted
+(`components/ui/Badge.tsx` removed entirely).
+
+**To bring status back:** add a `status: ProductStatus` field to the
+`Product` interface in `content/products/index.ts`, re-add a status
+badge component, and only fill in values the team has actually
+confirmed per item --- do not default every item to the same status
+again.
+
+## 8. Photo curation (v0.4)
 
 Source photos (raw camera exports, never committed --- see `.gitignore`):
 `C:\Users\USER\Downloads\drive-download-20260922T162515Z-1-001\` (ESIC
@@ -183,7 +239,7 @@ camp's actual start date is not confirmed. Note also that the `IMG_84xx`
 camera's own EXIF clock was wrong (reads "2020-01-01"), so those dates
 were derived from the other camera in the same folder, not from EXIF.
 
-## 8. Candidate product photos in the documentation set --- **none found**
+## 9. Candidate product photos in the documentation set --- **none found**
 
 The v0.4 brief asked me to flag any documentation photo (from ESIC
 Conference 2026 / Engineering Camp 2026) that appeared to show
@@ -195,20 +251,26 @@ physical apparatus), and the Engineering Camp photos are a farm-site
 visit, a Telkom University campus tour, and outdoor
 team-building/paintball activities --- no lab equipment, hydroponic/
 aquaponic rigs, or waste-processing machines appear in any of them. This
-is why v0.6's product photos (section 9 below) are sourced stock photos,
+is why the product photos (section 10 below) are sourced stock photos,
 not documentation photos --- none exist yet.
 
-## 9. Sample product photo sourcing (v0.6)
+## 10. Sample product photo sourcing (v0.6, corrected v0.7)
 
 One free-license photo per catalog item, sourced from Unsplash and
 processed by `scripts/optimize-sample-photos.mjs` (resize to 1400px
 longest side, WebP, EXIF/GPS stripped) into `public/photos/samples/`.
-Total folder size: 1.8 MB (limit was 10 MB). Full metadata (including
+Total folder size: 3.6 MB (limit was 10 MB). Full metadata (including
 `alt`, dimensions, and license) lives in `content/photos.ts` →
 `sampleProductPhotos`. None of these show PT KTS/unit equipment --- they
 are generic stock photos chosen to represent the product's category,
 and every `alt` starts with "Sample photo:" so it's never read as a
 claim that PT KTS owns the pictured item.
+
+**v0.7 correction:** the Mechanical & Biological Filters and RAMPUS
+Incinerator rows below were replaced --- the v0.6 originals (an aerial
+industrial water-treatment plant, and an industrial incineration-plant
+chimney) misrepresented PT KTS's actual small equipment scale. The
+table already reflects the replacements.
 
 | Product | Photo | Photographer | Source | License |
 |---|---|---|---|---|
@@ -216,11 +278,11 @@ claim that PT KTS owns the pictured item.
 | Engineering-Developed Equipment | Welder smoke sparks | Rob Lambert | [unsplash.com/photos/9Q_pLLP_jmA](https://unsplash.com/photos/9Q_pLLP_jmA) | Unsplash License |
 | System Design | Architectural blueprints with drafting tools | Lucas Kepner | [unsplash.com/photos/Yn8D5B8C-eY](https://unsplash.com/photos/Yn8D5B8C-eY) | Unsplash License |
 | Hydroponic & Aquaponic System Design-Build | Rows of plants in a greenhouse | Denis Sobnakov | [unsplash.com/photos/vZY9FKJ9i9A](https://unsplash.com/photos/vZY9FKJ9i9A) | Unsplash License |
-| Mechanical & Biological Filters | Aerial view, water treatment tanks | Patrick Federi | [unsplash.com/photos/_mZrKqrZaTc](https://unsplash.com/photos/_mZrKqrZaTc) | Unsplash License |
+| Mechanical & Biological Filters | A small row of filter tanks plumbed together outdoors | Alexey Demidov | [unsplash.com/photos/wzcyEpk2eWw](https://unsplash.com/photos/wzcyEpk2eWw) | Unsplash License |
 | Aeration Systems | Fountain aerator in a pond | Kuyune | [unsplash.com/photos/u6XStYWSrZA](https://unsplash.com/photos/u6XStYWSrZA) | Unsplash License |
 | Biofloc Ponds | Aerial view, round fish farm ponds | Shalev Cohen | [unsplash.com/photos/8pSNBO0ZsAI](https://unsplash.com/photos/8pSNBO0ZsAI) | Unsplash License |
 | Waste Shredder | Aerial view, wood chipper | Daniel Miksha | [unsplash.com/photos/iPKoGMksfAE](https://unsplash.com/photos/iPKoGMksfAE) | Unsplash License |
-| RAMPUS Incinerator | Incineration plant chimneys | Benoit Roy | [unsplash.com/photos/-LjbkWUUp90](https://unsplash.com/photos/-LjbkWUUp90) | Unsplash License |
+| RAMPUS Incinerator | Wood burning inside a small metal barrel | DDP | [unsplash.com/photos/8dRytMlVKzE](https://unsplash.com/photos/8dRytMlVKzE) | Unsplash License |
 | Takakura Composter | Household compost bin with kitchen scraps | Lenka Dzurendova | [unsplash.com/photos/FTCQPjPfFS4](https://unsplash.com/photos/FTCQPjPfFS4) | Unsplash License |
 | Gasification Stove | Outdoor wood stove cooking | Alan Jiang | [unsplash.com/photos/r1pX08YRdKo](https://unsplash.com/photos/r1pX08YRdKo) | Unsplash License |
 
@@ -229,25 +291,38 @@ credit; photographer credit is kept here anyway as a courtesy record and
 so the team can find/replace each source quickly once real product
 photos exist.
 
-## 10. Open questions --- do not guess these
+### 10.1 Location map (v0.7)
+
+`/contact` now shows a static map image
+(`public/photos/map/cimahi-location.webp`, ~100 KB), generated once by
+`scripts/generate-location-map.mjs` from raw OpenStreetMap tiles (no
+client-side map script, iframe, or API key). The marker sits on
+Cigugur Tengah at a neighborhood-level zoom, not a precise pin on the
+unconfirmed street address (see section 7.1) --- the caption under the
+map says "General area only, not a precise pin on the office address."
+OpenStreetMap tile data: © OpenStreetMap contributors, ODbL 1.0.
+
+## 11. Open questions --- do not guess these
 
 1.  ~~Official vision & mission for PT KTS~~ --- a draft was supplied
-    2026-09-23 (section 6.2), shown on `/about` with a "Draft, pending
+    2026-09-23 (section 7.2), shown on `/about` with a "Draft, pending
     approval" badge. Still needs formal team sign-off before that badge
     can be removed.
 2.  ~~Official WhatsApp number, email, and office address~~ --- supplied
-    2026-09-23 (section 6.1). WhatsApp is Pak Ramdlan's personal number
+    2026-09-23 (section 7.1). WhatsApp is Pak Ramdlan's personal number
     (temporary); the address is still unconfirmed by the team.
 3.  Shopee/shop store URL, and whether it may be shown publicly while
     still under Pak Ramdlan's personal account.
-4.  Team job titles and photos --- who exactly will appear on the site.
+4.  ~~Team job titles and photos~~ --- names were restored 2026-09-23
+    (section 7.4); job titles, official name spelling, and photos are
+    still open.
 5.  Real specifications, pricing model, and real photos for each
-    product/service (section 6.3 has the full sample-data list); what
+    product/service (section 7.3 has the full sample-data list); what
     "RAMPUS" stands for (RAMPUS Incinerator, Bumi Hijau).
 6.  What "ESIC" stands for, and current JESIC status (still being
     discussed by Pak Abrar, Aisha, Intan).
 7.  ~~Real event dates for `/events`~~ --- partially answered in v0.4 for
-    ESIC Conference 2026 and Engineering Camp 2026 (see section 7); the
+    ESIC Conference 2026 and Engineering Camp 2026 (see section 8); the
     camp's Day 1/2 dates and all other events are still open.
 8.  Whether "Nisha Snacks" (logo present on the slide but outside the
     org chart) is a PT KTS business unit.
@@ -259,27 +334,33 @@ photos exist.
 11. Whether any of PT KTS's own equipment was photographed at either
     documentation event but simply isn't in the photo set you shared ---
     if more photos exist, they can be added to `content/photos.ts` and
-    `scripts/optimize-photos.mjs`, and would let the v0.6 sample product
-    photos (section 9) be replaced with the real thing.
+    `scripts/optimize-photos.mjs`, and would let the sample product
+    photos (section 10) be replaced with the real thing.
+12. Per-item product status (Concept/In Development/Prototype/Coming
+    Soon) --- removed in v0.7 because nobody had confirmed it (section
+    7.5). Supply real values per item if/when known.
 
-## 11. Where to make changes
+## 12. Where to make changes
 
 All company facts live in these files --- never edit page components
 directly for content changes:
 
 - `content/site.ts` --- company info, contact, business lines/units,
-  ESIC Network, training references, vision/mission draft
+  ESIC Network, training references, vision/mission draft, team names
 - `content/products/index.ts` --- product/service catalog (sample
-  `summary`/`description`/`highlights`/`applications`/`specs` as of v0.6)
+  `summary`/`description`/`highlights`/`applications`/`specs`, no status
+  field as of v0.7)
 - `content/events.ts` --- activity calendar
 - `content/photos.ts` --- documentation photo metadata (`photos`,
   referencing `public/photos/`, generated by
   `scripts/optimize-photos.mjs`) and sample product photo metadata
   (`sampleProductPhotos`, referencing `public/photos/samples/`,
   generated by `scripts/optimize-sample-photos.mjs`) --- raw sources for
-  both are never committed
+  both are never committed. The `/contact` location map
+  (`public/photos/map/`) is generated by
+  `scripts/generate-location-map.mjs` and does not need `content/photos.ts`.
 
-## 12. What could not be verified in this pass
+## 13. What could not be verified in this pass
 
 See the final report delivered alongside this branch for the full list
 (reference-repo analysis method, build/lint/type-check results, and

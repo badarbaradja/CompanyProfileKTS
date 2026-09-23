@@ -15,24 +15,29 @@ product showcase.
 
 Always read, in this order:
 
-1.  `REVISION_V0.6.md` --- source of truth, most recent. Real contact
-    details, a draft vision/mission, and sample catalog content
-    (`summary`/`highlights`/`applications`/`specs`/photos, all marked
-    `isSample: true`) for every product.
-2.  `REVISION_V0.5.md` --- writing-rules pass (see the "Writing rules"
+1.  `REVISION_V0.7.md` --- source of truth, most recent. Fixes from a
+    visual review: removed the invented "In Development" status badge,
+    restored the team names section, fixed a copy contradiction on
+    `/products`, replaced two scale-misleading sample photos, trimmed a
+    repeated heading pattern to hero-only, and closed empty-space/
+    Pending-only-section gaps.
+2.  `REVISION_V0.6.md` --- real contact details, a draft vision/mission,
+    and sample catalog content (`summary`/`highlights`/`applications`/
+    `specs`/photos, all marked `isSample: true`) for every product.
+3.  `REVISION_V0.5.md` --- writing-rules pass (see the "Writing rules"
     section below); no content-fact or layout changes.
-3.  `REVISION_V0.3.md` --- corrects `REVISION_V0.2.md` on language
+4.  `REVISION_V0.3.md` --- corrects `REVISION_V0.2.md` on language
     (English, not Indonesian) and design direction; everything else in
     `REVISION_V0.2.md` still applies.
-4.  `REVISION_V0.2.md` --- source of truth for company structure,
+5.  `REVISION_V0.2.md` --- source of truth for company structure,
     product catalog, events schema, e-commerce rule, and the
     draft-mode/`<Pending>` content rules.
-5.  `PRD.md`
-6.  `DESIGN.md`
-7.  `ARCHITECTURE.md`
-8.  `CONTENT.md`
-9.  `PRODUCT_CATALOG.md`
-10. `ROADMAP.md`
+6.  `PRD.md`
+7.  `DESIGN.md`
+8.  `ARCHITECTURE.md`
+9.  `CONTENT.md`
+10. `PRODUCT_CATALOG.md`
+11. `ROADMAP.md`
 
 Do not begin a large implementation without understanding these
 documents.
@@ -112,8 +117,13 @@ specs block and a "Sample" badge on the photo. Do not remove those
 badges, and do not quote any sample figure (capacity, dimensions,
 power draw, timeline, price) to a customer as if verified.
 
-Use status labels such as Concept, In Development, Prototype, or Coming
-Soon only when appropriate.
+As of v0.7, products have **no status field or badge** ("Concept",
+"In Development", "Prototype", "Coming Soon"). The team never confirmed
+a real status for any item, so showing one was an invented claim,
+especially for a service like System Design where "In Development"
+doesn't even make sense. `StatusBadge`/`ProductStatus` were deleted
+(`components/ui/Badge.tsx`). Only add a status field/badge back once
+the team supplies real per-item status data --- see REVIEW_NOTES.md.
 
 ------------------------------------------------------------------------
 
@@ -161,6 +171,25 @@ As of v0.6, `content/site.ts` → `contact` (WhatsApp, email, address) and
 -   Vision/mission are a draft pending team approval, shown on `/about`
     with a "Draft, pending approval" badge (`SampleBadge`). Don't remove
     that badge or present the text as final without the team's sign-off.
+-   As of v0.7, `content/site.ts` → `team` holds `founders` (Abrar,
+    Mukhammad Ramdlan KI, Tri Ayodha) and `members` (Galuh Intan
+    Khumaira, Febianeu Putri Agna, Aisha Laila Mardiyah, Badar Zaki
+    Baradja) --- names only, restored on `/about` after being
+    accidentally reduced to a bare `<Pending>` block. Never add a job
+    title, a photo, or a corrected spelling that the team hasn't
+    actually supplied --- the `<Pending>` note below the two lists
+    covers exactly those three gaps.
+
+------------------------------------------------------------------------
+
+## Empty-section rule
+
+As of v0.7: a `<Pending>` block can never be the *only* content of a
+section. If a section would render nothing but a heading and a
+`<Pending>`, hide the whole section instead (see the Training page's
+"Documentation video" block for the pattern --- conditionally rendered
+on `training.youtubeUrl`, not always mounted). This applies site-wide;
+check it whenever a section's content depends on optional data.
 
 ------------------------------------------------------------------------
 
@@ -238,6 +267,12 @@ banned (see `REVISION_V0.3.md` part B step 3):
 Also avoid the older generic-Bootstrap failure modes: excessive
 gradients, excessive rounded corners on everything uniformly, neon
 cyberpunk styling, unnecessary glassmorphism, excessive animation.
+
+As of v0.7, the "upright line followed by an italic accent-color line"
+heading pattern is reserved for the **hero only**. It was repeated on
+the contact CTA and other titles, which cancelled its effect; the
+`AccentHeading` component was deleted (its one non-hero caller now uses
+a plain upright `<h2>`). Every other heading is written fully upright.
 
 For product photography that doesn't exist yet, use an intentional
 placeholder treatment (per the reference repos' style) rather than a

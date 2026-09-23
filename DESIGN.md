@@ -155,10 +155,13 @@ at equal visual weight.
 
 - **Display (headings): Cormorant Garamond**, self-hosted via
   `next/font/local`, weights 400/500/600/700 + italic 400/500. Used for
-  every `h1`--`h4` and for the recurring "two-line heading" pattern
-  (a dark serif line followed by an italic accent-color serif line) ---
-  borrowed from bestiego, used selectively (not on every heading, to
-  avoid becoming its own repetitive tic).
+  every `h1`--`h4`, and for the "two-line heading" pattern (a dark serif
+  line followed by an italic accent-color serif line, borrowed from
+  bestiego). As of REVISION v0.7, that two-line pattern is used on the
+  **hero only** --- it had spread to the contact CTA and become its own
+  repetitive tic, which defeated the point of using it selectively. The
+  `AccentHeading` component was removed; every other heading is a plain
+  upright `SectionHeading`/`<h2>`.
 - **Body/UI: DM Sans**, self-hosted via `next/font/local`, weights
   400/500/600/700. Used for body copy, nav, buttons, labels, forms.
 
@@ -226,13 +229,19 @@ table for why the drawer mechanics are kept from v0.2).
 
 ## 8. Product detail
 
-As of v0.6: photo (with a "Sample data" badge when `isSample`) → header
-(unit, type, status) → summary → description → highlights (plain list,
-not a card grid) → applications (tag list, not a card grid) →
-specifications (or `<Pending>`; "Sample data" badge when `isSample`) →
-"Ask about this product/service" CTA. Highlights and applications
-deliberately use two different list styles so they don't read as the
-same repeated block.
+As of v0.7: photo (with a "Sample data" badge when `isSample`) → header
+(unit, type --- no status badge, see below) → summary → description →
+highlights (plain list, not a card grid) → applications (tag list, not
+a card grid) → specifications (or `<Pending>`; "Sample data" badge when
+`isSample`) → "Ask about this product/service" CTA. Highlights and
+applications deliberately use two different list styles so they don't
+read as the same repeated block.
+
+There is no status badge ("In Development" etc.) on the card or the
+detail header --- it was an invented claim nobody confirmed (see
+REVISION_V0.7.md part A and CLAUDE.md's Product rule). The product
+card's only badges are the type label (Product/Service) and, when
+`isSample`, a "Sample" corner badge on the photo.
 
 ------------------------------------------------------------------------
 

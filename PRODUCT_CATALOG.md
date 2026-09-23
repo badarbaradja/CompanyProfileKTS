@@ -69,20 +69,32 @@ until the PT KTS team verifies them.
 
 ## Product/service detail template
 
-Every catalog entry currently provides only:
+As of REVISION v0.7, every catalog entry provides:
 
 ``` text
 Unit (Kappa Solution / Nara Aquaponics / Bumi Hijau)
 Type (product / service)
 Name
-Short description (general function only)
-Status (Concept / In Development / Prototype / Coming Soon)
+Summary (one line)
+Description (general function only)
+Highlights (short feature list)
+Applications (where it's used)
+Specifications ({label, value}[])
+One sample photo
 ```
 
-Once verified data exists, entries may add: specifications, dimensions,
-capacity, power, materials, safety, certifications, gallery,
-documentation, and a price/inquiry model. Only verified fields should be
-published; use `<Pending>` for the rest.
+Summary, description, highlights, applications, specs, and the photo
+are SAMPLE data (`isSample: true`, shown with a "Sample data"/"Sample"
+badge) — see REVIEW_NOTES.md section 6.3 for the full list of what the
+team must replace with verified values. There is deliberately no
+per-item status field (Concept/In Development/etc.) — the team never
+confirmed a real status for any item, so showing one was an invented
+claim (see REVISION_V0.7.md part A). Add a status field back once the
+team supplies real per-item status data.
+
+Once verified data exists, entries may also add: dimensions, materials,
+safety, certifications, additional photos, documentation, and a
+price/inquiry model. Only verified fields should replace sample ones.
 
 ------------------------------------------------------------------------
 
