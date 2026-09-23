@@ -1,0 +1,26 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "kappa-technology-solution",
+  "compatibility_date": "2026-09-23",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "main": "vinext/server/fetch-handler",
+  "assets": {
+    "directory": "dist/client",
+    "not_found_handling": "none",
+    "binding": "ASSETS"
+  },
+  // Preview environment variables — see REVISION_V0.9.md part B.3 and
+  // README.md "Deploying a preview". NEXT_PUBLIC_DRAFT_MODE=true keeps
+  // every <Pending> marker visible and the site set to noindex.
+  // NEXT_PUBLIC_SITE_URL is filled in with the real preview URL after
+  // the first deploy (needed for the sitemap/robots/OG metadata), then
+  // the project is redeployed once. Both are read server-side only
+  // (no "use client" component touches them), so plain `vars` +
+  // nodejs_compat is enough — no build-time inlining needed.
+  "vars": {
+    "NEXT_PUBLIC_DRAFT_MODE": "true",
+    "NEXT_PUBLIC_SITE_URL": ""
+  }
+}

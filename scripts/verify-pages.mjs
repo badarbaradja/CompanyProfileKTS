@@ -40,8 +40,8 @@ const BASE_HEIGHT = 900;
 // Read the office coordinates from content/site.ts rather than
 // hardcoding them here too — keeps this script honest about the same
 // single source of truth the app itself uses.
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const siteSrc = fs.readFileSync(path.join(__dirname, "../content/site.ts"), "utf8");
+const scriptDir = path.dirname(fileURLToPath(import.meta.url));
+const siteSrc = fs.readFileSync(path.join(scriptDir, "../content/site.ts"), "utf8");
 const CONTACT_LAT = parseFloat(siteSrc.match(/lat:\s*(-?\d+\.\d+)/)[1]);
 const CONTACT_LNG = parseFloat(siteSrc.match(/lng:\s*(-?\d+\.\d+)/)[1]);
 

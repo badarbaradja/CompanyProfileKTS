@@ -46,3 +46,6 @@ next-env.d.ts
 /photos-raw/
 /public/photos-raw/
 
+/dist/
+.vinext/
+.wrangler/
