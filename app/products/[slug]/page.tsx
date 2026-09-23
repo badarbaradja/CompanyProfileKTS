@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/layout/Container";
 import { FadeIn } from "@/components/motion/FadeIn";
-import { StatusBadge } from "@/components/ui/Badge";
 import { SampleBadge } from "@/components/ui/SampleBadge";
 import { Pending } from "@/components/ui/Pending";
 import { buttonClasses } from "@/components/ui/Button";
@@ -84,7 +83,6 @@ export default async function ProductDetailPage({ params }: Props) {
               <span className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)]">
                 {unit.name} · {product.type === "service" ? "Service" : "Product"}
               </span>
-              <StatusBadge status={product.status} />
             </div>
 
             <h1

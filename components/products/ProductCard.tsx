@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { StatusBadge } from "@/components/ui/Badge";
 import { site } from "@/content/site";
 import { getSampleProductPhoto } from "@/content/photos";
 import type { Product } from "@/content/products";
@@ -47,7 +46,6 @@ export function ProductCard({ product }: ProductCardProps) {
       {/* Card content */}
       <div className="flex flex-col flex-1 p-6">
         <div className="flex items-center gap-2 mb-3">
-          <StatusBadge status={product.status} />
           <span className="text-xs font-medium text-[var(--color-text-faint)]">
             {product.type === "service" ? "Service" : "Product"}
           </span>

@@ -7,9 +7,8 @@ interface SampleBadgeProps {
 
 /**
  * Neutral marker for placeholder catalog/profile content — see
- * REVISION v0.6 part C.1. Distinct from StatusBadge (which communicates
- * development status): this marks a block of content as example data
- * or an unapproved draft, not yet a verified fact.
+ * REVISION v0.6 part C.1. Marks a block of content as example data or
+ * an unapproved draft, not yet a verified fact.
  */
 export function SampleBadge({ label = "Sample data", className }: SampleBadgeProps) {
   return (

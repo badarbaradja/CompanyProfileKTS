@@ -1,7 +1,7 @@
 /**
  * content/products/index.ts
  *
- * PT KTS product/service catalog — v0.6.
+ * PT KTS product/service catalog — v0.7.
  *
  * The 11 items and their business-unit grouping are real, sourced from
  * the 2026-09-14 "Struktur" meeting slide (see PRODUCT_CATALOG.md and
@@ -15,10 +15,14 @@
  * real, priced, or certified PT KTS product — see REVIEW_NOTES.md
  * section "Sample catalog content" for the full list of fields the team
  * needs to replace, and `content/photos.ts` for photo sourcing/licenses.
+ *
+ * As of REVISION v0.7 part A, there is no `status` field (no "In
+ * Development"/"Prototype"/etc. badge) — the team never confirmed a
+ * real status for any item, so showing one was an invented claim. Add
+ * it back once the team supplies real per-item status data.
  */
 
 import type { BusinessUnitSlug } from "@/content/site";
-import type { ProductStatus } from "@/components/ui/Badge";
 
 export type ProductType = "product" | "service";
 
@@ -44,8 +48,6 @@ export interface Product {
   highlights: string[];
   /** Where this is used, shown as a tag list (not a card grid) */
   applications: string[];
-  /** Development/availability status */
-  status: ProductStatus;
   /** Featured on the homepage? (kept to a multiple of 3) */
   featured: boolean;
   /** Specifications — sample data until the team supplies verified values */
@@ -78,7 +80,6 @@ export const products: Product[] = [
       "Vocational training centers",
       "Training providers",
     ],
-    status: "in-development",
     featured: true,
     specs: [
       { label: "Kit format", value: "Bench unit" },
@@ -109,7 +110,6 @@ export const products: Product[] = [
       "Community programs",
       "Small production units",
     ],
-    status: "in-development",
     featured: true,
     specs: [
       { label: "Status", value: "Field tested" },
@@ -140,7 +140,6 @@ export const products: Product[] = [
       "Teaching labs",
       "Campus facilities",
     ],
-    status: "in-development",
     featured: true,
     specs: [
       { label: "Deliverable", value: "Drawings and specification" },
@@ -173,7 +172,6 @@ export const products: Product[] = [
       "Small commercial growers",
       "Demonstration plots",
     ],
-    status: "in-development",
     featured: true,
     specs: [
       { label: "Coverage", value: "12 to 200 m2" },
@@ -199,7 +197,6 @@ export const products: Product[] = [
       "Serviceable without draining the pond",
     ],
     applications: ["Aquaponic systems", "Fish ponds", "Ornamental fish", "Hatcheries"],
-    status: "in-development",
     featured: false,
     specs: [
       { label: "Flow", value: "1,000 to 8,000 L/h" },
@@ -230,7 +227,6 @@ export const products: Product[] = [
       "Fish nurseries",
       "Live fish holding tanks",
     ],
-    status: "in-development",
     featured: true,
     specs: [
       { label: "Air output", value: "40 to 150 L/min" },
@@ -261,7 +257,6 @@ export const products: Product[] = [
       "Community programs",
       "Training facilities",
     ],
-    status: "in-development",
     featured: true,
     specs: [
       { label: "Diameter", value: "2 to 4 m" },
@@ -284,7 +279,6 @@ export const products: Product[] = [
       "Whole organic waste composts slowly and is hard to handle. The shredder reduces it to small, even pieces, which speeds up composting and makes the material easier to feed into the next stage.",
     highlights: ["Even output size", "Replaceable blades", "Wheeled frame", "Hopper sized for garden waste"],
     applications: ["Composting units", "Waste banks", "Urban farms", "Campus and office grounds"],
-    status: "in-development",
     featured: true,
     specs: [
       { label: "Capacity", value: "100 to 300 kg/h" },
@@ -310,7 +304,6 @@ export const products: Product[] = [
       "Fixed installation on a concrete base",
     ],
     applications: ["Village waste facilities", "Waste banks", "Institutional grounds", "Remote sites"],
-    status: "in-development",
     featured: true,
     specs: [
       { label: "Capacity", value: "50 to 150 kg per cycle" },
@@ -331,7 +324,6 @@ export const products: Product[] = [
       "The Takakura method uses a fermentation starter in a ventilated basket, which turns kitchen waste into compost without an outdoor pit. It suits households and offices with little space, and it produces compost that can go straight into planters.",
     highlights: ["Fits indoors or on a balcony", "Starter medium included", "No pit required", "Low odor when maintained"],
     applications: ["Households", "Offices", "Schools", "Community waste programs"],
-    status: "in-development",
     featured: false,
     specs: [
       { label: "Volume", value: "40 to 60 L" },
@@ -357,7 +349,6 @@ export const products: Product[] = [
       "Portable stainless body",
     ],
     applications: ["Field kitchens", "Small food producers", "Farms with crop residue", "Demonstrations and training"],
-    status: "in-development",
     featured: true,
     specs: [
       { label: "Fuel", value: "Wood chips, shells, dry residue" },
