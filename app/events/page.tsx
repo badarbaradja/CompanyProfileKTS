@@ -52,6 +52,8 @@ export default function EventsPage() {
         </Container>
       </section>
 
+      <EsicNetworkSection />
+
       {documentationPhotos.length > 0 && (
         <section className="section-padding-sm bg-[var(--color-surface-raised)]">
           <Container>
@@ -69,8 +71,6 @@ export default function EventsPage() {
           </Container>
         </section>
       )}
-
-      <EsicNetworkSection />
     </>
   );
 }
