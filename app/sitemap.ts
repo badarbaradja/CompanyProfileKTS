@@ -9,10 +9,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "/about",
-    "/innovation",
+    "/services",
     "/products",
-    "/projects",
-    "/insights",
+    "/training",
+    "/events",
     "/contact",
   ].map((route) => ({
     url: `${siteUrl}${route}`,

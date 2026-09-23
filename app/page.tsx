@@ -1,29 +1,28 @@
 import type { Metadata } from "next";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { WhyKTSSection } from "@/components/sections/WhyKTSSection";
-import { InnovationsSection } from "@/components/sections/InnovationsSection";
-import { ProcessSection } from "@/components/sections/ProcessSection";
-import { ProjectsSection } from "@/components/sections/ProjectsSection";
-import { AboutSection } from "@/components/sections/AboutSection";
-import { ContactSection } from "@/components/sections/ContactSection";
+import { BusinessLinesSection } from "@/components/sections/BusinessLinesSection";
+import { BusinessUnitsSection } from "@/components/sections/BusinessUnitsSection";
+import { FeaturedProductsSection } from "@/components/sections/FeaturedProductsSection";
+import { UpcomingActivitiesSection } from "@/components/sections/UpcomingActivitiesSection";
+import { EsicNetworkSection } from "@/components/sections/EsicNetworkSection";
+import { ContactCtaSection } from "@/components/sections/ContactCtaSection";
+import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title:
-    "PT Kappa Technology Solution — From Research to Real-World Solutions",
-  description:
-    "PT KTS develops and commercializes practical technology originating from research, experimentation, and engineering innovation.",
+  title: `${site.legalName} | ${site.tagline}`,
+  description: site.description,
 };
 
 export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <WhyKTSSection />
-      <InnovationsSection />
-      <ProcessSection />
-      <ProjectsSection />
-      <AboutSection />
-      <ContactSection />
+      <BusinessLinesSection />
+      <BusinessUnitsSection />
+      <FeaturedProductsSection />
+      <UpcomingActivitiesSection />
+      <EsicNetworkSection />
+      <ContactCtaSection />
     </>
   );
 }

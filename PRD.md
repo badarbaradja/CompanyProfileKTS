@@ -1,27 +1,38 @@
 # Product Requirements Document --- PT KTS Website
 
+> v0.3. Corrected against `REVISION_V0.2.md` (meeting notes 2026-09-14 +
+> "Struktur" slide) and `REVISION_V0.3.md` (English language, redesign
+> direction). Where this document disagrees with either, the newer
+> revision doc wins --- `REVISION_V0.3.md` over `REVISION_V0.2.md`.
+
 ## 1. Product overview
 
 PT Kappa Technology Solution (PT KTS) is being positioned through this
-website as a technology and innovation company focused on turning
-research and engineering ideas into practical products.
+website as a company with **4 business lines** and **3 business units**,
+operating alongside (and supporting) **ESIC Network**.
 
-The first website is a **premium company profile + innovation showcase +
-product catalog/inquiry experience**.
+The first website is a **premium company profile**: enough of a
+skeleton to exist publicly, with dummy/placeholder content where real
+data is not yet available. It is explicitly not required to be complete
+at launch --- see section 10.
 
-It is not intended to be a marketplace clone.
+It is not intended to be a marketplace. No cart, checkout, or payment.
 
-### Core proposition
+### Core structure (from the 2026-09-14 "Struktur" slide)
 
-> **From Research to Real-World Solutions.**
+```
+PT KTS ──support──▶ ESIC Network (ESIC, JESIC, Summer Camp, Pelatihan)
 
-Working interpretation:
+Lini usaha: Penyediaan Barang · Konsultan · Pengembangan Rekayasa · Pelatihan
 
-> PT KTS develops and commercializes useful technology originating from
-> research, experimentation, and engineering innovation.
+Unit usaha:
+├─ Kappa Solution   — alat hasil pengembangan rekayasa, alat praktikum, desain sistem, pelatihan, camp
+├─ Nara Aquaponics  — rancang bangun sistem hidroponik & akuaponik, filter mekanik & biologi, sistem aerasi, kolam bioflok
+└─ Bumi Hijau       — pencacah sampah, insinerator RAMPUS, komposter Takakura, tungku gasifikasi
+```
 
-This positioning is provisional and must be reviewed by the PT KTS team
-before final publication.
+This positioning is sourced directly from meeting notes and must not be
+altered without a new source document.
 
 ------------------------------------------------------------------------
 
@@ -29,22 +40,21 @@ before final publication.
 
 ### Primary goals
 
-1.  Make a first-time visitor understand what PT KTS is within seconds.
-2.  Explain why PT KTS exists and what problem it solves.
-3.  Showcase research-derived products in a premium and understandable
-    way.
-4.  Convert interest into a product inquiry or business conversation.
-5.  Establish a credible digital presence for PT KTS.
-6.  Provide a foundation that can later grow into a content-managed
-    product platform.
+1.  Make a first-time visitor understand PT KTS's structure (4 business
+    lines, 3 business units, ESIC Network relationship) within seconds.
+2.  Present the real product/service catalog per business unit.
+3.  Provide a training/camp overview and an activity calendar.
+4.  Convert interest into a WhatsApp inquiry or store visit.
+5.  Establish a credible digital presence while company legal documents
+    (NIB, NPWP, bank account) are still incomplete.
 
 ### Secondary goals
 
--   Support product presentations to potential partners/customers.
--   Provide a central place for product documentation.
--   Build a recognizable technology-company visual identity.
+-   Support product/service presentations to potential customers.
 -   Prepare the site for future commerce without prematurely building a
     full marketplace.
+-   Give the PT KTS team and their advising lecturer a reviewable
+    artifact (`REVIEW_NOTES.md`) that lists what's still missing.
 
 ------------------------------------------------------------------------
 
@@ -52,94 +62,71 @@ before final publication.
 
 ### Primary
 
-**Potential customers / buyers**
-
-People, organizations, businesses, communities, or institutions that may
-need the technologies developed by PT KTS.
+**Potential customers / buyers** for Kappa Solution, Nara Aquaponics, or
+Bumi Hijau products and services.
 
 ### Secondary
 
-**Business and technology partners**
-
-Organizations interested in collaboration, deployment, distribution,
-research, or technology partnerships.
-
-### Secondary
-
-**Researchers / academics**
-
-Visitors who want to understand the innovation, research background, and
-technology.
+**Prospective training/camp participants**, **business/technology
+partners**, and **researchers/academics** evaluating PT KTS and ESIC
+Network.
 
 ### General
 
-**Curious visitors**
-
-People asking: "What is PT KTS and what does it actually make?"
+**Curious visitors** asking: "What is PT KTS, and what does it actually
+do?"
 
 ------------------------------------------------------------------------
 
 ## 4. Positioning
 
-PT KTS should feel like:
+PT KTS should feel: practical, credible, modern, human, premium,
+structured.
 
--   technology company
--   innovation company
--   engineering-driven
--   practical
--   credible
--   modern
--   human
--   premium
--   impact-oriented
-
-PT KTS should NOT initially feel like:
+PT KTS should NOT feel like:
 
 -   a student organization
--   an event organizer
--   a training provider
 -   a generic software house
--   a marketplace
--   a reseller with a random product catalog
+-   a marketplace / reseller with a random product catalog
+
+PT KTS training, camp, and ESIC Network activities ARE part of the
+public identity (reversing the v0.1 exclusion) --- they are real
+business lines and unit activities, not out-of-scope extras.
 
 ------------------------------------------------------------------------
 
-## 5. Scope --- MVP
+## 5. Scope --- v0.2
 
 ### In scope
 
--   Home
--   About
--   Innovation / Research
--   Products
--   Product detail
--   Projects / applications
--   Insights / updates (structure can be present even if empty)
--   Contact
--   Responsive navigation
--   Responsive footer
--   Premium motion system
--   Product inquiry CTA
--   SEO metadata
--   Accessibility basics
--   Placeholder content system
--   Cloudflare-ready deployment architecture
+-   Beranda (home)
+-   Tentang (profile, vision/mission, structure diagram, team)
+-   Layanan (4 business lines + 3 business units)
+-   Produk (catalog grouped by unit) + product/service detail
+-   Pelatihan (training & camp overview, Instagram showcase, optional
+    YouTube documentation)
+-   Kegiatan (activity calendar: upcoming/past, static data) + ESIC
+    Network section
+-   Kontak (contact info + client-side inquiry form → WhatsApp/mailto)
+-   "Toko Online" link, shown only when a shop URL is configured
+-   Draft-mode banner + `<Pending>` markers for missing data
+-   Responsive navigation and footer
+-   Motion system (respecting `prefers-reduced-motion`)
+-   SEO metadata, sitemap, robots (noindex while in draft mode)
+-   Permanent redirects from the old v0.1 routes
 
-### Out of scope for MVP
+### Out of scope for v0.2
 
--   customer accounts
--   public registration
--   admin dashboard
--   shopping cart
--   payment gateway
+-   customer accounts / public registration
+-   admin dashboard / CMS
+-   shopping cart / checkout / payment gateway
 -   order management
--   complex CMS
--   inventory management
--   e-commerce fulfillment
--   event calendar
--   ESIC Network public integration
--   JESIC public integration
--   training catalog
+-   database (event and product data stay static in `content/`)
+-   scraping or mirroring Instagram/YouTube content
+-   internal work classification (internal vs. jasa), KTS finances,
+    profit/wage distribution --- never shown publicly
+-   NIB, NPWP, bank account numbers --- not public content
+-   naming individual internal staff as task owners
 
 These can be added later if the business requires them.
 
@@ -150,203 +137,90 @@ These can be added later if the business requires them.
 ``` text
 /
 ├── /about
-├── /innovation
+├── /services
 ├── /products
-│   ├── /products/[slug]
-├── /projects
-├── /insights
-│   ├── /insights/[slug]
+│   └── /products/[slug]
+├── /training
+├── /events
 └── /contact
 ```
 
+`/about`, `/products`, `/products/[slug]`, and `/contact` are unchanged
+v0.1 paths. `/innovation`, `/projects`, and `/insights` have no direct
+v0.3 equivalent and permanently redirect to the closest replacement
+(`/services`, `/events`, `/events` respectively) --- see
+`REVISION_V0.3.md` part A.1.
+
 ### Main navigation
 
--   About
--   Innovation
--   Products
--   Projects
--   Insights
--   Contact
+Home · About · Services · Products · Training · Events · Contact
 
-Primary CTA:
-
-> Explore Products
-
-Secondary CTA:
-
-> Contact KTS
+Primary CTA (conditional): **Online Shop** --- shown only when
+`site.contact.shopUrl` is set.
 
 ------------------------------------------------------------------------
 
 ## 7. Homepage requirements
 
-### Hero
-
-Must answer:
-
-1.  Who is KTS?
-2.  What does KTS do?
-3.  Why should I care?
-
-Working copy:
-
-> **From Research to Real-World Solutions.**
-
-Supporting copy:
-
-> We turn research and engineering ideas into practical technology for
-> real-world impact.
-
-CTA:
-
--   Explore Products
--   Discover KTS
-
-Visual direction:
-
--   large product/technology visual
--   minimal background
--   generous whitespace
--   subtle entrance animation
-
-### Section: Why we exist
-
-Working message:
-
-> **Research should not stop in the lab.**
-
-Explain the transition:
-
-``` text
-Research → Development → Validation → Product → Impact
-```
-
-### Section: Featured innovations
-
-Show 2--4 products/concepts.
-
-Each card:
-
--   product image
--   category
--   short description
--   status
--   CTA
-
-### Section: How we innovate
-
-Visual process:
-
-1.  Research
-2.  Engineering
-3.  Development
-4.  Validation
-5.  Productization
-6.  Impact
-
-### Section: Selected projects
-
-Show applications or implementation stories where available.
-
-### Section: About KTS
-
-Short company explanation with CTA.
-
-### Section: Contact / conversion
-
-Working headline:
-
-> Have a problem worth solving?
-
-CTA:
-
-> Talk to KTS
+1.  **Hero** --- company name, one-line summary of the 4 business lines
+    and 3 business units. Visual uses the real logos and real structure,
+    not a fictional product illustration.
+2.  **4 business lines** --- Equipment Supply, Consulting, Engineering
+    Development, Training.
+3.  **3 business units** --- Kappa Solution, Nara Aquaponics, Bumi
+    Hijau, each with logo, field, and activity list per the Struktur
+    slide.
+4.  **Featured products** --- featured items in a multiple of 3 (full
+    grid rows).
+5.  **Upcoming training & events** --- pulled from `content/events.ts`.
+6.  **ESIC Network** --- what it is, and that PT KTS supports it.
+7.  **Contact CTA** + Online Shop link (conditional).
 
 ------------------------------------------------------------------------
 
-## 8. Product page requirements
+## 8. Product/service page requirements
 
-Product detail pages are a major differentiator.
-
-The experience should be story-driven rather than a generic marketplace
-listing.
-
-Recommended structure:
+Each catalog item belongs to a business unit and is either a product or
+a service. Structure:
 
 ``` text
-Product Hero
+Header (unit, category, status)
 ↓
-The Problem
+Description (general function only)
 ↓
-The Idea
+Specifications (only if verified --- otherwise omitted/Pending)
 ↓
-The Technology
-↓
-How It Works
-↓
-Applications
-↓
-Benefits
-↓
-Technical Specifications
-↓
-Gallery / Media
-↓
-Research / Development Context
-↓
-Inquiry CTA
+CTA: "Inquire" → WhatsApp with a pre-filled message, or /contact if no
+     WhatsApp number is configured yet
 ```
 
-Technical specifications must only be shown when verified.
-
-### Primary CTA
-
-> Request Product Information
-
-Possible future CTA:
-
-> Request a Quote
-
-Do not imply a fixed price unless the business has approved one.
+Never publish capacity, temperature, power, output percentages, pricing,
+or certifications until the team verifies them.
 
 ------------------------------------------------------------------------
 
 ## 9. Contact requirements
 
-At minimum:
-
--   official email placeholder
--   phone/WhatsApp placeholder
--   office/location placeholder
--   social media link
--   inquiry CTA
-
-A contact form is optional for MVP. If implemented, it must have spam
-protection and clear privacy handling.
+At minimum: WhatsApp, email, address (all placeholders until supplied),
+Instagram `@kappasolution`, and a client-side inquiry "form" that
+composes a message and opens WhatsApp or `mailto:` --- no backend, no
+stored data, no spam-protection requirement since nothing is persisted.
 
 ------------------------------------------------------------------------
 
 ## 10. Content integrity
 
-The site must distinguish between:
+The meeting explicitly allows dummy/"under construction" content as long
+as it is clearly marked. The site must distinguish between:
 
 -   verified company information
--   approved marketing copy
--   provisional copy
--   concept/mock product data
--   missing information
+-   approved/meeting-sourced copy (this document, `REVISION_V0.2.md`)
+-   dummy example data (e.g. sample calendar events) --- flagged
+    `isDummy: true` and labeled "Contoh" in the UI
+-   missing information --- shown via the `<Pending>` component while
+    `NEXT_PUBLIC_DRAFT_MODE` is true, hidden neatly otherwise
 
 Never turn a placeholder into an apparent fact.
-
-Use labels such as:
-
--   Coming Soon
--   In Development
--   Prototype
--   Information to be updated
-
-only when the label has been approved or clearly marked as internal
-draft content.
 
 ------------------------------------------------------------------------
 
@@ -354,41 +228,18 @@ draft content.
 
 A first-time visitor should be able to answer these within 10 seconds:
 
--   What is PT KTS?
--   What kind of technology does it create?
--   What products does it offer?
--   How can I learn more or contact the company?
+-   What is PT KTS, and what are its business lines/units?
+-   What does each unit (Kappa Solution, Nara Aquaponics, Bumi Hijau)
+    make or do?
+-   How is PT KTS related to ESIC Network?
+-   How can I learn more, ask about a product, or contact the company?
 
-The website should work cleanly at:
-
--   360--430px mobile
--   tablet
--   1280px desktop
--   1440px desktop
--   1920px desktop
-
-No horizontal overflow.
-
-No layout-breaking animation.
-
-No important information hidden only behind hover.
+The website should work cleanly at 360--430px mobile, tablet, and
+1280/1440/1920px desktop, with no horizontal overflow and no important
+information hidden only behind hover.
 
 ------------------------------------------------------------------------
 
 ## 12. Future roadmap
 
-Potential future capabilities:
-
--   content management
--   admin dashboard
--   product inquiry management
--   downloadable brochures
--   product comparison
--   product catalog filtering
--   customer accounts
--   quotation workflow
--   shopping cart
--   payment
--   order management
--   multilingual website
--   analytics dashboard
+See `ROADMAP.md`.

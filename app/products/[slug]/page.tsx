@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/layout/Container";
 import { FadeIn } from "@/components/motion/FadeIn";
-import { StatusBadge } from "@/components/ui/Badge";
+import { SampleBadge } from "@/components/ui/SampleBadge";
+import { Pending } from "@/components/ui/Pending";
+import { buttonClasses } from "@/components/ui/Button";
 import { getProductBySlug, products } from "@/content/products";
-import Link from "next/link";
+import { getSampleProductPhoto } from "@/content/photos";
+import { site } from "@/content/site";
+import { buildWhatsAppUrl } from "@/lib/utils";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -17,11 +23,11 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const product = getProductBySlug(slug);
-  if (!product) return { title: "Product Not Found | PT KTS" };
+  if (!product) return { title: "Product not found" };
 
   return {
-    title: `${product.name} | PT KTS`,
-    description: product.tagline,
+    title: product.name,
+    description: product.summary,
   };
 }
 
@@ -30,6 +36,14 @@ export default async function ProductDetailPage({ params }: Props) {
   const product = getProductBySlug(slug);
 
   if (!product) notFound();
+
+  const unit = site.businessUnits.find((u) => u.slug === product.unit)!;
+  const photo = getSampleProductPhoto(product.images[0] ?? "");
+  const whatsapp = site.contact.whatsapp;
+  // WhatsApp message stays in Indonesian — its recipient is the PT KTS team, per REVISION_V0.3.md part A.4.
+  const inquiryHref = whatsapp
+    ? buildWhatsAppUrl(whatsapp, `Halo PT KTS, saya ingin menanyakan tentang ${product.name}.`)
+    : "/contact";
 
   return (
     <section className="section-padding">
@@ -46,17 +60,33 @@ export default async function ProductDetailPage({ params }: Props) {
             </ol>
           </nav>
 
+          {/* Photo */}
+          {photo && (
+            <div className="relative aspect-[16/9] rounded-[var(--radius-lg)] overflow-hidden mb-10 max-w-3xl">
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                sizes="(min-width: 1024px) 768px, 100vw"
+                className="object-cover"
+                priority
+              />
+              {product.isSample && (
+                <SampleBadge className="absolute top-4 right-4" />
+              )}
+            </div>
+          )}
+
           {/* Header */}
           <div className="max-w-2xl mb-10">
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
               <span className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)]">
-                {product.category}
+                {unit.name} · {product.type === "service" ? "Service" : "Product"}
               </span>
-              <StatusBadge status={product.status} />
             </div>
 
             <h1
-              className="font-bold leading-tight tracking-tight mb-4"
+              className="leading-tight tracking-tight mb-4"
               style={{ fontSize: "var(--text-h1)" }}
             >
               {product.name}
@@ -66,69 +96,119 @@ export default async function ProductDetailPage({ params }: Props) {
               className="text-[var(--color-text-muted)] leading-relaxed"
               style={{ fontSize: "var(--text-body-lg)" }}
             >
-              {product.tagline}
+              {product.summary}
             </p>
           </div>
 
-          {/* Concept disclaimer */}
-          <div className="p-5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] mb-10 flex gap-3 items-start max-w-2xl">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 mt-0.5" aria-hidden="true">
-              <circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" />
-            </svg>
-            <div>
-              <p className="text-sm font-medium text-[var(--color-text)] mb-1">
-                This is a concept product entry.
-              </p>
-              <p className="text-sm text-[var(--color-text-muted)]">
-                No specifications, pricing, certifications, or performance metrics are published here.
-                Product information will be updated after validation by the PT KTS team.
-              </p>
-            </div>
-          </div>
-
-          {/* Problem */}
-          {product.problem && (
-            <div className="max-w-2xl mb-10">
-              <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-3">
-                The Problem
-              </h2>
-              <p className="text-[var(--color-text-muted)] leading-relaxed">
-                {product.problem}
-              </p>
-            </div>
-          )}
-
           {/* Description */}
-          <div className="max-w-2xl mb-12">
+          <div className="max-w-2xl mb-10">
             <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-3">
-              The Concept
+              Description
             </h2>
             <p className="text-[var(--color-text-muted)] leading-relaxed">
               {product.description}
             </p>
           </div>
 
+          {/* Highlights */}
+          {product.highlights.length > 0 && (
+            <div className="max-w-2xl mb-10">
+              <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-3">
+                Highlights
+              </h2>
+              <ul className="space-y-2">
+                {product.highlights.map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 text-[var(--color-text-muted)] leading-relaxed">
+                    <CheckIcon />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Applications */}
+          {product.applications.length > 0 && (
+            <div className="max-w-2xl mb-12">
+              <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-3">
+                Applications
+              </h2>
+              <div className="flex flex-wrap gap-2">
+                {product.applications.map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2 text-sm text-[var(--color-text)]"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Specifications */}
+          <div className="max-w-2xl mb-12">
+            <div className="flex items-center gap-2 mb-3">
+              <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)]">
+                Specifications
+              </h2>
+              {product.isSample && product.specs.length > 0 && <SampleBadge />}
+            </div>
+            {product.specs.length > 0 ? (
+              <dl className="grid grid-cols-2 gap-3">
+                {product.specs.map((spec) => (
+                  <div key={spec.label} className="rounded-[var(--radius-md)] border border-[var(--color-border)] px-4 py-3">
+                    <dt className="text-xs text-[var(--color-text-faint)]">{spec.label}</dt>
+                    <dd className="text-sm font-medium text-[var(--color-text)]">{spec.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            ) : (
+              <Pending label={`Capacity, dimensions, and technical specifications for ${product.name}`} />
+            )}
+          </div>
+
           {/* CTA */}
           <div className="border-t border-[var(--color-border)] pt-10">
             <h2
-              className="font-semibold mb-3"
+              className="mb-3"
               style={{ fontSize: "var(--text-h4)" }}
             >
-              Interested in this technology?
+              Ask about this {product.type === "service" ? "service" : "product"}
             </h2>
             <p className="text-[var(--color-text-muted)] text-sm mb-5">
-              Contact PT KTS to request product information or discuss a
-              potential application.
+              Contact PT KTS for more information.
             </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors duration-150"
+            <a
+              href={inquiryHref}
+              target={whatsapp ? "_blank" : undefined}
+              rel={whatsapp ? "noopener noreferrer" : undefined}
+              className={buttonClasses("primary", "md")}
             >
-              Request Product Information
-            </Link>
+              Ask about this {product.type === "service" ? "service" : "product"}
+            </a>
           </div>
         </FadeIn>
       </Container>
     </section>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="var(--color-accent)"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="shrink-0 mt-1"
+      aria-hidden="true"
+    >
+      <path d="M20 6 9 17l-5-5" />
+    </svg>
   );
 }

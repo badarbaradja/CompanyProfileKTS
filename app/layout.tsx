@@ -1,58 +1,86 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Navbar } from "@/components/navigation/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { isDraftMode } from "@/lib/draft";
+import { site } from "@/content/site";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
+// Self-hosted fonts — see REVISION_V0.2.md item #7 (v0.1 misconception
+// table): next/font/google made the build depend on network access to
+// Google Fonts. next/font/local removes that dependency.
+//
+// Cormorant Garamond (display) + DM Sans (body) — derived from
+// sparktalks/bestiego-app, see DESIGN.md section 0.
+const cormorant = localFont({
+  src: [
+    { path: "./fonts/cormorant/cormorant-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/cormorant/cormorant-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/cormorant/cormorant-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/cormorant/cormorant-700.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/cormorant/cormorant-400-italic.woff2", weight: "400", style: "italic" },
+    { path: "./fonts/cormorant/cormorant-500-italic.woff2", weight: "500", style: "italic" },
+  ],
+  variable: "--font-cormorant",
+  display: "swap",
+});
+
+const dmSans = localFont({
+  src: [
+    { path: "./fonts/dmsans/dmsans-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/dmsans/dmsans-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/dmsans/dmsans-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/dmsans/dmsans-700.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-dmsans",
   display: "swap",
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+// Kept only to drive robots/noindex below — see REVISION v0.4 part A.2.
+// The visible draft banner was removed in v0.4.
+const draft = isDraftMode();
 
 export const metadata: Metadata = {
   metadataBase: siteUrl ? new URL(siteUrl) : undefined,
   title: {
-    default: "PT Kappa Technology Solution — From Research to Real-World Solutions",
+    default: `${site.legalName} | ${site.tagline}`,
     template: "%s | PT KTS",
   },
-  description:
-    "PT Kappa Technology Solution develops and commercializes practical technology originating from research, experimentation, and engineering innovation.",
+  description: site.description,
   keywords: [
     "PT Kappa Technology Solution",
     "PT KTS",
-    "technology innovation",
-    "research to product",
-    "engineering Indonesia",
+    "Kappa Solution",
+    "Nara Aquaponics",
+    "Bumi Hijau",
+    "ESIC Network",
   ],
-  authors: [{ name: "PT Kappa Technology Solution" }],
-  creator: "PT Kappa Technology Solution",
+  authors: [{ name: site.legalName }],
+  creator: site.legalName,
   openGraph: {
     type: "website",
     locale: "en_US",
     ...(siteUrl ? { url: siteUrl } : {}),
-    siteName: "PT Kappa Technology Solution",
-    title: "PT KTS — From Research to Real-World Solutions",
-    description:
-      "We turn research and engineering ideas into practical technology for real-world impact.",
+    siteName: site.legalName,
+    title: `PT KTS | ${site.tagline}`,
+    description: site.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "PT KTS — From Research to Real-World Solutions",
-    description:
-      "We turn research and engineering ideas into practical technology for real-world impact.",
+    title: `PT KTS | ${site.tagline}`,
+    description: site.description,
   },
+  // Draft-mode sites stay out of search results — see REVISION_V0.2.md section 5.
   robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true },
+    index: !draft,
+    follow: !draft,
+    googleBot: { index: !draft, follow: !draft },
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#F5F5F3",
+  themeColor: "#F7F4EC",
   width: "device-width",
   initialScale: 1,
 };
@@ -63,7 +91,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
       <body>
         <Navbar />
         <main id="main-content">{children}</main>

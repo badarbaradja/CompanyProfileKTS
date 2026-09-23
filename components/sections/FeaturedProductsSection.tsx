@@ -1,0 +1,47 @@
+import Link from "next/link";
+import { Container } from "@/components/layout/Container";
+import { FadeIn } from "@/components/motion/FadeIn";
+import { StaggerContainer, StaggerItem } from "@/components/motion/StaggerContainer";
+import { ProductCard } from "@/components/products/ProductCard";
+import { getFeaturedProducts } from "@/content/products";
+
+export function FeaturedProductsSection() {
+  const featured = getFeaturedProducts();
+
+  return (
+    <section
+      id="featured-products"
+      aria-labelledby="featured-products-heading"
+      className="section-padding bg-[var(--color-surface-raised)]"
+    >
+      <Container>
+        <FadeIn className="mb-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
+          <h2
+            id="featured-products-heading"
+            className="leading-[1.1] tracking-tight max-w-xl"
+            style={{ fontSize: "var(--text-h2)" }}
+          >
+            Products and services
+          </h2>
+          <Link
+            href="/products"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-accent)] hover:underline shrink-0"
+          >
+            View full catalog →
+          </Link>
+        </FadeIn>
+
+        <StaggerContainer
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          staggerDelay={0.06}
+        >
+          {featured.map((product) => (
+            <StaggerItem key={product.slug}>
+              <ProductCard product={product} />
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
+      </Container>
+    </section>
+  );
+}

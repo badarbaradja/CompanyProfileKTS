@@ -1,65 +1,145 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 import { FadeIn } from "@/components/motion/FadeIn";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Pending } from "@/components/ui/Pending";
+import { InquiryForm } from "@/components/forms/InquiryForm";
+import { LocationMap } from "@/components/contact/LocationMap";
+import { site } from "@/content/site";
+import { buildWhatsAppUrl, formatPhoneDisplay } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Contact | PT KTS",
-  description: "Get in touch with PT Kappa Technology Solution.",
+  title: "Contact",
+  description: `Get in touch with ${site.legalName}.`,
 };
 
 export default function ContactPage() {
+  const { contact } = site;
+
   return (
     <section className="section-padding">
       <Container>
-        <FadeIn className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 mb-5">
-            <span className="w-6 h-px bg-[var(--color-accent)]" aria-hidden="true" />
-            <span className="text-xs font-semibold uppercase tracking-widest text-[var(--color-accent)]">
-              Contact
-            </span>
-          </div>
-          <h1 className="font-bold leading-tight tracking-tight mb-5" style={{ fontSize: "var(--text-h1)" }}>
-            Have a problem worth solving?
-          </h1>
-          <p className="text-[var(--color-text-muted)] leading-relaxed mb-8" style={{ fontSize: "var(--text-body-lg)" }}>
-            If you&apos;re working on an engineering challenge, waste management problem, or a research-rooted idea — we&apos;d like to hear from you.
-          </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <FadeIn>
+            <SectionHeading
+              eyebrow="Contact"
+              title="Contact PT KTS"
+              description="PT KTS can help with consultations, product questions, and training."
+            />
 
-          {/* Contact placeholders */}
-          <div className="space-y-5 mb-8">
-            {[
-              { label: "Email", value: "To be updated" },
-              { label: "WhatsApp / Phone", value: "To be updated" },
-              { label: "Office Location", value: "To be updated" },
-            ].map((item) => (
-              <div key={item.label} className="flex flex-col gap-1">
+            <div className="mt-10 space-y-5">
+              <ContactRow
+                label="WhatsApp (contact person)"
+                value={contact.whatsapp ? formatPhoneDisplay(contact.whatsapp) : ""}
+                href={
+                  contact.whatsapp
+                    ? buildWhatsAppUrl(contact.whatsapp, "Halo PT KTS, saya ingin bertanya.")
+                    : undefined
+                }
+                missingLabel="Official WhatsApp number"
+              />
+              <ContactRow
+                label="Email"
+                value={contact.email}
+                href={contact.email ? `mailto:${contact.email}` : undefined}
+                missingLabel="Official email address"
+              />
+              <ContactRow label="Address" value={contact.address} missingLabel="Official office address" />
+
+              <div className="flex flex-col gap-1">
                 <span className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)]">
-                  {item.label}
+                  Instagram
                 </span>
-                <span className="text-sm text-[var(--color-text-muted)] italic">
-                  {item.value}
-                </span>
+                <a
+                  href={contact.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-[var(--color-accent)] hover:underline w-fit"
+                >
+                  {contact.instagramHandle}
+                </a>
               </div>
-            ))}
-          </div>
 
-          {/* Instagram */}
-          <a
-            href="https://www.instagram.com/kappasolution/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold border border-[var(--color-border-strong)] text-[var(--color-text)] hover:bg-[var(--color-border)] transition-colors duration-150"
-          >
-            Find us on Instagram @kappasolution
-          </a>
+              {contact.shopUrl && (
+                <div className="flex flex-col gap-1">
+                  <span className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)]">
+                    Online Shop
+                  </span>
+                  <a
+                    href={contact.shopUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-[var(--color-accent)] hover:underline w-fit"
+                  >
+                    Visit the shop
+                  </a>
+                  {contact.shopIsPersonalAccount && (
+                    <span className="text-xs text-[var(--color-text-faint)]">
+                      Currently a personal account, not yet an official PT KTS store.
+                    </span>
+                  )}
+                </div>
+              )}
 
-          <div className="mt-8 p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)]">
-            <p className="text-sm text-[var(--color-text-muted)] italic">
-              Contact details are being finalized. Reach us via Instagram while the official contact information is updated.
-            </p>
-          </div>
-        </FadeIn>
+              <div className="pt-2">
+                <LocationMap
+                  lat={contact.coordinates.lat}
+                  lng={contact.coordinates.lng}
+                  companyName={site.legalName}
+                  address={contact.address}
+                  className="shadow-[var(--shadow-sm)]"
+                />
+              </div>
+            </div>
+          </FadeIn>
+
+          <FadeIn direction="left">
+            <div className="rounded-[var(--radius-lg)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] p-6 sm:p-8">
+              <h2 className="font-display font-medium text-[var(--color-text)] mb-1" style={{ fontSize: "var(--text-h4)" }}>
+                Send a question
+              </h2>
+              <p className="text-sm text-[var(--color-text-muted)] mb-6">
+                Write your message, then send it via WhatsApp or email.
+              </p>
+              <InquiryForm whatsapp={contact.whatsapp} email={contact.email} />
+            </div>
+          </FadeIn>
+        </div>
       </Container>
     </section>
+  );
+}
+
+function ContactRow({
+  label,
+  value,
+  href,
+  missingLabel,
+}: {
+  label: string;
+  value: string;
+  href?: string;
+  missingLabel: string;
+}) {
+  return (
+    <div className="flex flex-col gap-1">
+      <span className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)]">
+        {label}
+      </span>
+      {value && href ? (
+        <a
+          href={href}
+          target={href.startsWith("https://wa.me/") ? "_blank" : undefined}
+          rel={href.startsWith("https://wa.me/") ? "noopener noreferrer" : undefined}
+          className="text-sm text-[var(--color-accent)] hover:underline w-fit"
+        >
+          {value}
+        </a>
+      ) : value ? (
+        <span className="text-sm text-[var(--color-text)]">{value}</span>
+      ) : (
+        <Pending label={missingLabel} />
+      )}
+    </div>
   );
 }

@@ -1,18 +1,21 @@
 import Link from "next/link";
+import { KTSLogo } from "@/components/brand/Logo";
+import { Pending } from "@/components/ui/Pending";
+import { site } from "@/content/site";
 
 const footerLinks = {
   Company: [
     { label: "About", href: "/about" },
-    { label: "Innovation", href: "/innovation" },
+    { label: "Services", href: "/services" },
     { label: "Products", href: "/products" },
-    { label: "Projects", href: "/projects" },
+    { label: "Training", href: "/training" },
   ],
   Connect: [
-    { label: "Insights", href: "/insights" },
+    { label: "Events", href: "/events" },
     { label: "Contact", href: "/contact" },
     {
       label: "Instagram",
-      href: "https://www.instagram.com/kappasolution/",
+      href: site.contact.instagram,
       external: true,
     },
   ],
@@ -20,47 +23,54 @@ const footerLinks = {
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const hasContact = site.contact.whatsapp || site.contact.email || site.contact.address;
 
   return (
     <footer
       role="contentinfo"
-      className="border-t border-[var(--color-border)] bg-[var(--color-surface)]"
+      className="bg-[var(--color-dark)] text-[var(--color-canvas)] pt-16 pb-8"
     >
-      <div className="container-kts py-16">
+      <div className="container-kts">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8">
           {/* Brand column */}
           <div className="md:col-span-2">
             <Link
               href="/"
-              className="inline-flex items-center gap-2.5 group mb-4"
-              aria-label="PT Kappa Technology Solution — Home"
+              className="inline-flex items-center gap-2.5 mb-4"
+              aria-label="PT Kappa Technology Solution, home"
             >
-              <FooterMark />
-              <span className="text-[15px] font-semibold tracking-[-0.01em] text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-200">
+              <KTSLogo variant="mark" className="h-7" />
+              <span className="font-display text-xl font-medium text-[var(--color-canvas)]">
                 KTS
               </span>
             </Link>
-            <p className="text-sm text-[var(--color-text-muted)] max-w-xs leading-relaxed mt-2">
-              PT Kappa Technology Solution develops practical technology
-              originating from research, experimentation, and engineering
-              innovation.
+            <p className="text-sm text-[var(--color-dark-muted)] max-w-xs leading-relaxed mt-2">
+              {site.description}
             </p>
             <a
-              href="https://www.instagram.com/kappasolution/"
+              href={site.contact.instagram}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="PT KTS on Instagram (opens in new tab)"
-              className="inline-flex items-center gap-2 mt-5 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors duration-150"
+              className="inline-flex items-center gap-2 mt-5 text-sm text-[var(--color-dark-muted)] hover:text-[var(--color-canvas)] transition-colors duration-150"
             >
               <InstagramIcon />
-              @kappasolution
+              {site.contact.instagramHandle}
             </a>
+
+            {!hasContact && (
+              <Pending
+                label="Official contact details (WhatsApp, email, address)"
+                variant="dark"
+                className="mt-5 max-w-xs"
+              />
+            )}
           </div>
 
           {/* Link columns */}
           {Object.entries(footerLinks).map(([groupName, links]) => (
             <div key={groupName}>
-              <h3 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-4">
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-dark-muted)] mb-4">
                 {groupName}
               </h3>
               <ul className="space-y-2.5" role="list">
@@ -71,60 +81,45 @@ export function Footer() {
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors duration-150"
+                        className="text-sm text-[var(--color-dark-muted)] hover:text-[var(--color-canvas)] transition-colors duration-150"
                       >
                         {link.label}
                       </a>
                     ) : (
                       <Link
                         href={link.href}
-                        className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors duration-150"
+                        className="text-sm text-[var(--color-dark-muted)] hover:text-[var(--color-canvas)] transition-colors duration-150"
                       >
                         {link.label}
                       </Link>
                     )}
                   </li>
                 ))}
+                {site.contact.shopUrl && (
+                  <li>
+                    <a
+                      href={site.contact.shopUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-[var(--color-dark-muted)] hover:text-[var(--color-canvas)] transition-colors duration-150"
+                    >
+                      Online Shop
+                    </a>
+                  </li>
+                )}
               </ul>
             </div>
           ))}
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-6 border-t border-[var(--color-border)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <p className="text-xs text-[var(--color-text-faint)]">
-            &copy; {currentYear} PT Kappa Technology Solution. All rights
-            reserved.
-          </p>
-          <p className="text-xs text-[var(--color-text-faint)]">
-            {/* Contact details placeholder — to be updated */}
-            Contact information to be updated.
+        <div className="mt-12 pt-6 border-t border-[var(--color-dark-border)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <p className="text-xs text-[var(--color-dark-muted)]">
+            &copy; {currentYear} PT Kappa Technology Solution. All rights reserved.
           </p>
         </div>
       </div>
     </footer>
-  );
-}
-
-function FooterMark() {
-  return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 28 28"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <rect width="28" height="28" rx="6" fill="var(--color-accent)" />
-      <path
-        d="M8 7.5V20.5M8 14H15.5L20 7.5M15.5 14L20 20.5"
-        stroke="white"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }
 
