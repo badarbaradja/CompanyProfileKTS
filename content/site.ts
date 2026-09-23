@@ -90,6 +90,8 @@ export const site = {
     email: "kappasolution25@gmail.com",
     /** Address supplied 2026-09-23, not yet confirmed by the team — see REVIEW_NOTES.md. Shown publicly as-is per that revision's instruction. */
     address: "Jl. Sukasenang 143, Cigugur Tengah, Kec. Cimahi Tengah, Kota Cimahi, Jawa Barat 40522",
+    /** Precise office coordinates, supplied by Badar 2026-09-23 (REVISION v0.8 part A) — used for the /contact map and the Google Maps links. */
+    coordinates: { lat: -6.890875319895791, lng: 107.54733362424025 },
     instagram: "https://www.instagram.com/kappasolution/",
     instagramHandle: "@kappasolution",
     /**
