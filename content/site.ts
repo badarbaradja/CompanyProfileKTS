@@ -11,8 +11,10 @@
  * REVISION v0.6 part A) — the WhatsApp number is Pak Ramdlan's personal
  * line, used temporarily as the contact person, and the address is not
  * yet confirmed by the team. Vision/mission are a 2026-09-23 draft,
- * still pending team approval. Team member data is still a placeholder.
- * See REVIEW_NOTES.md for the open-questions list.
+ * still pending team approval. Team member names (only) were restored
+ * 2026-09-23 (REVISION v0.7 part B) — job titles, official name
+ * spelling, and photos are still missing. See REVIEW_NOTES.md for the
+ * open-questions list.
  *
  * All public-facing English copy lives in this file (never hardcoded in
  * a component) so an Indonesian translation layer can be added later
@@ -50,6 +52,10 @@ export interface EsicActivity {
 export interface TrainingReference {
   label: string;
   url: string;
+}
+
+export interface TeamMember {
+  name: string;
 }
 
 export const site = {
@@ -179,6 +185,27 @@ export const site = {
       { name: "Summer Camp", status: "active" },
       { name: "Training", status: "active" },
     ] satisfies EsicActivity[],
+  },
+
+  /**
+   * Names supplied 2026-09-23 (REVISION v0.7 part B) — they appeared on
+   * an earlier version of the site and are being restored. Job titles,
+   * the official spelling of each name, and photos are NOT supplied yet
+   * — do not invent them. Only `name` is shown; see the /about Team
+   * section's `<Pending>` note for what's still missing.
+   */
+  team: {
+    founders: [
+      { name: "Abrar" },
+      { name: "Mukhammad Ramdlan KI" },
+      { name: "Tri Ayodha" },
+    ] satisfies TeamMember[],
+    members: [
+      { name: "Galuh Intan Khumaira" },
+      { name: "Febianeu Putri Agna" },
+      { name: "Aisha Laila Mardiyah" },
+      { name: "Badar Zaki Baradja" },
+    ] satisfies TeamMember[],
   },
 
   training: {

@@ -108,7 +108,7 @@ export default function AboutPage() {
 
               {/* support arrow */}
               <div className="flex flex-col items-center text-[var(--color-text-faint)]">
-                <span className="text-xs uppercase tracking-widest">supports</span>
+                <span className="text-xs">supports</span>
                 <svg width="16" height="24" viewBox="0 0 16 24" fill="none" aria-hidden="true">
                   <path d="M8 0v20M2 15l6 7 6-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -158,14 +158,60 @@ export default function AboutPage() {
       {/* Team */}
       <section className="section-padding-sm">
         <Container>
-          <FadeIn className="max-w-2xl mb-8">
+          <FadeIn className="max-w-2xl mb-10">
             <SectionHeading as="h2" eyebrow="Team" title="The PT KTS team" />
           </FadeIn>
-          <FadeIn className="max-w-2xl">
-            <Pending label="Team members' roles, photos, and who will be featured on this site" />
+          <FadeIn className="space-y-10">
+            <div>
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-4">
+                Founders
+              </h3>
+              <div className="flex flex-wrap gap-6">
+                {site.team.founders.map((person) => (
+                  <TeamMemberCard key={person.name} name={person.name} />
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-4">
+                Team
+              </h3>
+              <div className="flex flex-wrap gap-6">
+                {site.team.members.map((person) => (
+                  <TeamMemberCard key={person.name} name={person.name} />
+                ))}
+              </div>
+            </div>
+            <Pending
+              label="Job titles, official name spelling, and photos for each team member"
+              className="max-w-2xl"
+            />
           </FadeIn>
         </Container>
       </section>
     </>
+  );
+}
+
+function TeamMemberCard({ name }: { name: string }) {
+  const initials = name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
+
+  return (
+    <div className="flex w-24 flex-col items-center gap-2.5 text-center">
+      <div
+        className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-accent-light)] font-display font-medium text-[var(--color-accent)]"
+        style={{ fontSize: "var(--text-body-lg)" }}
+        aria-hidden="true"
+      >
+        {initials}
+      </div>
+      <span className="text-sm leading-snug text-[var(--color-text)]">{name}</span>
+    </div>
   );
 }
