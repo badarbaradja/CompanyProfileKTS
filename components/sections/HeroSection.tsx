@@ -27,11 +27,9 @@ export function HeroSection() {
                 className="leading-[1.08] tracking-tight mb-6"
                 style={{ fontSize: "var(--text-display)" }}
               >
-                Equipment, consulting, engineering
+                Equipment built to be run
                 <br />
-                development, and training.
-                <br />
-                <em className="italic text-[var(--color-accent)]">Three business units.</em>
+                <em className="italic text-[var(--color-accent)]">by the people who use it.</em>
               </h1>
             </FadeIn>
 

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { FadeIn } from "@/components/motion/FadeIn";
-import { AccentHeading } from "@/components/ui/SectionHeading";
 import { buttonClasses } from "@/components/ui/Button";
 import { site } from "@/content/site";
 
@@ -10,13 +9,13 @@ export function ContactCtaSection() {
     <section id="contact-cta" aria-labelledby="contact-cta-heading" className="section-padding">
       <Container>
         <FadeIn className="max-w-2xl mx-auto text-center">
-          <AccentHeading
-            as="h2"
-            align="center"
-            line1="Contact PT KTS"
-            line2="for products, services, or training."
-            className="mb-6"
-          />
+          <h2
+            id="contact-cta-heading"
+            className="leading-[1.12] tracking-tight mb-6"
+            style={{ fontSize: "var(--text-h2)" }}
+          >
+            Contact PT KTS for products, services, or training.
+          </h2>
           <p className="text-[var(--color-text-muted)] leading-relaxed mb-8 max-w-lg mx-auto" style={{ fontSize: "var(--text-body-lg)" }}>
             Use the contact page to reach the team.
           </p>
