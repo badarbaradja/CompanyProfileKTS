@@ -183,6 +183,11 @@ export function getHeroPhoto(): Photo | undefined {
  * permission or credit — the photographer/source fields below are kept
  * anyway as a courtesy record for REVIEW_NOTES.md and for the team to
  * swap out once real product photos exist.
+ *
+ * REVISION v0.7 part D: the Mechanical & Biological Filters and RAMPUS
+ * Incinerator photos were replaced — the originals showed a large
+ * aerial sewage-treatment plant and industrial incineration-plant
+ * chimneys, which misrepresented PT KTS's actual small equipment scale.
  */
 export interface SampleProductPhoto {
   src: string;
@@ -248,13 +253,13 @@ export const sampleProductPhotos: Record<string, SampleProductPhoto> = {
   },
   "/photos/samples/mechanical-biological-filters.webp": {
     src: "/photos/samples/mechanical-biological-filters.webp",
-    alt: "Sample photo: aerial view of round water treatment tanks.",
+    alt: "Sample photo: a small row of filter tanks plumbed together outdoors.",
     width: 1400,
-    height: 1050,
-    photographer: "Patrick Federi",
-    photographerUrl: "https://unsplash.com/@federi?utm_source=pt_kts_website&utm_medium=referral",
+    height: 933,
+    photographer: "Alexey Demidov",
+    photographerUrl: "https://unsplash.com/@alexeydemidov?utm_source=pt_kts_website&utm_medium=referral",
     source: "Unsplash",
-    sourceUrl: "https://unsplash.com/photos/_mZrKqrZaTc",
+    sourceUrl: "https://unsplash.com/photos/wzcyEpk2eWw",
     license: "Unsplash License (free to use)",
     isSample: true,
   },
@@ -296,13 +301,13 @@ export const sampleProductPhotos: Record<string, SampleProductPhoto> = {
   },
   "/photos/samples/rampus-incinerator.webp": {
     src: "/photos/samples/rampus-incinerator.webp",
-    alt: "Sample photo: chimneys at an industrial incineration plant.",
+    alt: "Sample photo: wood burning inside a small metal barrel.",
     width: 1400,
     height: 933,
-    photographer: "Benoit Roy",
-    photographerUrl: "https://unsplash.com/@beroy?utm_source=pt_kts_website&utm_medium=referral",
+    photographer: "DDP",
+    photographerUrl: "https://unsplash.com/@moino007?utm_source=pt_kts_website&utm_medium=referral",
     source: "Unsplash",
-    sourceUrl: "https://unsplash.com/photos/-LjbkWUUp90",
+    sourceUrl: "https://unsplash.com/photos/8dRytMlVKzE",
     license: "Unsplash License (free to use)",
     isSample: true,
   },
