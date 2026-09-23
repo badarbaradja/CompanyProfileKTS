@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Container } from "@/components/layout/Container";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Pending } from "@/components/ui/Pending";
 import { InquiryForm } from "@/components/forms/InquiryForm";
+import { LocationMap } from "@/components/contact/LocationMap";
 import { site } from "@/content/site";
 import { buildWhatsAppUrl, formatPhoneDisplay } from "@/lib/utils";
 
@@ -82,18 +82,13 @@ export default function ContactPage() {
               )}
 
               <div className="pt-2">
-                <div className="relative aspect-[5/3] w-full overflow-hidden rounded-[var(--radius-lg)] shadow-[var(--shadow-sm)]">
-                  <Image
-                    src="/photos/map/cimahi-location.webp"
-                    alt="Static map showing the general area of Cigugur Tengah, Cimahi Tengah, Kota Cimahi."
-                    fill
-                    sizes="(min-width: 1024px) 45vw, 90vw"
-                    className="object-cover"
-                  />
-                </div>
-                <p className="mt-2 text-xs text-[var(--color-text-faint)]">
-                  General area only, not a precise pin on the office address.
-                </p>
+                <LocationMap
+                  lat={contact.coordinates.lat}
+                  lng={contact.coordinates.lng}
+                  companyName={site.legalName}
+                  address={contact.address}
+                  className="shadow-[var(--shadow-sm)]"
+                />
               </div>
             </div>
           </FadeIn>
