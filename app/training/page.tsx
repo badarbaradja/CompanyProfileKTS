@@ -3,7 +3,6 @@ import { Container } from "@/components/layout/Container";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { StaggerContainer, StaggerItem } from "@/components/motion/StaggerContainer";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Pending } from "@/components/ui/Pending";
 import { PhotoGallery } from "@/components/ui/PhotoGallery";
 import { site } from "@/content/site";
 import { getPhotosByUsage } from "@/content/photos";
@@ -77,16 +76,18 @@ export default function TrainingPage() {
         </Container>
       </section>
 
-      {/* Documentation video */}
-      <section className="section-padding-sm">
-        <Container>
-          <FadeIn className="max-w-2xl mb-8">
-            <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-3">
-              Documentation video
-            </h2>
-          </FadeIn>
-          <FadeIn>
-            {training.youtubeUrl ? (
+      {/* Documentation video — hidden entirely until a real video exists,
+          per REVISION v0.7's rule: a section can't consist of only a
+          Pending marker (see REVIEW_NOTES.md). */}
+      {training.youtubeUrl && (
+        <section className="section-padding-sm">
+          <Container>
+            <FadeIn className="max-w-2xl mb-8">
+              <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-faint)] mb-3">
+                Documentation video
+              </h2>
+            </FadeIn>
+            <FadeIn>
               <div className="aspect-video max-w-3xl rounded-[var(--radius-lg)] overflow-hidden">
                 <iframe
                   src={training.youtubeUrl}
@@ -96,12 +97,10 @@ export default function TrainingPage() {
                   allowFullScreen
                 />
               </div>
-            ) : (
-              <Pending label="Documentation video (ESIC, Camp, community service)" className="max-w-2xl" />
-            )}
-          </FadeIn>
-        </Container>
-      </section>
+            </FadeIn>
+          </Container>
+        </section>
+      )}
     </>
   );
 }

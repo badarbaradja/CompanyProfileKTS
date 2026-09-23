@@ -27,6 +27,7 @@ export function Pending({ label, variant = "light", className }: PendingProps) {
   return (
     <div
       role="note"
+      data-pending="true"
       className={cn(
         "flex items-start gap-2.5 rounded-[var(--radius-sm)] border px-4 py-3 text-sm",
         VARIANT_CLASSES[variant],
