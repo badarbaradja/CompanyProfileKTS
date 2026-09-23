@@ -21,7 +21,7 @@ export default function ProductsPage() {
           <SectionHeading
             eyebrow="Products"
             title="Products and services"
-            description="Grouped by business unit. Photos, technical specifications, and pricing are not yet available for most items."
+            description="Grouped by business unit."
           />
         </FadeIn>
 
@@ -30,8 +30,7 @@ export default function ProductsPage() {
             <circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" />
           </svg>
           <p className="text-sm text-[var(--color-text-muted)]">
-            The descriptions below explain general function only. Capacity, technical
-            specifications, certifications, and pricing have not yet been verified by the PT KTS team.
+            Photos and specifications on this page are sample data. The PT KTS team will replace them.
           </p>
         </FadeIn>
 
